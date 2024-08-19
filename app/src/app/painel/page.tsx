@@ -471,7 +471,7 @@ export default function DashboardPage() {
     <>
       {isMounted && (
         <div className="h-screen w-screen bg-govbr-gray-5 overflow-hidden grid grid-rows-[auto_1fr_auto]">
-          <HeaderGov />
+          <HeaderGov>Painel Interativo sobre o Estado de Conservação das Espécies da Flora Brasileira</HeaderGov>
           <main className="gap-5 row-span-1 grid grid-cols-[auto_1fr] overflow-hidden">
             <aside className="w-[350px] grid grid-rows-[1fr_auto] gap-5 overflow-hidden">
               <div className="overflow-y-auto overflow-x-hidden">

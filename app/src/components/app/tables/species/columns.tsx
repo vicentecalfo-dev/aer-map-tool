@@ -153,8 +153,8 @@ export const columns: ColumnDef<Species>[] = [
       return (
         <Sheet>
           <SheetTrigger>
-            <Button size="icon" variant="outline">
-              <FontAwesomeIcon icon={faChevronRight} />
+            <Button variant="outline" density="high">
+              <span className="text-xs">Abrir</span> <FontAwesomeIcon icon={faChevronRight} />
             </Button>
           </SheetTrigger>
           <SheetContent className=" !min-w-[1024px] !p-0 !grid !grid-rows-[auto_1fr_auto] h-screen gap-0 border-0">

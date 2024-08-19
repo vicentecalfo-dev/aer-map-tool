@@ -16,7 +16,7 @@ export default function FooterGov() {
         </p>
         <span className="text-xs">
           <span className="font-bold text-govbr-blue-warm-vivid-70">Versão 1.0. </span>
-        Painel de Dados do CNCFlora sobre Espécies da Flora Brasileira Ameaçadas de Extinção.
+        Administrado e Desenvolvido pelo Centro Nacional de Conservação da Flora (CNCFlora).
         </span>
       </div>
       <div className="flex gap-5 items-center">

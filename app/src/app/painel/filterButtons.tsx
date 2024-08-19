@@ -17,7 +17,7 @@ interface FilterButtonsProps {
 
 export default function FilterButtons({ query, onSubmit, loading = false, onReset }: FilterButtonsProps) {
   return (
-    <ul className="grid grid-cols-[1fr_auto] gap-5 px-6">
+    <ul className="grid grid-cols-[1fr_auto] gap-5 pl-6">
       <li>
         <Button
           className="w-full font-normal"

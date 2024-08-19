@@ -5,7 +5,7 @@ import { faBars, faHouse, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function HeaderGov() {
+export default function HeaderGov({children}:any) {
   return (
     <header className="flex flex-col gap-5 p-6">
       <div className="flex items-center gap-20">
@@ -64,6 +64,7 @@ export default function HeaderGov() {
           </Input>
         </div>
       </div> */}
+      {children && <h1 className="text-xl font-bold text-govbr-blue-warm-vivid-70">{children}</h1>}
     </header>
   );
 }
