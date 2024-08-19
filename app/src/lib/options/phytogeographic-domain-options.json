@@ -1,0 +1,26 @@
+[
+    {
+        "label": "Amazônia",
+        "value": "Amazônia"
+    },
+    {
+        "label": "Cerrado",
+        "value": "Cerrado"
+    },
+    {
+        "label": "Pantanal",
+        "value": "Pantanal"
+    },
+    {
+        "label": "Caatinga",
+        "value": "Caatinga"
+    },
+    {
+        "label": "Mata Atlântica",
+        "value": "Mata Atlântica"
+    },
+    {
+        "label": "Pampa",
+        "value": "Pampa"
+    }
+]

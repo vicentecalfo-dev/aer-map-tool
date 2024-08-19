@@ -1,0 +1,28 @@
+[
+    { "label": "Todos", "value": "TODOS" },
+    { "label": "Área Antropizada", "value": "AREA_ANTROPICA" },
+    { "label": "Caatinga (stricto sensu)", "value": "CAATINGA" },
+    { "label": "Campinarana", "value": "CAMPINARANA" },
+    { "label": "Campo de Altitude", "value": "CAMPO_DE_ALTITUDE" },
+    { "label": "Campo de Várzea", "value": "CAMPO_DE_VARZEA" },
+    { "label": "Campo Limpo", "value": "CAMPO_LIMPO" },
+    { "label": "Campo Rupestre", "value": "CAMPO_RUPESTRE" },
+    { "label": "Carrasco", "value": "CARRASCO" },
+    { "label": "Cerrado (lato sensu)", "value": "CERRADO" },
+    { "label": "Floresta Ciliar e/ou Floresta de Galeria", "value": "FLORESTA_CILIAR_OU_GALERIA" },
+    { "label": "Floresta de Igapó", "value": "FLORESTA_DE_IGAPO" },
+    { "label": "Floresta de Terra Firme", "value": "FLORESTA_DE_TERRA_FIRME" },
+    { "label": "Floresta de Várzea", "value": "FLORESTA_DE_VARZEA" },
+    { "label": "Floresta Estacional Decidual", "value": "FLORESTA_ESTACIONAL_DECIDUAL" },
+    { "label": "Floresta Estacional Perene", "value": "FLORESTA_ESTACIONAL_PERENIFOLIA" },
+    { "label": "Floresta Estacional Semidecidual", "value": "FLORESTA_ESTACIONAL_SEMIDECIDUAL" },
+    { "label": "Floresta Ombrofílica (Floresta Tropical Úmida)", "value": "FLORESTA_OMBROFILA" },
+    { "label": "Floresta Ombrofílica Mista", "value": "FLORESTA_OMBROFILA_MISTA" },
+    { "label": "Manguezal", "value": "MANGUEZAL" },
+    { "label": "Palmeiral", "value": "PALMEIRAL" },
+    { "label": "Restinga", "value": "RESTINGA" },
+    { "label": "Savana Amazônica", "value": "SAVANA_AMAZONICA" },
+    { "label": "Vegetação Aquática", "value": "VEGETACAO_AQUATICA" },
+    { "label": "Vegetação sobre Afloramentos Rochosos", "value": "VEGETACAO_SOBRE_AFLORAMENTOS_ROCHOSOS" }
+  ]
+  

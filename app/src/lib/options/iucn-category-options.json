@@ -1,0 +1,15 @@
+[
+    { "label": "Extinta (EX)", "value": "EX" },
+    { "label": "Extinta na Natureza (EW)", "value": "EW" },
+    { "label": "Regionalmente Extinta (RE)", "value": "RE" },
+    { "label": "Criticamente em Perigo (possivelmente extinta na natureza) (PEW)", "value": "PEW" },
+    { "label": "Criticamente em Perigo (possivelmente extinta) (PE)", "value": "PE" },
+    { "label": "Criticamente em Perigo (CR)", "value": "CR" },
+    { "label": "Em Perigo (EN)", "value": "EN" },
+    { "label": "Vulnerável (VU)", "value": "VU" },
+    { "label": "Quase Ameaçada (NT)", "value": "NT" },
+    { "label": "Menos Preocupante (LC)", "value": "LC" },
+    { "label": "Dados Insuficientes (DD)", "value": "DD" },
+    { "label": "Não Avaliada (NE)", "value": "NE" }
+  ]
+  

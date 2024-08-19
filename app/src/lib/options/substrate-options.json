@@ -1,0 +1,51 @@
+[
+  { "label": "Litter aéreo", "value": "Aerial litter" },
+  { "label": "Outro fungo", "value": "Another fungus" },
+  { "label": "Aquático", "value": "Aquatic" },
+  { "label": "Corticicoloso", "value": "Corticicolous" },
+  { "label": "Animal morto", "value": "Dead animal" },
+  { "label": "Madeira em decomposição", "value": "Decaying wood" },
+  { "label": "Fezes ou excrementos", "value": "Dung or Faeces" },
+  { "label": "Edáfico", "value": "Edaphic" },
+  { "label": "Epífilo", "value": "Epiphyllous" },
+  { "label": "Epífito", "value": "Epiphytic" },
+  { "label": "Epixiloso", "value": "Epixilous" },
+  { "label": "Hemiepífito", "value": "Hemiepiphytes" },
+  { "label": "Hemiparasita", "value": "Hemiparasites" },
+  { "label": "Litter de folhas", "value": "Leaf litter" },
+  { "label": "Animal vivo", "value": "Living animal" },
+  { "label": "Planta viva", "value": "Living plant" },
+  { "label": "Planta viva - fruto", "value": "Living plant - fruit" },
+  {
+    "label": "Planta viva - inflorescência",
+    "value": "Living plant - inflorescence"
+  },
+  { "label": "Planta viva - folha", "value": "Living plant - leaf" },
+  { "label": "Planta viva - raiz", "value": "Living plant - root" },
+  {
+    "label": "Planta viva - córtex do caule",
+    "value": "Living plant - stem cortex"
+  },
+  {
+    "label": "Planta viva - córtex do galho",
+    "value": "Living plant – branch cortex"
+  },
+  { "label": "Outro", "value": "Other" },
+  { "label": "Parasita", "value": "Parasite" },
+  { "label": "Rocha", "value": "Rock" },
+  { "label": "Rupícola", "value": "Rupicolous" },
+  { "label": "Areia", "value": "Sand" },
+  { "label": "Saprófito", "value": "Saprophyte" },
+  { "label": "Saxícola", "value": "Saxicolous" },
+  { "label": "Semente", "value": "Seed" },
+  { "label": "Solo", "value": "Soil" },
+  { "label": "Subaéreo", "value": "Subaerial" },
+  { "label": "Litter submerso", "value": "Submerged litter" },
+  {
+    "label": "Simbiótico (incluindo líquenes)",
+    "value": "Symbiont (including lichenes)"
+  },
+  { "label": "Terrestre", "value": "Terrestrial" },
+  { "label": "Água", "value": "Water" },
+  { "label": "Desconhecido", "value": "Unknown" }
+]

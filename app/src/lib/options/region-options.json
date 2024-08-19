@@ -1,0 +1,23 @@
+[
+    {
+      "label": "Norte",
+      "value": "norte"
+    },
+    {
+      "label": "Nordeste",
+      "value": "nordeste"
+    },
+    {
+      "label": "Centro-Oeste",
+      "value": "centro-oeste"
+    },
+    {
+      "label": "Sudeste",
+      "value": "sudeste"
+    },
+    {
+      "label": "Sul",
+      "value": "sul"
+    }
+  ]
+  

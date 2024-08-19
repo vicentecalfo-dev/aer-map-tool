@@ -1,0 +1,19 @@
+[
+    {
+      "label": "Nome Científico",
+      "value": "scientificName"
+    },
+    {
+      "label": "Sinônimo",
+      "value": "synonyms.scientificName"
+    },
+    {
+      "label": "Nome Popular",
+      "value": "vernacularNames.vernacularName"
+    },
+    {
+      "label": "Autor",
+      "value": "scientificNameAuthorship"
+    }
+  ]
+  

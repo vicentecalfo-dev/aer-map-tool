@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Rawline Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Regular"),
+      url("../../public/fonts/rawline-400.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Italic"),
+      url("../../public/fonts/rawline-400i.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Thin";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Thin"),
+      url("../../public/fonts/rawline-100.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Thin Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Thin Italic"),
+      url("../../public/fonts/rawline-100i.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline ExtraLight";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline ExtraLight"),
+      url("../../public/fonts/rawline-200.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline ExtraLight Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline ExtraLight Italic"),
+      url("../../public/fonts/rawline-200i.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Light";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Light"),
+      url("../../public/fonts/rawline-300.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Light Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Light Italic"),
+      url("../../public/fonts/rawline-300i.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Medium";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Medium"),
+      url("../../public/fonts/rawline-500.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Medium Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Medium Italic"),
+      url("../../public/fonts/rawline-500i.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline SemiBold";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline SemiBold"),
+      url("../../public/fonts/rawline-600.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline SemiBold Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline SemiBold Italic"),
+      url("../../public/fonts/rawline-600i.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Bold";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Bold"),
+      url("../../public/fonts/rawline-700.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Bold Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Bold Italic"),
+      url("../../public/fonts/rawline-700i.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline ExtraBold";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline ExtraBold"),
+      url("../../public/fonts/rawline-800.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline ExtraBold Italic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline ExtraBold Italic"),
+      url("../../public/fonts/rawline-800i.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Black";
+    font-style: normal;
+    font-weight: normal;
+    src: local("Rawline Black"),
+      url("../../public/fonts/rawline-900.woff") format("woff");
+  }
+
+  @font-face {
+    font-family: "Rawline Black Italic";
+    font-style: normal;
+    font-weight: bolder;
+    src: local("Rawline Black Italic"),
+      url("../../public/fonts/rawline-900i.woff") format("woff");
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.3);
+}
