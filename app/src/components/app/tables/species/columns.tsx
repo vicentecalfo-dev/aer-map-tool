@@ -157,7 +157,7 @@ export const columns: ColumnDef<Species>[] = [
               <span className="text-xs">Abrir</span> <FontAwesomeIcon icon={faChevronRight} />
             </Button>
           </SheetTrigger>
-          <SheetContent className=" !min-w-[1024px] !p-0 !grid !grid-rows-[auto_1fr_auto] h-screen gap-0 border-0">
+          <SheetContent className=" !min-w-[90vw] !p-0 !grid !grid-rows-[auto_1fr_auto] h-screen gap-0 border-0">
             <SheetHeader className="p-5 bg-govbr-gray-2">
               <SheetTitle className=" !font-normal">
                 <div className="flex gap-5 ml-[-55px] items-center">
@@ -174,7 +174,7 @@ export const columns: ColumnDef<Species>[] = [
                       <ScientificName scientificName={scientificName} />
                     </span>
                     <span className="text-xs mt-3">
-                      Avaliado por <b>Eduardo Amorim</b> e revisado por
+                      Avaliado por <b>Eduardo Amorim</b> e revisado por&nbsp;
                       <b>Eduardo Fernandez</b>.
                     </span>
                   </h1>
