@@ -41,7 +41,7 @@ export const columnsHeader = {
   redList: "Lista Vermelha MMA",
 };
 
-function ScientificName({ scientificName }: any) {
+ export function ScientificName({ scientificName }: any) {
   const nameParts = scientificName.split(" ");
   const genus = nameParts[0];
   const specificEpithet = nameParts.length > 2 ? nameParts[1] : null;

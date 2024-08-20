@@ -190,6 +190,8 @@ export function AssessmentSheet({ row, id }: any) {
     data?.profile?.reproduction?.fenology.map(
       ({ fenology, start, end }: any) => `${fenology} (${start}~${end})`
     );
+
+    const synonmys = data?.synonyms ? data?.synonyms.map(({scientificName}:any) => scientificName) : []
   function hasValues(obj: any): boolean {
     if (Array.isArray(obj)) {
       return obj.length > 0;
@@ -374,9 +376,9 @@ export function AssessmentSheet({ row, id }: any) {
               />
             </ul>
 
-            {hasValues(data?.profile?.taxonomicNotes) && (
+           
               <AssessmentSheetTitle>Perfil da Espécie</AssessmentSheetTitle>
-            )}
+            
 
             {data?.profile?.taxonomicNotes?.notes && (
               <ul className="flex flex-col gap-2 w-full text-sm mb-10">
@@ -390,6 +392,16 @@ export function AssessmentSheet({ row, id }: any) {
                 />
               </ul>
             )}
+
+<ul className="flex flex-col gap-2 w-full text-sm mb-10">
+<AssessmentSheetItemList
+              data={synonmys}
+              label="Sinônimos"
+              hint="Flora e Funga"
+            />
+</ul>
+
+            
 
             {hasValues(data?.profile?.economicValue) && (
               <AssessmentSheetSubTitle>Valor Econômico</AssessmentSheetSubTitle>
@@ -600,7 +612,9 @@ export function AssessmentSheet({ row, id }: any) {
                           <div className="w-full h-3 bg-govbr-gray-10 rounded-md">
                             <div className="flex w-full">
                               <div
-                                className={`h-3 rounded-l-md ${severity && threatSeverityLabel[severity][1]}`}
+                                className={`h-3 rounded-l-md ${
+                                  severity && threatSeverityLabel[severity][1]
+                                }`}
                               ></div>
                             </div>
                           </div>
