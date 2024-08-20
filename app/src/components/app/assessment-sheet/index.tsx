@@ -1,4 +1,5 @@
 import Badge from "@codeworker.br/govbr-tw-react/dist/components/Badge";
+import statesOptions from "../../../lib/options/states-options.json" assert { type: "json" };
 import { _categoriesLabels } from "../IUCN/config";
 import {
   Table,
@@ -43,17 +44,24 @@ const conservation = [
 ];
 
 const threatSeverityLabel: any = {
-  "very low": "Muito Baixa",
-  low: "Baixa",
-  medium: "Média",
-  high: "Alta",
-  "very high": "Muito Alta",
+  "very low": ["Muito Baixa", "w-1/5 bg-govbr-green-cool-vivid-50"],
+  low: ["Baixa", "w-2/5 bg-govbr-green-cool-vivid-50"],
+  medium: ["Média", "w-3/5 bg-govbr-yellow-vivid-20"],
+  high: ["Alta", "w-4/5 bg-govbr-red-vivid-50"],
+  "very high": ["Muito Alta", "w-5/5 bg-govbr-red-vivid-50"],
 };
 
-function AssessmentSheetItem({ label, children }: any) {
+function AssessmentSheetItem({ label, hint, children, vAlign = "top" }: any) {
   return (
-    <li className="flex gap-5 justify-start">
-      <span className="w-1/5 text-govbr-blue-warm-vivid-70">{label}</span>
+    <li
+      className={`flex gap-5 ${
+        vAlign === "top" ? "justify-start" : "items-center"
+      }`}
+    >
+      <span className="w-1/5 text-govbr-blue-warm-vivid-70 flex flex-col">
+        <span>{label}</span>
+        {hint && <span className="text-govbr-gray-60 text-xs">{hint}</span>}
+      </span>
       <span className="w-4/5">{children}</span>
     </li>
   );
@@ -75,6 +83,78 @@ function AssessmentSheetSubTitle({ children }: any) {
   );
 }
 
+function AssessmentSheetItemList({ data, label, hint }: any) {
+  return (
+    <>
+      {data && data.length > 0 && (
+        <AssessmentSheetItem label={label} hint={hint}>
+          <span className="flex flex-col gap-1 capitalize">
+            {data.map((value: any) => (
+              <span key={value}>{value}</span>
+            ))}
+          </span>
+        </AssessmentSheetItem>
+      )}
+    </>
+  );
+}
+
+function AssessmentSheetItemValue({ data, label, hint, children }: any) {
+  return (
+    <>
+      {data && (
+        <AssessmentSheetItem label={label} hint={hint}>
+          {data} {children}
+        </AssessmentSheetItem>
+      )}
+    </>
+  );
+}
+
+function AssessmentSheetItemValueText({ data, label, hint }: any) {
+  return (
+    <>
+      {data && (
+        <AssessmentSheetItem label={label} hint={hint}>
+          <p className="text-justify">{data}</p>
+        </AssessmentSheetItem>
+      )}
+    </>
+  );
+}
+
+function AssessmentSheetItemTrueOrFalse({ data, label, hint }: any) {
+  return (
+    <>
+      {data && (
+        <AssessmentSheetItem label={label} hint={hint}>
+          <Badge variant={data ? "success-light" : "danger-light"}>
+            {data ? "Sim" : "Não"}
+          </Badge>
+        </AssessmentSheetItem>
+      )}
+    </>
+  );
+}
+
+function AssessmentSheetItemReferences({ data, label, hint }: any) {
+  return (
+    <>
+      {data && data.length > 0 && (
+        <AssessmentSheetItem label={`Referência (${data.length})`}>
+          <ol className="list-decimal text-xs">
+            {data.map((reference: any, index: number) => (
+              <li className="mb-1 ml-5" key={index}>
+                {reference}
+              </li>
+            ))}
+          </ol>
+        </AssessmentSheetItem>
+      )}
+    </>
+  );
+}
+
 const MapEditor = dynamic(() => import("@/components/app/map-editor"), {
   ssr: false,
   loading: () => (
@@ -89,6 +169,7 @@ export function AssessmentSheet({ row, id }: any) {
   const { data: data, loading: dataLoading }: any = useFetchData(
     `${BASE_API_URL}/taxon/${id}`
   );
+  console.log(data);
   const criteria = row.getValue("criteria");
   const trueAndFalseLabel = (value: boolean) => (value ? "Sim" : "Não");
   const yesNoUnknowLabel: any = {
@@ -96,6 +177,28 @@ export function AssessmentSheet({ row, id }: any) {
     no: "Não",
     unknow: "Desconhecido",
   };
+  const distributionStates = data?.distribution?.states || [];
+  let distributionStatesFullName: any = [];
+  if (distributionStates.length) {
+    distributionStatesFullName = statesOptions.filter(({ value }: any) =>
+      distributionStates.includes(value)
+    );
+  }
+  const fenology =
+    data?.profile?.reproduction?.fenology &&
+    data?.profile?.reproduction?.fenology > 0 &&
+    data?.profile?.reproduction?.fenology.map(
+      ({ fenology, start, end }: any) => `${fenology} (${start}~${end})`
+    );
+  function hasValues(obj: any): boolean {
+    if (Array.isArray(obj)) {
+      return obj.length > 0;
+    } else if (typeof obj === "object" && obj !== null) {
+      return Object.values(obj).some(hasValues);
+    } else {
+      return obj !== undefined && obj !== null && obj !== "";
+    }
+  }
   return (
     <>
       {dataLoading ? (
@@ -122,297 +225,372 @@ export function AssessmentSheet({ row, id }: any) {
                 {row.getValue("category")})
               </AssessmentSheetItem>
 
-              {data?.assessment?.criteria && (
-                <AssessmentSheetItem label="Critério">
-                  {data?.assessment?.criteria}
-                </AssessmentSheetItem>
-              )}
+              <AssessmentSheetItemValue
+                data={data?.assessment?.criteria}
+                label="Critério"
+              />
 
-              {data?.assessment?.evaluator && (
-                <AssessmentSheetItem label="Avaliador">
-                  {data?.assessment?.evaluator}
-                </AssessmentSheetItem>
-              )}
+              <AssessmentSheetItemValue
+                data={data?.assessment?.assessor}
+                label="Avaliador"
+              />
 
-              {data?.assessment?.revisor && (
-                <AssessmentSheetItem label="Revisor">
-                  {data?.assessment?.revisor}
-                </AssessmentSheetItem>
-              )}
+              <AssessmentSheetItemValue
+                data={data?.assessment?.evaluator}
+                label="Revisor"
+              />
 
-              {data?.assessment?.rationale && (
-                <AssessmentSheetItem label="Justificativa">
-                  <p className="text-justify">{data?.assessment?.rationale}</p>
-                </AssessmentSheetItem>
-              )}
+              <AssessmentSheetItemValueText
+                data={data?.assessment?.rationale}
+                label="Justificativa"
+              />
 
-              {data?.assessment?.reasonsForReAssessment.change && (
+              {data?.assessment?.reasonsForReAssessment.resume && (
                 <>
                   <AssessmentSheetSubTitle>
                     Informações da Reavaliação
                   </AssessmentSheetSubTitle>
-                  {data?.assessment?.reasonsForReAssessment.reason && (
-                    <AssessmentSheetItem label="Razão para Reavaliação">
-                      {data?.assessment?.reasonsForReAssessment.reason}
-                    </AssessmentSheetItem>
-                  )}
-                  {data?.assessment?.reasonsForReAssessment.change && (
-                    <AssessmentSheetItem label="Houve Mudança de Categoria?">
-                      {trueAndFalseLabel(
-                        data?.assessment?.reasonsForReAssessment.change
-                      )}
-                    </AssessmentSheetItem>
-                  )}
-                  {data?.assessment?.reasonsForReAssessment.resume && (
-                    <AssessmentSheetItem label="Detalhes">
-                      <p className="text-justify">{data?.assessment?.reasonsForReAssessment.resume}</p>
-                    </AssessmentSheetItem>
-                  )}
-                  {data?.assessment?.reasonsForChange.reason && (
-                    <AssessmentSheetItem label="Razão da Mudança de Categoria">
-                      {trueAndFalseLabel(
-                        data?.assessment?.reasonsForChange.reason
-                      )}
-                    </AssessmentSheetItem>
-                  )}
-                   {data?.assessment?.reasonsForChange.resume && (
-                    <AssessmentSheetItem label="Justificativa para Mudança de Categoria">
-                      <p className="text-justify">{data?.assessment?.reasonsForChange.resume}</p>
-                    </AssessmentSheetItem>
-                  )}
+
+                  <AssessmentSheetItemValue
+                    data={data?.assessment?.reasonsForReAssessment.reason}
+                    label="Motivo"
+                  />
+
+                  <AssessmentSheetItemTrueOrFalse
+                    data={data?.assessment?.reasonsForReAssessment.change}
+                    label="Houve Mudança?"
+                    hint="Categoria de Risco"
+                  />
+
+                  <AssessmentSheetItemValueText
+                    data={data?.assessment?.reasonsForReAssessment.resume}
+                    label="Detalhes"
+                  />
+
+                  <AssessmentSheetItemValue
+                    data={data?.assessment?.reasonsForChange.reason}
+                    label="Motivo da Mudança"
+                    hint="Categoria de Risco"
+                  />
+                  <AssessmentSheetItemValueText
+                    data={data?.assessment?.reasonsForChange.resume}
+                    label="Justificativa da Mudança"
+                    hint="Categoria de Risco"
+                  />
                 </>
               )}
 
-              <AssessmentSheetSubTitle>
-                Informações Gerais
-              </AssessmentSheetSubTitle>
-              <AssessmentSheetItem label="Possivelmente Extinta?">
-                {
-                  <Badge
-                    variant={
-                      data?.assessment?.information.possiblyExtinct
-                        ? "success-light"
-                        : "danger-light"
-                    }
-                  >
-                    {trueAndFalseLabel(
-                      data?.assessment?.information.possiblyExtinct
-                    )}
-                  </Badge>
-                }
-              </AssessmentSheetItem>
-              {data?.assessment?.information?.dateLastSeen && (
-                <AssessmentSheetItem label="Data do Último Avistamento">
-                  {data?.assessment?.information?.dateLastSeen}
-                </AssessmentSheetItem>
-              )}
-              {data?.assessment?.information?.generationLength && (
-                <AssessmentSheetItem label="Tempo de Geração">
-                  {data?.assessment?.information?.generationLength}
-                </AssessmentSheetItem>
-              )}
-              {data?.assessment?.information?.timePeriodOfPastDecline && (
-                <AssessmentSheetItem label="Período de Declínio Passado">
-                  {data?.assessment?.information?.timePeriodOfPastDecline}
-                </AssessmentSheetItem>
-              )}
-              {data?.assessment?.information?.numberOfLocation && (
-                <AssessmentSheetItem label="Quantidade de Localidades">
-                  {data?.assessment?.information?.numberOfLocation}
-                </AssessmentSheetItem>
-              )}
-              {data?.assessment?.information?.severelyFragmented && (
-                <AssessmentSheetItem label="Severamente Fragmentada?">
-                  {
-                    yesNoUnknowLabel[
-                      data?.assessment?.information?.severelyFragmented
-                    ]
-                  }
-                </AssessmentSheetItem>
-              )}
-              {data?.assessment?.information?.currentPopulationTrend && (
-                <AssessmentSheetItem label="Tendência Populacional Atual">
-                  {data?.assessment?.information?.currentPopulationTrend}
-                </AssessmentSheetItem>
-              )}
-              {data?.assessment?.information?.numberOfMatureIndividuals && (
-                <AssessmentSheetItem label="Quantidade de Indivíduos Maduros">
-                  {data?.assessment?.information?.numberOfMatureIndividuals}
-                </AssessmentSheetItem>
+              {hasValues(data?.assessment?.information) && (
+                <AssessmentSheetSubTitle>
+                  Informações Gerais
+                </AssessmentSheetSubTitle>
               )}
 
-              {data?.assessment.references.length > 0 && (
-                <AssessmentSheetItem
-                  label={`Referência (${data?.assessment.references.length})`}
-                >
-                  <ol className="list-decimal text-xs">
-                    {data?.assessment.references.map((reference: any) => (
-                      <li className="mb-1 ml-3">{reference}</li>
-                    ))}
-                  </ol>
-                </AssessmentSheetItem>
-              )}
-            </ul>
-            <AssessmentSheetTitle>Distribuição</AssessmentSheetTitle>
-            <ul className="flex flex-col gap-2 w-full text-sm mb-10">
-              <AssessmentSheetItem label="EOO">
-                0,177 Km<sup>2</sup>
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="AOO">
-                12 Km<sup>2</sup>
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Endêmica do Brasil">
-                <Badge variant="success-light">Sim</Badge>
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Estados">
-                <span className="flex flex-col gap-1">
-                  <span>Espirito Santo (ES)</span>
-                  <span>Rio de Janeiro (RJ)</span>
-                </span>
-              </AssessmentSheetItem>
-            </ul>
-            <AssessmentSheetTitle>Perfil da Espécie</AssessmentSheetTitle>
-            <ul className="flex flex-col gap-2 w-full text-sm mb-10">
-              <AssessmentSheetItem label="Obra Princeps">
-                <p>
-                  Descrita em: Kew Bull. 60(2): 221, 2005. É afim de S.
-                  arenaria, mas difere por possuir hábito ereto; e é afim de S.
-                  lychnitis, mas difere por possuir folhas com formato diferente
-                  e um indumento estrigoso (vs. seríceo) (Atkins, 2005).
-                </p>
-              </AssessmentSheetItem>
-            </ul>
-            <AssessmentSheetSubTitle>Valor Econômico</AssessmentSheetSubTitle>
-            <ul className="flex flex-col gap-2 w-full text-sm mb-10">
-              <AssessmentSheetItem label="Potencial Valor">
-                <span className="text-govbr-gray-20">Desconhecido</span>
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Detalhes">
-                Não é conhecido valor econômico da espécie.
-              </AssessmentSheetItem>
+              <AssessmentSheetItemTrueOrFalse
+                data={data?.assessment?.information.possiblyExtinct}
+                label="Possivelmente Extinta?"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.assessment?.information?.dateLastSeen}
+                label="Data do Último Avistamento"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.assessment?.information?.generationLength}
+                label="Tempo de Geração"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.assessment?.information?.timePeriodOfPastDecline}
+                label="Período de Declínio Passado"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.assessment?.information?.numberOfLocation}
+                label="Quantidade de Localidades"
+              />
+
+              <AssessmentSheetItemTrueOrFalse
+                data={data?.assessment?.information?.severelyFragmented}
+                label="Severamente Fragmentada?"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.assessment?.information?.currentPopulationTrend}
+                label="Tendência Populacional Atual"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.assessment?.information?.numberOfMatureIndividuals}
+                label="Quantidade de Indivíduos Maduros"
+              />
+              <AssessmentSheetItemReferences
+                data={data?.assessment.references}
+                label="Referência"
+              />
             </ul>
 
-            <AssessmentSheetSubTitle>População</AssessmentSheetSubTitle>
+            {(hasValues(data?.profile?.distribution) ||
+              hasValues(data?.distribution)) && (
+              <AssessmentSheetTitle>Distribuição</AssessmentSheetTitle>
+            )}
+
             <ul className="flex flex-col gap-2 w-full text-sm mb-10">
-              <AssessmentSheetItem label="Flutuação Extrema">
-                <span className="text-govbr-gray-20">Desconhecido</span>
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Detalhes">
-                Não existem dados populacionais.
-              </AssessmentSheetItem>
+              <AssessmentSheetItemValue
+                data={data?.profile?.distribution?.eoo}
+                label="EOO"
+                hint="Extensão de Ocorrência"
+              >
+                Km<sup>2</sup>
+              </AssessmentSheetItemValue>
+
+              <AssessmentSheetItemValue
+                data={data?.profile?.distribution?.aoo}
+                label="AOO"
+                hint="Área de Ocupação"
+              >
+                Km<sup>2</sup>
+              </AssessmentSheetItemValue>
+
+              <AssessmentSheetItemTrueOrFalse
+                data={data?.distribution?.endemism}
+                label="Endêmica do Brasil?"
+              />
+
+              <AssessmentSheetItemList
+                value={data?.distribution?.states}
+                label="Estados"
+              />
+
+              <AssessmentSheetItemValueText
+                data={data?.profile?.distribution.resume}
+                label="Detalhes"
+              />
+
+              <AssessmentSheetItemReferences
+                data={data?.profile?.distribution?.references}
+                label="Referência"
+              />
             </ul>
+
+            {hasValues(data?.profile?.taxonomicNotes) && (
+              <AssessmentSheetTitle>Perfil da Espécie</AssessmentSheetTitle>
+            )}
+
+            {data?.profile?.taxonomicNotes?.notes && (
+              <ul className="flex flex-col gap-2 w-full text-sm mb-10">
+                <AssessmentSheetItemValueText
+                  data={data?.profile?.taxonomicNotes?.notes}
+                  label="Obra Princeps"
+                />
+                <AssessmentSheetItemReferences
+                  data={data?.profile?.taxonomicNotes.references}
+                  label="Referência"
+                />
+              </ul>
+            )}
+
+            {hasValues(data?.profile?.economicValue) && (
+              <AssessmentSheetSubTitle>Valor Econômico</AssessmentSheetSubTitle>
+            )}
+
+            {(data?.profile?.economicValue?.potentialEconomicValue ||
+              data?.profile?.economicValue?.details) && (
+              <ul className="flex flex-col gap-2 w-full text-sm mb-10">
+                <AssessmentSheetItemValue
+                  data={data?.profile?.economicValue?.potentialEconomicValue}
+                  label="Potencial Valor"
+                />
+
+                <AssessmentSheetItemValueText
+                  data={data?.profile?.economicValue?.details}
+                  label="Detalhes"
+                />
+
+                <AssessmentSheetItemReferences
+                  data={data?.profile?.economicValue?.references}
+                  label="Referência"
+                />
+              </ul>
+            )}
+
+            {hasValues(data?.profile?.population) && (
+              <AssessmentSheetSubTitle>População</AssessmentSheetSubTitle>
+            )}
+
+            {(data?.profile?.population?.resume ||
+              data?.profile?.population?.extremeFluctuation
+                ?.extremeFluctuation) && (
+              <ul className="flex flex-col gap-2 w-full text-sm mb-10">
+                <AssessmentSheetItemList
+                  value={data?.profile?.population?.extremeFluctuation}
+                  label="Flutuação Extrema"
+                />
+
+                <AssessmentSheetItemValueText
+                  data={data?.profile?.population?.resume}
+                  label="Detalhes"
+                />
+
+                <AssessmentSheetItemReferences
+                  data={data?.profile?.population?.references}
+                  label="Referência"
+                />
+              </ul>
+            )}
 
             <AssessmentSheetSubTitle>Ecologia</AssessmentSheetSubTitle>
-            <ul className="flex flex-col gap-2 w-full text-sm mb-10">
-              <AssessmentSheetItem label="Substrato">
-                Terrestrial
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Forma de Visa">
-                Subarbusto
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Fenologia">
-                Perenifolia
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Longevidade">
-                Perennial
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Bioma">
-                <span className="flex flex-col gap-1">
-                  <span>Caatinga</span>
-                  <span> Mata Atlântica</span>
-                </span>
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Vegetação">
-                Campo Rupestre
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Habitat">
-                <span className="flex flex-col gap-1">
-                  <span>3.7 Subtropical/Tropical High Altitude Shrubland</span>
-                  <span>4.7 Subtropical/Tropical High Altitude Grassland</span>
-                </span>
-              </AssessmentSheetItem>
 
-              <AssessmentSheetItem label="Clone">
-                <span className="text-govbr-gray-20">Desconhecido</span>
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Rebrota">
-                <span className="text-govbr-gray-20">Desconhecido</span>
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Referência">
-                <ol className="list-decimal text-xs">
-                  <li>
-                    Cardoso, P.H., Salimena, F.R.G., 2022. Stachytarpheta. Flora
-                    e Funga do Brasil. Jardim Botânico do Rio de Janeiro. URL
-                    https://floradobrasil.jbrj.gov.br/FB21464 (acesso em 03 de
-                    outubro de 2022)
-                  </li>
-                </ol>
-              </AssessmentSheetItem>
-            </ul>
-            <AssessmentSheetSubTitle>Reprodução</AssessmentSheetSubTitle>
             <ul className="flex flex-col gap-2 w-full text-sm mb-10">
-              <AssessmentSheetItem label="Detalhes">
-                A espécie é hermafrodita, e iterópara. Com base nos registros,
-                foi coletada com flores: de janeiro a março, e em julho.
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Fenologia">
-                <span className="flex flex-col gap-1">
-                  <span>Floração (Janeiro ~ Março)</span>
-                  <span>Floração (Julho)</span>
-                </span>
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Estratégia">
-                Iteropara
-              </AssessmentSheetItem>
-              <AssessmentSheetItem label="Sistema Sexual">
-                Hermafrodita
-              </AssessmentSheetItem>
-              {/* <AssessmentSheetItem label="Sistema"><span className="text-govbr-gray-20">Desconhecido</span></AssessmentSheetItem> */}
-              <AssessmentSheetItem label="Referência">
-                <ol className="list-decimal text-xs">
-                  <li>
-                    Cardoso, P.H., Salimena, F.R.G., 2022. Stachytarpheta. Flora
-                    e Funga do Brasil. Jardim Botânico do Rio de Janeiro. URL
-                    https://floradobrasil.jbrj.gov.br/FB21464 (acesso em 03 de
-                    outubro de 2022)
-                  </li>
-                </ol>
-              </AssessmentSheetItem>
+              <AssessmentSheetItemList
+                data={data?.profile?.ecology?.substratum}
+                label="Substrato"
+              />
+              <AssessmentSheetItemList
+                data={data?.profile?.lifeForm}
+                label="Forma de Vida"
+                hint="Flora e Funga"
+              />
+              <AssessmentSheetItemList
+                data={data?.profile?.vegetationType}
+                label="Tipo de Vegetação"
+                hint="Flora e Funga"
+              />
+
+              <AssessmentSheetItemList
+                data={data?.profile?.habitat}
+                label="Habitat"
+                hint="Flora e Funga"
+              />
+
+              <AssessmentSheetItemList
+                data={data?.profile?.ecology?.habitats}
+                label="Habitat"
+                hint="IUCN"
+              />
+
+              <AssessmentSheetItemList
+                data={data?.profile?.ecology?.luminosity}
+                label="Luminosidade"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.profile?.ecology?.fenology}
+                label="Fenologia"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.profile?.ecology?.longevity}
+                label="Longevidade"
+              />
+
+              <AssessmentSheetItemList
+                data={data?.distribution?.phytogeographicDomain}
+                label="Biomas"
+                hint="Flora e Funga"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.profile?.ecology?.clonal}
+                label="Clone"
+              />
+
+              <AssessmentSheetItemValue
+                data={data?.profile?.ecology?.resprout}
+                label="Rebrota"
+              />
+
+              <AssessmentSheetItemReferences
+                data={data?.profile?.ecology?.references}
+                label="Referência"
+              />
             </ul>
 
-            <AssessmentSheetSubTitle>
-              Ameaça
-              <Badge type="pill" className="ml-3 h-6 w-6 text-xs">
-                {threats.length}
-              </Badge>
-            </AssessmentSheetSubTitle>
-            <Table className="mb-10">
-              <TableHeader>
-                <TableRow className="text-govbr-blue-warm-vivid-70">
-                  <TableHead className="w-[200px]">Estresse</TableHead>
-                  <TableHead className="w-[200px]">Ameaça</TableHead>
-                  <TableHead>Declínio</TableHead>
-                  <TableHead>Tempo</TableHead>
-                  <TableHead>Incidência</TableHead>
-                  <TableHead>Severidade</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {threats.map(
-                  (
-                    {
-                      stress,
-                      threat,
-                      decline,
-                      timming,
-                      incidence,
-                      severity,
-                      detail,
-                    },
-                    index
-                  ) => (
-                    <>
-                      <TableRow key={`${stress}_${index}`}>
+            {hasValues(data?.profile?.reproduction) && (
+              <AssessmentSheetSubTitle>Reprodução</AssessmentSheetSubTitle>
+            )}
+
+            <ul className="flex flex-col gap-2 w-full text-sm mb-10">
+              <AssessmentSheetItemValueText
+                data={data?.profile?.reproduction?.resume}
+                label="Detalhes"
+              />
+
+              <AssessmentSheetItemList data={fenology} label="Fenologia" />
+
+              <AssessmentSheetItemValue
+                data={data?.profile?.reproduction?.strategy}
+                label="Estratégia"
+              />
+              <AssessmentSheetItemValue
+                data={data?.profile?.reproduction?.system}
+                label="Sistema"
+              />
+              <AssessmentSheetItemValue
+                data={data?.profile?.reproduction?.sexualSystem}
+                label="Sistema Sexual"
+              />
+              <AssessmentSheetItemValue
+                data={data?.profile?.reproduction?.pollinatorInformation}
+                label="Informações sobre Polinizadores"
+              />
+
+              <AssessmentSheetItemList
+                data={data?.profile?.reproduction?.pollinationSyndrome}
+                label="Síndrome de Polinização"
+              />
+
+              <AssessmentSheetItemList
+                data={data?.profile?.reproduction?.dispersionSyndrome}
+                label="Síndrome de Dispersão"
+              />
+
+              <AssessmentSheetItemReferences
+                data={data?.profile?.reproduction?.references}
+                label="Referência"
+              />
+            </ul>
+
+            {hasValues(data?.profile?.threats) && (
+              <AssessmentSheetSubTitle>
+                Ameaça
+                <Badge type="pill" className="ml-3 h-6 w-6 text-xs">
+                  {data?.profile?.threats.length}
+                </Badge>
+              </AssessmentSheetSubTitle>
+            )}
+            {data?.profile?.threats.map(
+              (
+                {
+                  stress,
+                  threat,
+                  decline,
+                  timming,
+                  incidence,
+                  severity,
+                  details,
+                  references,
+                }: any,
+                index: number
+              ) => (
+                <>
+                  <Table className="mb-0">
+                    <TableHeader>
+                      <TableRow className="text-govbr-blue-warm-vivid-70">
+                        <TableHead className="w-[200px]">Estresse</TableHead>
+                        <TableHead className="w-[200px]">Ameaça</TableHead>
+                        <TableHead>Declínio</TableHead>
+                        <TableHead>Tempo</TableHead>
+                        <TableHead>Incidência</TableHead>
+                        <TableHead>Severidade</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow
+                        key={`${stress}_${index}`}
+                        className="capitalize"
+                      >
                         <TableCell>{stress}</TableCell>
                         <TableCell>{threat}</TableCell>
                         <TableCell>{decline}</TableCell>
@@ -421,94 +599,76 @@ export function AssessmentSheet({ row, id }: any) {
                         <TableCell>
                           <div className="w-full h-3 bg-govbr-gray-10 rounded-md">
                             <div className="flex w-full">
-                              <div className="w-4/5 h-3 bg-govbr-red-vivid-50 rounded-l-md"></div>
+                              <div
+                                className={`h-3 rounded-l-md ${severity && threatSeverityLabel[severity][1]}`}
+                              ></div>
                             </div>
                           </div>
-                          <p className="text-xs pl-1 mt-1">
-                            {threatSeverityLabel[severity]}
+                          <p className="text-xs pl-1 mt-1 capitalize">
+                            {severity && threatSeverityLabel[severity][0]}
                           </p>
                         </TableCell>
                       </TableRow>
                       <TableRow>
                         <TableCell colSpan={6} className="p-4 bg-govbr-gray-2">
-                          <p className="text-sm">{detail}</p>
+                          <p className="text-sm">{details}</p>
                         </TableCell>
                       </TableRow>
-                    </>
-                  )
-                )}
-              </TableBody>
-            </Table>
-            <ul className="flex flex-col gap-2 w-full text-sm mb-10">
-              <AssessmentSheetItem label="Referência">
-                <ol className="list-decimal text-xs">
-                  <li className="mb-2">
-                    Lapig - Laboratório de Processamento de Imagens e
-                    Geoprocessamento, 2022. Atlas Digital das Pastagens
-                    Brasileiras, dados de 2020. Município: Ituaçu (BA). URL
-                    https://www.lapig.iesa.ufg.br/lapig/index.php/produtos/atlas-digital-das-pastagens-brasileiras
-                    (acesso em 14 de outubro de 2022).
-                  </li>
-                  <li>
-                    MapBiomas, 2022. Projeto MapBiomas - Coleção 6 da Série
-                    Anual de Mapas de Cobertura e Uso de Solo do Brasil, dados
-                    de 2020. Município: Ituaçu (BA). URL
-                    https://drive.google.com/file/d/1RT7J2jS6LKyISM49ctfRO31ynJZXX_TY/view?usp=sharing
-                    (acesso em 14 de outubro de 2022).
-                  </li>
-                </ol>
-              </AssessmentSheetItem>
-            </ul>
+                    </TableBody>
+                  </Table>
+                  <ul className="flex flex-col gap-2 w-full text-sm mb-10">
+                    <AssessmentSheetItemReferences
+                      data={references}
+                      label="Referência"
+                    />
+                  </ul>
+                </>
+              )
+            )}
 
-            <AssessmentSheetSubTitle>
-              Ação de Conservação
-              <Badge type="pill" className="ml-3 h-6 w-6 text-xs">
-                {conservation.length}
-              </Badge>
-            </AssessmentSheetSubTitle>
-            <Table className="mb-10">
-              <TableHeader>
-                <TableRow className="text-govbr-blue-warm-vivid-70">
-                  <TableHead className="w-3/5">Ação</TableHead>
-                  <TableHead className="w-2/5">Situação</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {conservation.map(({ action, situation, detail }, index) => (
-                  <>
-                    <TableRow key={`${action}_${index}`}>
-                      <TableCell>{action}</TableCell>
-                      <TableCell>{situation}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell colSpan={3} className="p-4 bg-govbr-gray-2">
-                        <p className="text-sm">{detail}</p>
-                      </TableCell>
-                    </TableRow>
-                  </>
-                ))}
-              </TableBody>
-            </Table>
-            <ul className="flex flex-col gap-2 w-full text-sm mb-10">
-              <AssessmentSheetItem label="Referência">
-                <ol className="list-decimal text-xs">
-                  <li className="mb-2">
-                    Lapig - Laboratório de Processamento de Imagens e
-                    Geoprocessamento, 2022. Atlas Digital das Pastagens
-                    Brasileiras, dados de 2020. Município: Ituaçu (BA). URL
-                    https://www.lapig.iesa.ufg.br/lapig/index.php/produtos/atlas-digital-das-pastagens-brasileiras
-                    (acesso em 14 de outubro de 2022).
-                  </li>
-                  <li>
-                    MapBiomas, 2022. Projeto MapBiomas - Coleção 6 da Série
-                    Anual de Mapas de Cobertura e Uso de Solo do Brasil, dados
-                    de 2020. Município: Ituaçu (BA). URL
-                    https://drive.google.com/file/d/1RT7J2jS6LKyISM49ctfRO31ynJZXX_TY/view?usp=sharing
-                    (acesso em 14 de outubro de 2022).
-                  </li>
-                </ol>
-              </AssessmentSheetItem>
-            </ul>
+            {hasValues(data?.profile?.actions) && (
+              <AssessmentSheetSubTitle>
+                Ação de Conservação
+                <Badge type="pill" className="ml-3 h-6 w-6 text-xs">
+                  {data?.profile?.actions.length}
+                </Badge>
+              </AssessmentSheetSubTitle>
+            )}
+            {data?.profile?.actions.map(
+              (
+                { action, situation, details, references }: any,
+                index: number
+              ) => (
+                <>
+                  <Table className="mb-0">
+                    <TableHeader>
+                      <TableRow className="text-govbr-blue-warm-vivid-70">
+                        <TableHead className="w-3/5">Ação</TableHead>
+                        <TableHead className="w-2/5">Situação</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow key={`${action}_${index}`}>
+                        <TableCell>{action}</TableCell>
+                        <TableCell>{situation}</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell colSpan={3} className="p-4 bg-govbr-gray-2">
+                          <p className="text-sm">{details}</p>
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                  <ul className="flex flex-col gap-2 w-full text-sm mb-10">
+                    <AssessmentSheetItemReferences
+                      data={references}
+                      label="Referência"
+                    />
+                  </ul>
+                </>
+              )
+            )}
+
             <AssessmentSheetSubTitle>Usos</AssessmentSheetSubTitle>
             <ul className="flex flex-col gap-2 w-full text-sm mb-10">
               <AssessmentSheetItem label="Categoria">

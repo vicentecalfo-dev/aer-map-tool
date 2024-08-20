@@ -154,7 +154,7 @@ export const columns: ColumnDef<Species>[] = [
     ),
     cell: ({ row }) => {
       const redList = row.getValue("redList");
-      console.log(redList);
+     // console.log(redList);
       const label = redList ? "Sim" : "Não";
       return (
         <Badge variant={redList ? "success-light" : "danger-light"}>
@@ -193,12 +193,10 @@ export const columns: ColumnDef<Species>[] = [
                     <span className="mt-[-5px]">
                       <ScientificName scientificName={scientificName} />
                     </span>
-                    <span className="text-xs mt-3">
-                      Avaliado por <b>Eduardo Amorim</b> e revisado por&nbsp;
-                      <b>Eduardo Fernandez</b>.
-                    </span>
                   </h1>
                   <div className="flex gap-3">
+                    {row.getValue("redList") === true && <Badge variant="danger">Lista Vermelha MMA</Badge>}
+                  
                     <Badge>{row.getValue("assessmentYear")}</Badge>
                     {row.getValue("reassessment") ? (
                       <Badge variant="success-light">

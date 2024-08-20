@@ -52,7 +52,11 @@ export default function DashboardPage() {
   }, [query]);
 
   function handleQueryUpdate(key: string, values: any[]) {
-    if (key === "assessment.reassessment" || key === "redList" || key === "assessment.reasonsForReAssessment.change")
+    if (
+      key === "assessment.reassessment" ||
+      key === "redList" ||
+      key === "assessment.reasonsForReAssessment.change"
+    )
       values = values.map((value) => value === "true");
     if (key === "assessment.year")
       values = values.map((value) => Number(value));
@@ -144,6 +148,14 @@ export default function DashboardPage() {
 
   const { data: assessmentYears, loading: assessmentYearLoading } =
     useFetchData(`${BASE_API_URL}/assessmentYear`);
+
+  const { data: threats, loading: threatsLoading } = useFetchData(
+    `${BASE_API_URL}/threats`
+  );
+
+  const { data: threatsStress, loading: threatsStressLoading } = useFetchData(
+    `${BASE_API_URL}/threats/stress`
+  );
 
   // Controllers Filter
   const [filterByTypeValue, setFilterByTypeValue] = useState("scientificName");
@@ -300,6 +312,30 @@ export default function DashboardPage() {
     handleRemoveSelection: handleRedListSelectionRemove,
   } = useSelection<string>([]);
 
+  const {
+    selectedItems: selectedThreats,
+    handleSelectionChange: handleThreatsSelectionChange,
+    handleRemoveSelection: handleThreatsSelectionRemove,
+  } = useSelection<string>([]);
+
+  const {
+    selectedItems: selectedThreatsStress,
+    handleSelectionChange: handleThreatsStressSelectionChange,
+    handleRemoveSelection: handleThreatsStressSelectionRemove,
+  } = useSelection<string>([]);
+
+  const {
+    selectedItems: selectedThreatsSeverity,
+    handleSelectionChange: handleThreatsSeveritySelectionChange,
+    handleRemoveSelection: handleThreatsSeveritySelectionRemove,
+  } = useSelection<string>([]);
+
+  const {
+    selectedItems: selectedThreatsIncidence,
+    handleSelectionChange: handleThreatsIncidenceSelectionChange,
+    handleRemoveSelection: handleThreatsIncidenceSelectionRemove,
+  } = useSelection<string>([]);
+
   const kingdoms: any = [
     { label: "Fungo", value: "Fungi" },
     { label: "Planta", value: "Plantae" },
@@ -311,6 +347,18 @@ export default function DashboardPage() {
   const redListOptions = [
     { label: "Sim", value: "true" },
     { label: "Não", value: "false" },
+  ];
+  const threatSeverityOptions = [
+    { label: "Muito Baixa", value: "very low" },
+    { label: "Baixa", value: "low" },
+    { label: "Média", value: "medium" },
+    { label: "Alta", value: "high" },
+    { label: "Muito Alta", value: "very high" },
+  ];
+  const threatsIncidenceOptions = [
+    { label: "Local", value: "local" },
+    { label: "Nacional", value: "national" },
+    { label: "Regional", value: "regional" },
   ];
 
   //Configuração do Config
@@ -400,6 +448,48 @@ export default function DashboardPage() {
       onQueryUpdate: handleQueryUpdate,
       loading: vegetationTypesLoading,
       field: "profile.vegetationType",
+    },
+    {
+      title: "Tipo de Estresse",
+      context: "Ameaças IUCN",
+      options: threatsStress,
+      selectedItems: selectedThreatsStress,
+      handleSelectionChange: handleThreatsStressSelectionChange,
+      handleRemoveSelection: handleThreatsStressSelectionRemove,
+      onQueryUpdate: handleQueryUpdate,
+      loading: threatsStressLoading,
+      field: "profile.threats.stress",
+    },
+    {
+      title: "Tipo de Ameaça",
+      context: "Ameaças IUCN",
+      options: threats,
+      selectedItems: selectedThreats,
+      handleSelectionChange: handleThreatsSelectionChange,
+      handleRemoveSelection: handleThreatsSelectionRemove,
+      onQueryUpdate: handleQueryUpdate,
+      loading: threatsLoading,
+      field: "profile.threats.threat",
+    },
+    {
+      title: "Tipo de Severidade da Ameaça",
+      context: "Ameaças IUCN",
+      options: threatSeverityOptions,
+      selectedItems: selectedThreatsSeverity,
+      handleSelectionChange: handleThreatsSeveritySelectionChange,
+      handleRemoveSelection: handleThreatsSeveritySelectionRemove,
+      onQueryUpdate: handleQueryUpdate,
+      field: "profile.threats.severity",
+    },
+    {
+      title: "Tipo de Incidência da Ameaça",
+      context: "Ameaças IUCN",
+      options: threatsIncidenceOptions,
+      selectedItems: selectedThreatsIncidence,
+      handleSelectionChange: handleThreatsIncidenceSelectionChange,
+      handleRemoveSelection: handleThreatsIncidenceSelectionRemove,
+      onQueryUpdate: handleQueryUpdate,
+      field: "profile.threats.incidence",
     },
     {
       title: "Estado",
