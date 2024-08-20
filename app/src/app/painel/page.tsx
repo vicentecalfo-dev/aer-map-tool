@@ -18,7 +18,7 @@ import establishments from "../../lib/options/establishment-options.json" assert
 import endemism from "../../lib/options/endemism-options.json" assert { type: "json" };
 import phytogeographicDomains from "../../lib/options/phytogeographic-domain-options.json" assert { type: "json" };
 import assessmentCategories from "../../lib/options/iucn-category-options.json" assert { type: "json" };
-import { Button } from "@codeworker.br/govbr-tw-react";
+import { Button, Switch } from "@codeworker.br/govbr-tw-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons/faFilterCircleXmark";
 import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -52,7 +52,7 @@ export default function DashboardPage() {
   }, [query]);
 
   function handleQueryUpdate(key: string, values: any[]) {
-    if (key === "assessment.reassessment")
+    if (key === "assessment.reassessment" || key === "redList" || key === "assessment.reasonsForReAssessment.change")
       values = values.map((value) => value === "true");
     if (key === "assessment.year")
       values = values.map((value) => Number(value));
@@ -110,6 +110,7 @@ export default function DashboardPage() {
     handleAssessmentCriteriaSelectionChange([]);
     handleReAssessmentSelectionChange([]);
     handleAssessmentYearSelectionChange([]);
+    handleRedListSelectionChange([]);
     setFilterByNameValue("");
     setQuery({});
     setQueryResult([]);
@@ -148,10 +149,12 @@ export default function DashboardPage() {
   const [filterByTypeValue, setFilterByTypeValue] = useState("scientificName");
   const [filterByNameValue, setFilterByNameValue] = useState("");
 
-  function buildLikeQuery(string:any){
-    const sanitizedStringExtraSpaces = string.replace(/\s+/g, ' ').trim()
-    const sanitizedString = sanitizedStringExtraSpaces.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').trim();
-    return {$regex:sanitizedString, $options: "i"}
+  function buildLikeQuery(string: any) {
+    const sanitizedStringExtraSpaces = string.replace(/\s+/g, " ").trim();
+    const sanitizedString = sanitizedStringExtraSpaces
+      .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      .trim();
+    return { $regex: sanitizedString, $options: "i" };
   }
 
   function handleFilterByTypeValue(event: any) {
@@ -182,7 +185,6 @@ export default function DashboardPage() {
       ) {
         delete updatedQuery[filterByTypeValue];
       } else {
-       
         updatedQuery[filterByTypeValue] = buildLikeQuery(inputValue);
       }
 
@@ -281,9 +283,21 @@ export default function DashboardPage() {
   } = useSelection<string>([]);
 
   const {
+    selectedItems: selectedReAssessmentWithChange,
+    handleSelectionChange: handleReAssessmentWithChangeSelectionChange,
+    handleRemoveSelection: handleReAssessmentWithChangeSelectionRemove,
+  } = useSelection<string>([]);
+
+  const {
     selectedItems: selectedAssessmentYears,
     handleSelectionChange: handleAssessmentYearSelectionChange,
     handleRemoveSelection: handleAssessmentYearSelectionRemove,
+  } = useSelection<string>([]);
+
+  const {
+    selectedItems: selectedRedList,
+    handleSelectionChange: handleRedListSelectionChange,
+    handleRemoveSelection: handleRedListSelectionRemove,
   } = useSelection<string>([]);
 
   const kingdoms: any = [
@@ -291,6 +305,10 @@ export default function DashboardPage() {
     { label: "Planta", value: "Plantae" },
   ];
   const reassessmentOptions = [
+    { label: "Sim", value: "true" },
+    { label: "Não", value: "false" },
+  ];
+  const redListOptions = [
     { label: "Sim", value: "true" },
     { label: "Não", value: "false" },
   ];
@@ -424,6 +442,16 @@ export default function DashboardPage() {
       field: "distribution.phytogeographicDomain",
     },
     {
+      title: "Lista Vermelha MMA",
+      context: "Avaliação do Risco de Extinção",
+      options: redListOptions,
+      selectedItems: selectedRedList,
+      handleSelectionChange: handleRedListSelectionChange,
+      handleRemoveSelection: handleRedListSelectionRemove,
+      onQueryUpdate: handleQueryUpdate,
+      field: "redList",
+    },
+    {
       title: "Categoria",
       context: "Avaliação do Risco de Extinção",
       options: assessmentCategories,
@@ -455,6 +483,16 @@ export default function DashboardPage() {
       field: "assessment.reassessment",
     },
     {
+      title: "Reavaliação Com Mudança de Categoria",
+      context: "Avaliação do Risco de Extinção",
+      options: reassessmentOptions,
+      selectedItems: selectedReAssessmentWithChange,
+      handleSelectionChange: handleReAssessmentWithChangeSelectionChange,
+      handleRemoveSelection: handleReAssessmentWithChangeSelectionRemove,
+      onQueryUpdate: handleQueryUpdate,
+      field: "assessment.reasonsForReAssessment.change",
+    },
+    {
       title: "Ano de Avaliação",
       context: "Avaliação do Risco de Extinção",
       options: assessmentYears,
@@ -471,7 +509,10 @@ export default function DashboardPage() {
     <>
       {isMounted && (
         <div className="h-screen w-screen bg-govbr-gray-5 overflow-hidden grid grid-rows-[auto_1fr_auto]">
-          <HeaderGov>Painel Interativo sobre o Estado de Conservação das Espécies da Flora Brasileira</HeaderGov>
+          <HeaderGov>
+            Painel Interativo sobre o Estado de Conservação das Espécies da
+            Flora Brasileira
+          </HeaderGov>
           <main className="gap-5 row-span-1 grid grid-cols-[auto_1fr] overflow-hidden">
             <aside className="w-[350px] grid grid-rows-[1fr_auto] gap-5 overflow-hidden">
               <div className="overflow-y-auto overflow-x-hidden">
@@ -539,9 +580,10 @@ export default function DashboardPage() {
                                         {title}
                                         <FontAwesomeIcon
                                           icon={faXmark}
-                                          onClick={() =>
-                                            handleSelectionChange([])
-                                          }
+                                          onClick={() => {
+                                            handleSelectionChange([]);
+                                            handleSubmitQuery();
+                                          }}
                                         />
                                       </Badge>
                                     </li>
@@ -555,9 +597,10 @@ export default function DashboardPage() {
                                             {label}
                                             <FontAwesomeIcon
                                               icon={faXmark}
-                                              onClick={() =>
-                                                handleRemoveSelection(value)
-                                              }
+                                              onClick={() => {
+                                                handleRemoveSelection(value);
+                                                handleSubmitQuery();
+                                              }}
                                             />
                                           </Badge>
                                         </li>

@@ -1,5 +1,6 @@
 "use client";
 import { Circle, MapContainer, TileLayer, WMSTileLayer } from "react-leaflet";
+import { GeoJSON } from 'react-leaflet/GeoJSON'
 import "leaflet/dist/leaflet.css";
 import {
   Layers3,
@@ -20,7 +21,7 @@ import useFetchData from "@/lib/useFetchData";
 import { useEffect, useState } from "react";
 import MultiComboBox from "@/components/ui/multi-combo-box";
 
-export default function MapEditor() {
+export default function MapEditor({ data }: any) {
   const { data: INPELayers, loading: INPELayersLoading } = useFetchData(
     "https://corsbypass-5jyi.onrender.com/https://visualizador.inde.gov.br/api/buscacamada"
   );
@@ -49,7 +50,7 @@ export default function MapEditor() {
         data = data.map(({ BaseUrl, Titulo, Camada }: any) => ({
           label: Titulo,
           value: Camada,
-          url: BaseUrl
+          url: BaseUrl,
         }));
         setINPEContextLayers(data);
         console.log(data);
@@ -61,18 +62,19 @@ export default function MapEditor() {
   }, [INPESLayerSelected]);
 
   useEffect(() => {
-    const selectedLayers = INPEContextLayerSelected.map((selectedLayer: any) => {
-      console.log(selectedLayer)
-      console.log(INPEContextLayers)
-      return INPEContextLayers.find(
-        (item: any) => item.value === selectedLayer
-      );
-    }).filter((layer: any) => layer !== undefined); // Filtra layers que não foram encontrados
-  
+    const selectedLayers = INPEContextLayerSelected.map(
+      (selectedLayer: any) => {
+        console.log(selectedLayer);
+        console.log(INPEContextLayers);
+        return INPEContextLayers.find(
+          (item: any) => item.value === selectedLayer
+        );
+      }
+    ).filter((layer: any) => layer !== undefined); // Filtra layers que não foram encontrados
+
     setINPEWmsLayers(selectedLayers);
     console.log("Selected WMS Layers:", selectedLayers);
   }, [INPEContextLayerSelected, INPEContextLayers]);
-  
 
   function handleSelectINPELayer(event: any) {
     const selectedLayer = event.target.value;
@@ -107,11 +109,11 @@ export default function MapEditor() {
               <MapPinOff />
             </MapEditorToolbarButton>
           </li>
-          <li>
+          {/* <li>
             <MapEditorToolbarButton tooltip="Camadas de Sobreposição">
               <Layers3 />
             </MapEditorToolbarButton>
-          </li>
+          </li> */}
         </ul>
         <ul className="flex flex-col text-xs">
           <li>
@@ -132,20 +134,17 @@ export default function MapEditor() {
               attribution={`&copy; <a href="https://carto.com/attributions">CARTO DB</a>`}
             />
 
-           {
-              INPEWmsLayers.map(({value, url}:any)=>(
-                <WMSTileLayer
-                  layers={value}
-                  url={url}
-                  maxZoom={6}
-                  transparent={true}
-                  format="image/png"
-                  opacity={0.8}
-                />
-
-              ))
-            } 
-{/* 
+            {INPEWmsLayers.map(({ value, url }: any) => (
+              <WMSTileLayer
+                layers={value}
+                url={url}
+                maxZoom={6}
+                transparent={true}
+                format="image/png"
+                opacity={0.8}
+              />
+            ))}
+            {/* 
 <WMSTileLayer
                   layers={"CGEO:pib2021_mun_var50"}
                   url={`https://geoservicos.ibge.gov.br/geoserver/ows`}
@@ -154,7 +153,7 @@ export default function MapEditor() {
                   format="image/png"
                   opacity={0.8}
                 /> */}
-{/* 
+            {/* 
             <Circle center={[51.51, -0.06]} radius={22} /> */}
           </MapContainer>
         </main>
@@ -162,13 +161,19 @@ export default function MapEditor() {
         <aside className="flex flex-col w-1/4">
           <div className="flex-1">
             <Accordion
-              value="1"
+              value=""
               multi={false}
               className="bg-white"
               fixedHeight="max-h-[300px]"
             >
+              {data &&data.map(({ title, content }: any) => 
+                <Accordion.Item value={title} key={title}>
+                  <>{title}</>
+                  <p>{content}</p>
+                </Accordion.Item>
+              )}
               <Accordion.Item value="1">
-                <>Camadas Disponíveis do INDE</>
+                <>INDE</>
                 <div className="flex flex-col gap-2">
                   <div className="flex gap-3 items-center">
                     {INPEContextLayersLoading && (
@@ -198,8 +203,8 @@ export default function MapEditor() {
                 </div>
               </Accordion.Item>
               <Accordion.Item value="2">
-                <>Camadas</>
-                <p>Camadas</p>
+                <>MapBiomas</>
+                <p>LISTAR CAMADAS</p>
               </Accordion.Item>
             </Accordion>
           </div>

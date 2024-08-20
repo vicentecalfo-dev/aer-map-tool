@@ -25,6 +25,7 @@ export type Species = {
   scientificName: string;
   category: string;
   criteria: string;
+  redList: boolean;
   assessmentYear: number;
   reassessment: boolean;
 };
@@ -37,6 +38,7 @@ export const columnsHeader = {
   //criteria: "Critério de avaliação",
   assessmentYear: "Ano de Avaliação",
   reassessment: "Reavaliação",
+  redList: "Lista Vermelha MMA",
 };
 
 function ScientificName({ scientificName }: any) {
@@ -63,7 +65,7 @@ export const columns: ColumnDef<Species>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <span className="min-w-[150px] block">{row.getValue("family")}</span>
+        <span className="min-w-[150px] block">{row.getValue("family") === "" ? "-" : row.getValue("family")}</span>
       );
     },
   },
@@ -115,7 +117,7 @@ export const columns: ColumnDef<Species>[] = [
       </TableSortIcon>
     ),
     cell: ({ row }) => (
-      <span className="text-right">{row.getValue("assessmentYear")}</span>
+      row.getValue("assessmentYear") === "" ? <Badge variant="neutral" className="opacity-50">Não se Aplica</Badge> : <span className="text-right">{row.getValue("assessmentYear")}</span>
     ),
   },
   {
@@ -127,11 +129,11 @@ export const columns: ColumnDef<Species>[] = [
     ),
     cell: ({ row }) => {
       const label = row.getValue("reassessment") ? "Sim" : "Não";
-      const category = row.getValue("category") === "NE";
+      const categoryNE = row.getValue("category") === "NE";
       return (
         <span className="min-w-[120px] block">
-          {category ? (
-            ""
+          {categoryNE ? (
+            <Badge variant="neutral" className="opacity-50">Não se Aplica</Badge>
           ) : (
             <Badge
               variant={
@@ -146,15 +148,33 @@ export const columns: ColumnDef<Species>[] = [
     },
   },
   {
+    accessorKey: "redList",
+    header: ({ column }) => (
+      <TableSortIcon column={column}>{columnsHeader.redList}</TableSortIcon>
+    ),
+    cell: ({ row }) => {
+      const redList = row.getValue("redList");
+      console.log(redList);
+      const label = redList ? "Sim" : "Não";
+      return (
+        <Badge variant={redList ? "success-light" : "danger-light"}>
+          {label}
+        </Badge>
+      );
+    },
+  },
+  {
     accessorKey: "id",
     header: "",
     cell: ({ row }) => {
       const scientificName = row.getValue("scientificName") as string;
+      const categoryNE = row.getValue("category") === "NE";
       return (
         <Sheet>
           <SheetTrigger>
-            <Button variant="outline" density="high">
-              <span className="text-xs">Abrir</span> <FontAwesomeIcon icon={faChevronRight} />
+            <Button variant="outline" density="high" disabled={categoryNE}>
+              <span className="text-xs">Abrir</span>{" "}
+              <FontAwesomeIcon icon={faChevronRight} />
             </Button>
           </SheetTrigger>
           <SheetContent className=" !min-w-[90vw] !p-0 !grid !grid-rows-[auto_1fr_auto] h-screen gap-0 border-0">
@@ -199,7 +219,7 @@ export const columns: ColumnDef<Species>[] = [
               </SheetTitle>
             </SheetHeader>
             <div className="overflow-y-auto bg-govbr-pure-0">
-              <AssessmentSheet row={row} />
+              <AssessmentSheet row={row} id={row.getValue("id")}/>
             </div>
             <SheetFooter>
               <div className="p-5 bg-govbr-gray-2 w-full flex gap-3 items-center">
@@ -228,6 +248,7 @@ export const columns: ColumnDef<Species>[] = [
             </SheetFooter>
           </SheetContent>
         </Sheet>
+
       );
     },
   },
