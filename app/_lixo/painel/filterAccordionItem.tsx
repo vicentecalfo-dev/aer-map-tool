@@ -1,5 +1,5 @@
 import { Accordion, Badge, Spinner } from "@codeworker.br/govbr-tw-react";
-import MultiComboBox from "@/components/ui/multi-combo-box";
+import MultiComboBox from "../index_bk2";
 import { useEffect } from "react";
 
 interface FilterAccordionItemProps {

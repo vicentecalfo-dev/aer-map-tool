@@ -19,7 +19,7 @@ import MapEditorSettings from "@/app/map-editor/components/settings";
 import MapEditorToolbarButton from "@/app/map-editor/components/toolbar/button";
 import useFetchData from "@/lib/useFetchData";
 import { useEffect, useState } from "react";
-import MultiComboBox from "@/components/ui/multi-combo-box";
+import MultiComboBox from "../../../../_lixo/index_bk2";
 
 export default function MapEditor({ data }: any) {
   const { data: INPELayers, loading: INPELayersLoading } = useFetchData(

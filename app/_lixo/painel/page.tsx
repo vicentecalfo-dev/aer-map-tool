@@ -9,7 +9,7 @@ import { columns } from "@/components/app/tables/species/columns";
 import { useEffect, useState } from "react";
 import useFetchData from "@/lib/useFetchData";
 import Badge from "@codeworker.br/govbr-tw-react/dist/components/Badge";
-import MultiComboBox from "@/components/ui/multi-combo-box";
+import MultiComboBox from "../index_bk2";
 import { Spinner } from "@codeworker.br/govbr-tw-react/dist/components/Spinner";
 import useSelection from "./useSelection";
 
@@ -22,6 +22,7 @@ import { Button, Switch } from "@codeworker.br/govbr-tw-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons/faFilterCircleXmark";
 import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
 
 import {
   Sheet,
@@ -595,6 +596,26 @@ export default function DashboardPage() {
     },
   ];
 
+  const [file, setFile]:any = useState()
+
+  function handleChange(event:any) {
+    setFile(event.target.files[0])
+    console.log(event.target.files)
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('shapeFile', event.target.files[0]);
+    formData.append('shapeFileName', event.target.files[0].name);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+
+    axios.post('http://localhost:3100/data/geo/upload', formData, config).then((response) => {
+      console.log(response.data);
+    });
+  }
+
   return (
     <>
       {isMounted && (
@@ -773,6 +794,12 @@ export default function DashboardPage() {
                       </Accordion.Item>
                     )
                   )}
+                  <Accordion.Item value='uploadshape' key={`shape`}>
+                    <>Upload Shape</>
+                    <>
+                    <input type="file" onChange={handleChange} name="shapeFile"/>
+                    </>
+                  </Accordion.Item>
                 </Accordion>
               </div>
               <FilterButtons

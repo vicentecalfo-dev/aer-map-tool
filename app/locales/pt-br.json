@@ -1,0 +1,114 @@
+{
+  "HeaderGov": {
+    "title": "Painel Interativo sobre o Estado de Conservação da Flora Brasileira",
+    "locator": "CNCFlora - Centro Nacional de Conservação da Flora",
+    "cabinet": "Ministério do Meio Ambiente e Mudança do Clima"
+  },
+  "Filters": {
+    "form":{
+      "search": "Buscar",
+      "clearSearch": "Limpar Busca"
+    },
+    "taxonRank":{
+      "label": "Classificação Taxonômica",
+      "context": "Flora e Funga do Brasil"
+    },
+    "kingdom": {
+      "label": "Reino",
+      "context": "Flora e Funga do Brasil"
+    },
+    "phylum":{
+      "label": "Filo",
+      "context": "Flora e Funga do Brasil"
+    },
+    "class":{
+      "label": "Classe",
+      "context": "Flora e Funga do Brasil"
+    },
+    "order":{
+      "label": "Ordem",
+      "context": "Flora e Funga do Brasil"
+    },
+    "family":{
+      "label": "Família",
+      "context": "Flora e Funga do Brasil"
+    },
+    "genus":{
+      "label": "Gênero",
+      "context": "Flora e Funga do Brasil"
+    },
+    "profileLifeForm":{
+      "label": "Forma de Vida",
+      "context": "Flora e Funga do Brasil"
+    },
+    "profileVegatationType":{
+      "label": "Tipo de Vegetação",
+      "context": "Flora e Funga do Brasil"
+    },
+    "profileHabitat":{
+      "label": "Habitat",
+      "context": "Flora e Funga do Brasil"
+    },
+    "distributionRegion":{
+      "label": "Região",
+      "context": "Distribuição Geográfica"
+    },
+    "distributionState":{
+      "label": "Estado",
+      "context": "Distribuição Geográfica"
+    },
+    "establishmentMeans":{
+      "label": "Origem",
+      "context": "Distribuição Geográfica"
+    },
+    "endemism":{
+      "label": "Endêmica do Brasil",
+      "context": "Distribuição Geográfica"
+    },
+    "phytogeographicDomain":{
+      "label": "Bioma",
+      "context": "Distribuição Geográfica"
+
+    },
+    "governmentOfficialList":  {
+      "label": "Lista Oficial MMA",
+      "context": "Ministério do Meio Ambiente e Mudança do Clima"
+    },
+    "assessmentCategory":{
+      "label": "Categoria de Risco",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "assessmentYear":{
+       "label": "Ano de Avaliação",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "reassessment":{
+      "label": "Reavaliação",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "assessmentCategoryChanged":{
+       "label": "Categoria de Risco Alterada na Reavaliação",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "lastAssessmentCategory":{
+      "label": "Categoria de Risco da Última Avaliação",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "threatsIncidence":  {
+      "label": "Incidência da Ameaça",
+      "context": "Avaliação de Risco de Extinção"
+    }
+  },
+  "MultiComboBox":{
+    "clearSelection": "Limpar Seleção",
+    "selectAll":"Selecionar Todos",
+    "deselectAll": "Deselecionar Todos",
+    "noOptionFound": "Nenhuma opção encontrada"
+  },
+  "SearchByNumber":{
+    "clearSelection": "Limpar Campos",
+    "errorMessageBetween": "O valor deve estar entre {minimumValue} e {maximumValue}",
+    "errorInitialLessThanFinal": "O valor inicial deve ser menor que o valor final.",
+    "errorFinalGreaterThanInitial": "O valor final deve ser maior que o valor inicial."
+  }
+}
