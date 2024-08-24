@@ -57,10 +57,15 @@ export default function DashboardPage() {
                 help={filters[filter]?.help || false}
                 hint={filters[filter]?.hint || false}
                 component={filters[filter]?.component}
+                translate={filters[filter]?.translate}
               />
             ))}
           </Accordion>
-          <>{JSON.stringify(results, null, 2)}</>
+          <>
+          {results.length}
+          <br />
+          {JSON.stringify(results, null, 2)}
+          </>
         </FilterLayout>
       )}
     </>

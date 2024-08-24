@@ -2,21 +2,23 @@ import Accordion from "@codeworker.br/govbr-tw-react/dist/components/Accordion";
 import AccordionFilterTitle from "./AccordionFilterTitle";
 import MultiComboBox from "@/components/ui/multi-combo-box";
 import { useEffect, useState } from "react";
-import SearchByNumber from "@/components/ui/serchByNumber";
-
+import SearchByNumber from "@/components/ui/searchByNumber";
+import SearchByText from "@/components/ui/searchByText";
+import { useTranslations } from "next-intl";
 
 export default function AccordionFilter({
   filter,
   onChangeSelection,
-  selected = [],
+  selected,
   options = [],
   sortOrder = "asc",
   component,
   help,
-  hint
+  hint,
+  translate
 }: any) {
   const [resolvedOptions, setResolvedOptions]: any = useState();
-
+  const t = useTranslations("Filters"); 
   useEffect(() => {
     (async () => {
       try {
@@ -51,19 +53,33 @@ export default function AccordionFilter({
         return (
           <SearchByNumber
             comparisonTypeDefault={resolvedOptions.comparisonTypeDefault}
-            minimumValue = {resolvedOptions.limits[0]}
-            maximumValue = {resolvedOptions.limits[1]}
+            minimumValue={resolvedOptions.limits[0]}
+            maximumValue={resolvedOptions.limits[1]}
             hint={hint}
             onChange={(selection: any) => {
-              //console.log('year',selection)
               onChangeSelection({ filter, selection });
             }}
           />
         );
       default:
-        return <>Sem Component</>;
+        return (
+          <>
+            <SearchByText
+              name={filter}
+              selected={selected}
+              onChangeSelection={(selection: any) =>
+                onChangeSelection({ filter, selection })
+              }
+              selectionTitle={t(`${filter}.${translate.selectionTitle}`)}
+              inputPlaceholder={t(`${filter}.${translate.inputPlaceholder}`)}
+            />
+          </>
+        );
     }
   };
+
+  let selectedHasSelection = selected.hasOwnProperty('selection');
+  if(selectedHasSelection) selected = selected.selection;
 
   return (
     <Accordion.Item value={filter} key={filter}>

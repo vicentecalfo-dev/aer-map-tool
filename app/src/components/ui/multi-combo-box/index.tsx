@@ -117,14 +117,13 @@ const MultiComboBox = ({
 
   return (
     <div className="grid grid-rows-[auto_1fr_auto] gap-3 w-full">
-      <div className="flex gap-1 w-full">
+      <div className="flex gap-3 w-full items-center">
         <div className="flex-1">
           <Input
             type="text"
             value={filterText}
             onChange={handleFilterTextChange}
             placeholder="Filtrar..."
-            density="high"
           />
         </div>
         <Tooltip position="left" className="text-xs">

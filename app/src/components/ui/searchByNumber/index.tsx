@@ -197,7 +197,7 @@ const SearchByNumber: React.FC<SearchByNumberProps> = ({
           <AccordionFilterHint></AccordionFilterHint>
         </>
       )}
-      <div className="flex gap-1 items-center">
+      <div className="flex gap-3 items-center">
         <div className="flex-1">
           <NativeSelect
             value={comparisonType}

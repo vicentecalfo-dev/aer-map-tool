@@ -2,23 +2,62 @@ import axios from "axios";
 
 const BASE_API_URL = "http://localhost:3100/data";
 
-const assessmentCategory =  [
-  { "label": "Extinta (EX)", "value": "EX" },
-  { "label": "Extinta na Natureza (EW)", "value": "EW" },
-  { "label": "Regionalmente Extinta (RE)", "value": "RE" },
-  { "label": "Criticamente em Perigo (possivelmente extinta na natureza) (PEW)", "value": "PEW" },
-  { "label": "Criticamente em Perigo (possivelmente extinta) (PE)", "value": "PE" },
-  { "label": "Criticamente em Perigo (CR)", "value": "CR" },
-  { "label": "Em Perigo (EN)", "value": "EN" },
-  { "label": "Vulnerável (VU)", "value": "VU" },
-  { "label": "Quase Ameaçada (NT)", "value": "NT" },
-  { "label": "Menos Preocupante (LC)", "value": "LC" },
-  { "label": "Dados Insuficientes (DD)", "value": "DD" },
-  { "label": "Não Avaliada (NE)", "value": "NE" }
+const assessmentCategory = [
+  { label: "Extinta (EX)", value: "EX" },
+  { label: "Extinta na Natureza (EW)", value: "EW" },
+  { label: "Regionalmente Extinta (RE)", value: "RE" },
+  {
+    label: "Criticamente em Perigo (possivelmente extinta na natureza) (PEW)",
+    value: "PEW",
+  },
+  { label: "Criticamente em Perigo (possivelmente extinta) (PE)", value: "PE" },
+  { label: "Criticamente em Perigo (CR)", value: "CR" },
+  { label: "Em Perigo (EN)", value: "EN" },
+  { label: "Vulnerável (VU)", value: "VU" },
+  { label: "Quase Ameaçada (NT)", value: "NT" },
+  { label: "Menos Preocupante (LC)", value: "LC" },
+  { label: "Dados Insuficientes (DD)", value: "DD" },
+  { label: "Não Avaliada (NE)", value: "NE" },
 ];
 
 const getFiltersService = (filter = null) => {
   const config = {
+    scientificName: {
+      options: {},
+      dbField: "scientificName",
+      component: "searchByText",
+      translate: {
+        selectionTitle: "selectionTitle",
+        inputPlaceholder: "inputPlaceholder",
+      },
+    },
+    synonym: {
+      options: {},
+      dbField: "synonyms.scientificName",
+      component: "searchByText",
+      translate: {
+        selectionTitle: "selectionTitle",
+        inputPlaceholder: "inputPlaceholder",
+      },
+    },
+    vernacularName: {
+      options: {},
+      dbField: "vernacularNames.vernacularName",
+      component: "searchByText",
+      translate: {
+        selectionTitle: "selectionTitle",
+        inputPlaceholder: "inputPlaceholder",
+      },
+    },
+    scientificNameAuthorship: {
+      options: {},
+      dbField: "scientificNameAuthorship",
+      component: "searchByText",
+      translate: {
+        selectionTitle: "selectionTitle",
+        inputPlaceholder: "inputPlaceholder",
+      },
+    },
     taxonRank: {
       options: [
         { value: "CLASSE", label: "Classe" },
@@ -34,7 +73,7 @@ const getFiltersService = (filter = null) => {
         { value: "VARIEDADE", label: "Variedade" },
       ],
       dbField: "taxonRank",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     kingdom: {
       options: [
@@ -42,32 +81,32 @@ const getFiltersService = (filter = null) => {
         { label: "Plantae", value: "Plantae" },
       ],
       dbField: "kingdom",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     phylum: {
       options: axios.get(`${BASE_API_URL}/phylum`),
       dbField: "phylum",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     class: {
       options: axios.get(`${BASE_API_URL}/class`),
       dbField: "class",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     order: {
       options: axios.get(`${BASE_API_URL}/order`),
       dbField: "order",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     family: {
       options: axios.get(`${BASE_API_URL}/family`),
       dbField: "family",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     genus: {
       options: axios.get(`${BASE_API_URL}/genus`),
       dbField: "genus",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     profileLifeForm: {
       options: [
@@ -103,7 +142,7 @@ const getFiltersService = (filter = null) => {
         { label: "Árvore", value: "Árvore" },
       ],
       dbField: "profile.lifeForm",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     profileVegatationType: {
       options: [
@@ -157,7 +196,7 @@ const getFiltersService = (filter = null) => {
         { label: "Área Antrópica", value: "Área Antrópica" },
       ],
       dbField: "profile.vegetationType",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     profileHabitat: {
       options: [
@@ -209,7 +248,7 @@ const getFiltersService = (filter = null) => {
         { label: "Água", value: "Água" },
       ],
       dbField: "profile.habitat",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     distributionRegion: {
       options: [
@@ -220,7 +259,7 @@ const getFiltersService = (filter = null) => {
         { value: "Sul", label: "Sul" },
       ],
       dbField: "distribution.region",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     distributionState: {
       options: [
@@ -253,50 +292,50 @@ const getFiltersService = (filter = null) => {
         { value: "TO", label: "Tocantins (TO)" },
       ],
       dbField: "distribution.states",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     establishmentMeans: {
-      options:[
+      options: [
         { value: "", label: "Desconhecida" },
         { value: "CULTIVADA", label: "Cultivada" },
         { value: "NATIVA", label: "Nativa" },
-        { value: "NATURALIZADA", label: "Naturalizada" }
+        { value: "NATURALIZADA", label: "Naturalizada" },
       ],
-      dbField: 'distribution.establishmentMeans',
-      component: 'multiComboBox'
+      dbField: "distribution.establishmentMeans",
+      component: "multiComboBox",
     },
-    endemism:{
-      options:[
+    endemism: {
+      options: [
         { label: "Sim", value: "Endemica" },
         { label: "Não", value: "Não endemica" },
       ],
       dbField: "distribution.endemism",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
-    phytogeographicDomain:{
+    phytogeographicDomain: {
       options: [
         { value: "Amazônia", label: "Amazônia" },
         { value: "Caatinga", label: "Caatinga" },
         { value: "Cerrado", label: "Cerrado" },
         { value: "Mata Atlântica", label: "Mata Atlântica" },
         { value: "Pampa", label: "Pampa" },
-        { value: "Pantanal", label: "Pantanal" }
+        { value: "Pantanal", label: "Pantanal" },
       ],
       dbField: "distribution.phytogeographicDomain",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     assessmentCategory: {
       options: assessmentCategory,
       dbField: "assessment.category",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     reassessment: {
-      options:[
+      options: [
         { label: "Sim", value: "Sim" },
         { label: "Não", value: "Não" },
       ],
       dbField: "assessment.reassessment",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     assessmentCategoryChanged: {
       options: [
@@ -304,20 +343,20 @@ const getFiltersService = (filter = null) => {
         { label: "Não", value: "Não" },
       ],
       dbField: "assessment.categoryChanged",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     lastAssessmentCategory: {
       options: assessmentCategory,
       dbField: "assessment.lastCategory",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     assessmentYear: {
-      options:{
-        limits:[1950, new Date().getFullYear()],
+      options: {
+        limits: [1950, new Date().getFullYear()],
         comparisonTypeDefault: "$eq",
       },
       dbField: "assessment.year",
-      component: 'searchByNumber',
+      component: "searchByNumber",
     },
     threatsIncidence: {
       options: [
@@ -326,7 +365,7 @@ const getFiltersService = (filter = null) => {
         { label: "Regional", value: "regional" },
       ],
       dbField: "threats.incidence",
-      component: 'multiComboBox'
+      component: "multiComboBox",
     },
     governmentOfficialList: {
       options: [
@@ -334,7 +373,7 @@ const getFiltersService = (filter = null) => {
         { label: "Portaria MMA 148 (2022)", value: "MMA_148" },
       ],
       dbField: "governmentOfficialList",
-      component: 'multiComboBox',
+      component: "multiComboBox",
     },
   };
 

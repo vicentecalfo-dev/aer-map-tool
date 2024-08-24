@@ -9,6 +9,30 @@
       "search": "Buscar",
       "clearSearch": "Limpar Busca"
     },
+    "scientificName": {
+      "label": "Espécie (Nome Científico)",
+      "context": "Flora e Funga do Brasil",
+      "selectionTitle": "Seleção de Espécies",
+      "inputPlaceholder": "Digitar Espécie"
+    },
+    "synonym": {
+      "label": "Sinônimo (Nome Científico)",
+      "context": "Flora e Funga do Brasil",
+      "selectionTitle": "Seleção de Espécies (sinônimos)",
+      "inputPlaceholder": "Digitar Sinônimo"
+    },
+    "vernacularName": {
+      "label": "Nome Popular",
+      "context": "Flora e Funga do Brasil",
+      "selectionTitle": "Seleção de Nomes",
+      "inputPlaceholder": "Digitar Nome Popular"
+    },
+    "scientificNameAuthorship": {
+      "label": "Autor",
+      "context": "Flora e Funga do Brasil",
+      "selectionTitle": "Seleção de Autores",
+      "inputPlaceholder": "Digitar Nome do Autor"
+    },
     "taxonRank": {
       "label": "Classificação Taxonômica",
       "context": "Flora e Funga do Brasil"
@@ -117,5 +141,18 @@
     "$lte": "Menor igual que",
     "$gt-$lt": "Entre",
     "$gte-$lte": "Entre (inclusivo)"
+  },
+  "SearchByText": {
+    "clearSelection": "Limpar Seleção",
+    "add": "Adicionar",
+    "remove": "Remover",
+    "sortAsc": "Ordenar Ascendente",
+    "sortDesc": "Ordenar Descendente",
+    "sortNone": "Sem Ordenação",
+    "upload": "Enviar Arquivo CSV",
+    "isExactMatch": "Buscando exatamente pelo termo selecionado",
+    "similarityMatch": "A buscar será por registros que contenham os termos selecionados.",
+    "instructions": "Digite no campo de busca e/ou faça o upload de um arquivo CSV. Colunas aceitas: {columns}.",
+    "filterPlaceholder": "Filtrar ..."
   }
 }
