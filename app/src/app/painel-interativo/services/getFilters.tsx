@@ -314,11 +314,10 @@ const getFiltersService = (filter = null) => {
     assessmentYear: {
       options:{
         limits:[1950, new Date().getFullYear()],
-        comparisonTypeDefault: "$gt",
+        comparisonTypeDefault: "$eq",
       },
       dbField: "assessment.year",
       component: 'searchByNumber',
-      hint: true
     },
     threatsIncidence: {
       options: [
@@ -336,7 +335,6 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "governmentOfficialList",
       component: 'multiComboBox',
-      help: true,
     },
   };
 

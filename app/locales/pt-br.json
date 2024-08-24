@@ -5,11 +5,11 @@
     "cabinet": "Ministério do Meio Ambiente e Mudança do Clima"
   },
   "Filters": {
-    "form":{
+    "form": {
       "search": "Buscar",
       "clearSearch": "Limpar Busca"
     },
-    "taxonRank":{
+    "taxonRank": {
       "label": "Classificação Taxonômica",
       "context": "Flora e Funga do Brasil"
     },
@@ -17,98 +17,105 @@
       "label": "Reino",
       "context": "Flora e Funga do Brasil"
     },
-    "phylum":{
+    "phylum": {
       "label": "Filo",
       "context": "Flora e Funga do Brasil"
     },
-    "class":{
+    "class": {
       "label": "Classe",
       "context": "Flora e Funga do Brasil"
     },
-    "order":{
+    "order": {
       "label": "Ordem",
       "context": "Flora e Funga do Brasil"
     },
-    "family":{
+    "family": {
       "label": "Família",
       "context": "Flora e Funga do Brasil"
     },
-    "genus":{
+    "genus": {
       "label": "Gênero",
       "context": "Flora e Funga do Brasil"
     },
-    "profileLifeForm":{
+    "profileLifeForm": {
       "label": "Forma de Vida",
       "context": "Flora e Funga do Brasil"
     },
-    "profileVegatationType":{
+    "profileVegatationType": {
       "label": "Tipo de Vegetação",
       "context": "Flora e Funga do Brasil"
     },
-    "profileHabitat":{
+    "profileHabitat": {
       "label": "Habitat",
       "context": "Flora e Funga do Brasil"
     },
-    "distributionRegion":{
+    "distributionRegion": {
       "label": "Região",
       "context": "Distribuição Geográfica"
     },
-    "distributionState":{
+    "distributionState": {
       "label": "Estado",
       "context": "Distribuição Geográfica"
     },
-    "establishmentMeans":{
+    "establishmentMeans": {
       "label": "Origem",
       "context": "Distribuição Geográfica"
     },
-    "endemism":{
+    "endemism": {
       "label": "Endêmica do Brasil",
       "context": "Distribuição Geográfica"
     },
-    "phytogeographicDomain":{
+    "phytogeographicDomain": {
       "label": "Bioma",
       "context": "Distribuição Geográfica"
-
     },
-    "governmentOfficialList":  {
+    "governmentOfficialList": {
       "label": "Lista Oficial MMA",
       "context": "Ministério do Meio Ambiente e Mudança do Clima"
     },
-    "assessmentCategory":{
+    "assessmentCategory": {
       "label": "Categoria de Risco",
       "context": "Avaliação de Risco de Extinção"
     },
-    "assessmentYear":{
-       "label": "Ano de Avaliação",
+    "assessmentYear": {
+      "label": "Ano de Avaliação",
       "context": "Avaliação de Risco de Extinção"
     },
-    "reassessment":{
+    "reassessment": {
       "label": "Reavaliação",
       "context": "Avaliação de Risco de Extinção"
     },
-    "assessmentCategoryChanged":{
-       "label": "Categoria de Risco Alterada na Reavaliação",
+    "assessmentCategoryChanged": {
+      "label": "Categoria de Risco Alterada na Reavaliação",
       "context": "Avaliação de Risco de Extinção"
     },
-    "lastAssessmentCategory":{
+    "lastAssessmentCategory": {
       "label": "Categoria de Risco da Última Avaliação",
       "context": "Avaliação de Risco de Extinção"
     },
-    "threatsIncidence":  {
+    "threatsIncidence": {
       "label": "Incidência da Ameaça",
       "context": "Avaliação de Risco de Extinção"
     }
   },
-  "MultiComboBox":{
+  "MultiComboBox": {
     "clearSelection": "Limpar Seleção",
-    "selectAll":"Selecionar Todos",
+    "selectAll": "Selecionar Todos",
     "deselectAll": "Deselecionar Todos",
     "noOptionFound": "Nenhuma opção encontrada"
   },
-  "SearchByNumber":{
+  "SearchByNumber": {
     "clearSelection": "Limpar Campos",
     "errorMessageBetween": "O valor deve estar entre {minimumValue} e {maximumValue}",
     "errorInitialLessThanFinal": "O valor inicial deve ser menor que o valor final.",
-    "errorFinalGreaterThanInitial": "O valor final deve ser maior que o valor inicial."
+    "errorFinalGreaterThanInitial": "O valor final deve ser maior que o valor inicial.",
+    "$eq": "Igual",
+    "$ne": "Não Igual",
+    "$gt": "Maior que",
+    "$gte": "Maior igual que",
+    "$lt": "Menor que",
+    "$lte": "Menor igual que",
+    "$gt-$lt": "Entre",
+    "$gte-$lte": "Entre (inclusivo)"
   }
 }

@@ -33,6 +33,16 @@ const buildQuery = ({
   const isValue2Valid = !isNaN(value2Int) && validateNumber(value2Int);
 
   switch (comparisonType) {
+    case "$eq":
+      if (isValue1Valid) {
+        newQuery = { $eq: value1Int };
+      }
+      break;
+    case "$ne":
+      if (isValue1Valid) {
+        newQuery = { $ne: value1Int };
+      }
+      break;
     case "$gt":
       if (isValue1Valid) {
         newQuery = { $gt: value1Int };
@@ -193,13 +203,18 @@ const SearchByNumber: React.FC<SearchByNumberProps> = ({
             value={comparisonType}
             onChange={handleComparisonTypeChange}
             options={[
-              { value: "$gt", label: "Maior que" },
-              { value: "$gte", label: "Maior igual que" },
-              { value: "$lt", label: "Menor que" },
-              { value: "$lte", label: "Menor igual que" },
-              { value: "$gt-$lt", label: "Entre" },
-              { value: "$gte-$lte", label: "Entre (inclusivo)" },
-            ]}
+              "$eq",
+              "$ne",
+              "$gt",
+              "$gte",
+              "$lt",
+              "$lte",
+              "$gt-$lt",
+              "$gte-$lte",
+            ].map((operator) => ({
+              value: operator,
+              label: t(operator),
+            }))}
           />
         </div>
         <div>

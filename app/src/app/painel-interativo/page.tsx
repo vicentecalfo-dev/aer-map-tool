@@ -27,8 +27,8 @@ export default function DashboardPage() {
   const handleFilterSubmit = async () => {
     const query = buildMongoQuery({ selectedFilters, filters });
     console.log(query);
-    //const { data } = await axios.post(`${BASE_API_URL}/query`, query);
-    //setResults(data);
+    const { data } = await axios.post(`${BASE_API_URL}/query`, query);
+    setResults(data);
   };
   function handleFilterSelection({ filter, selection }: any) {
     setSelectedFilters((prevFilters: any) => {
@@ -60,7 +60,7 @@ export default function DashboardPage() {
               />
             ))}
           </Accordion>
-          <>{JSON.stringify(results)}</>
+          <>{JSON.stringify(results, null, 2)}</>
         </FilterLayout>
       )}
     </>
