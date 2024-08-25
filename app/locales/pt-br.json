@@ -95,7 +95,11 @@
     },
     "governmentOfficialList": {
       "label": "Lista Oficial MMA",
-      "context": "Ministério do Meio Ambiente e Mudança do Clima"
+      "context": "Ministério do Meio Ambiente e Mudança do Clima",
+      "options":{
+        "MMA_443":"Portaria MMA 443 (2014)",
+        "MMA_148": "Portaria MMA 148 (2022)"
+      }
     },
     "assessmentCategory": {
       "label": "Categoria de Risco",
@@ -109,12 +113,32 @@
       "label": "Reavaliação",
       "context": "Avaliação de Risco de Extinção"
     },
+    "reasonForReAssessment": {
+      "label": "Razão para Reavaliação",
+      "context": "Avaliação de Risco de Extinção",
+      "options":{
+        "Criteria revision":"Revisão de Critério",
+        "Incorrect data":"Informações Incorretas",
+        "Mistake":"Errata",
+        "New information":"Novas Informações",
+        "Other":"Outros",
+        "Taxonomy": "Revisão Taxonômica"
+      }
+    },
     "assessmentCategoryChanged": {
       "label": "Categoria de Risco Alterada na Reavaliação",
       "context": "Avaliação de Risco de Extinção"
     },
     "lastAssessmentCategory": {
       "label": "Categoria de Risco da Última Avaliação",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "assessmentAssessor": {
+      "label": "Avaliador",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "assessmentEvaluator": {
+      "label": "Revisor",
       "context": "Avaliação de Risco de Extinção"
     },
     "threatsIncidence": {
@@ -126,7 +150,13 @@
     "clearSelection": "Limpar Seleção",
     "selectAll": "Selecionar Todos",
     "deselectAll": "Deselecionar Todos",
-    "noOptionFound": "Nenhuma opção encontrada"
+    "noOptionFound": "Nenhuma opção encontrada",
+    "yesOrNo":{
+      "Sim": "Sim",
+      "true": "Sim",
+      "Não": "Não",
+      "false": "Não"
+    }
   },
   "SearchByNumber": {
     "clearSelection": "Limpar Campos",

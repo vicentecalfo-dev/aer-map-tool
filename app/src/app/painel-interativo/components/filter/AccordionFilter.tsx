@@ -15,18 +15,29 @@ export default function AccordionFilter({
   component,
   help,
   hint,
-  translate
+  translate,
 }: any) {
   const [resolvedOptions, setResolvedOptions]: any = useState();
-  const t = useTranslations("Filters"); 
+  const t: any = useTranslations(translate);
+  const translateOptions = ({ options }: any) => {
+    if (component === "multiComboBox" && typeof translate === "string") {
+      options = options.map(({ label, value }: any) => ({
+        value,
+        label: t(value),
+      }));
+    }
+    return options;
+  };
   useEffect(() => {
     (async () => {
       try {
         if (Array.isArray(options) || !(options instanceof Promise)) {
+          options = translateOptions({ options });
           setResolvedOptions(options);
         } else {
           const resolvedOptions = await options;
-          setResolvedOptions(resolvedOptions.data);
+          options = translateOptions({ options: resolvedOptions.data });
+          setResolvedOptions(options);
         }
       } catch (error) {
         console.error("Error fetching filter options:", error);
@@ -70,16 +81,16 @@ export default function AccordionFilter({
               onChangeSelection={(selection: any) =>
                 onChangeSelection({ filter, selection })
               }
-              selectionTitle={t(`${filter}.${translate.selectionTitle}`)}
-              inputPlaceholder={t(`${filter}.${translate.inputPlaceholder}`)}
+              selectionTitle={t('selectionTitle')}
+              inputPlaceholder={t('inputPlaceholder')}
             />
           </>
         );
     }
   };
 
-  let selectedHasSelection = selected.hasOwnProperty('selection');
-  if(selectedHasSelection) selected = selected.selection;
+  let selectedHasSelection = selected.hasOwnProperty("selection");
+  if (selectedHasSelection) selected = selected.selection;
 
   return (
     <Accordion.Item value={filter} key={filter}>

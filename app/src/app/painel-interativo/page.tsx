@@ -57,7 +57,7 @@ export default function DashboardPage() {
                 help={filters[filter]?.help || false}
                 hint={filters[filter]?.hint || false}
                 component={filters[filter]?.component}
-                translate={filters[filter]?.translate}
+                translate={filters[filter]?.translate || null}
               />
             ))}
           </Accordion>

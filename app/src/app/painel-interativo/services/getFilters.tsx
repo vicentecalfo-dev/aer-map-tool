@@ -20,43 +20,35 @@ const assessmentCategory = [
   { label: "Não Avaliada (NE)", value: "NE" },
 ];
 
+const yesOrNo = [
+  { label: "Sim", value: "Sim" },
+  { label: "Não", value: "Não" },
+];
+
 const getFiltersService = (filter = null) => {
   const config = {
     scientificName: {
       options: {},
       dbField: "scientificName",
       component: "searchByText",
-      translate: {
-        selectionTitle: "selectionTitle",
-        inputPlaceholder: "inputPlaceholder",
-      },
+      translate: "Filters.scientificName",
     },
     synonym: {
       options: {},
       dbField: "synonyms.scientificName",
       component: "searchByText",
-      translate: {
-        selectionTitle: "selectionTitle",
-        inputPlaceholder: "inputPlaceholder",
-      },
+      translate: "Filters.synonym",
     },
     vernacularName: {
       options: {},
       dbField: "vernacularNames.vernacularName",
       component: "searchByText",
-      translate: {
-        selectionTitle: "selectionTitle",
-        inputPlaceholder: "inputPlaceholder",
-      },
+      translate: "Filters.vernacularName",
     },
     scientificNameAuthorship: {
-      options: {},
+      options: axios.get(`${BASE_API_URL}/authorship`),
       dbField: "scientificNameAuthorship",
-      component: "searchByText",
-      translate: {
-        selectionTitle: "selectionTitle",
-        inputPlaceholder: "inputPlaceholder",
-      },
+      component: "multiComboBox"
     },
     taxonRank: {
       options: [
@@ -330,20 +322,22 @@ const getFiltersService = (filter = null) => {
       component: "multiComboBox",
     },
     reassessment: {
-      options: [
-        { label: "Sim", value: "Sim" },
-        { label: "Não", value: "Não" },
-      ],
+      options: yesOrNo,
       dbField: "assessment.reassessment",
       component: "multiComboBox",
+      translate: "MultiComboBox.yesOrNo",
+    },
+    reasonForReAssessment: {
+      options: axios.get(`${BASE_API_URL}/reasonForReAssessment`),
+      dbField: "assessment.reasonForReAssessment",
+      component: "multiComboBox",
+      translate: "Filters.reasonForReAssessment.options"
     },
     assessmentCategoryChanged: {
-      options: [
-        { label: "Sim", value: "Sim" },
-        { label: "Não", value: "Não" },
-      ],
+      options: yesOrNo,
       dbField: "assessment.categoryChanged",
       component: "multiComboBox",
+      translate: "MultiComboBox.yesOrNo"
     },
     lastAssessmentCategory: {
       options: assessmentCategory,
@@ -367,6 +361,16 @@ const getFiltersService = (filter = null) => {
       dbField: "threats.incidence",
       component: "multiComboBox",
     },
+    assessmentAssessor: {
+      options: axios.get(`${BASE_API_URL}/assessor`),
+      dbField: "assessment.assessor",
+      component: "multiComboBox",
+    },
+    assessmentEvaluator: {
+      options: axios.get(`${BASE_API_URL}/evaluator`),
+      dbField: "assessment.evaluator",
+      component: "multiComboBox",
+    },
     governmentOfficialList: {
       options: [
         { label: "Portaria MMA 443 (2014)", value: "MMA_443" },
@@ -374,6 +378,7 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "governmentOfficialList",
       component: "multiComboBox",
+      translate: "Filters.governmentOfficialList.options"
     },
   };
 
