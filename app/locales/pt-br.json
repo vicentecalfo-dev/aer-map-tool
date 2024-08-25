@@ -125,6 +125,19 @@
         "Taxonomy": "Revisão Taxonômica"
       }
     },
+    "reasonForChangeCategory":{
+      "label": "Razão para Mudança de Categoria",
+      "context": "Avaliação de Risco de Extinção",
+      "options":{
+        "Criteria revision":"Revisão de Critério",
+        "Genuine (since first assessment)": "Genuíno (desde a primeira avaliação)",
+        "Incorrect data":"Informações Incorretas",
+        "Mistake":"Errata",
+        "New information":"Novas Informações",
+        "Other":"Outros",
+        "Taxonomy": "Revisão Taxonômica"
+      }
+    },
     "assessmentCategoryChanged": {
       "label": "Categoria de Risco Alterada na Reavaliação",
       "context": "Avaliação de Risco de Extinção"

@@ -339,6 +339,12 @@ const getFiltersService = (filter = null) => {
       component: "multiComboBox",
       translate: "MultiComboBox.yesOrNo"
     },
+    reasonForChangeCategory: {
+      options: axios.get(`${BASE_API_URL}/reasonForChangeCategory`),
+      dbField: "assessment.reasonForChangeCategory",
+      component: "multiComboBox",
+      translate: "Filters.reasonForChangeCategory.options"
+    },
     lastAssessmentCategory: {
       options: assessmentCategory,
       dbField: "assessment.lastCategory",
