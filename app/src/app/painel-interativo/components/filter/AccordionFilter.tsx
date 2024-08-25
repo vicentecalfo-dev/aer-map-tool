@@ -16,6 +16,8 @@ export default function AccordionFilter({
   help,
   hint,
   translate,
+  isExactMatch,
+  isExactMatchValue,
 }: any) {
   const [resolvedOptions, setResolvedOptions]: any = useState();
   const t: any = useTranslations(translate);
@@ -55,9 +57,12 @@ export default function AccordionFilter({
             selected={selected}
             sortOrder={sortOrder}
             hint={hint}
-            onChangeSelection={(selection: any) =>
-              onChangeSelection({ filter, selection })
-            }
+            isExactMatchDefault={isExactMatchValue}
+            isExactMatchButtonEnable={isExactMatch}
+            onChangeSelection={(selection: any) => {
+              console.log(selection);
+              onChangeSelection({ filter, selection });
+            }}
           />
         );
       case "searchByNumber":
@@ -81,8 +86,10 @@ export default function AccordionFilter({
               onChangeSelection={(selection: any) =>
                 onChangeSelection({ filter, selection })
               }
-              selectionTitle={t('selectionTitle')}
-              inputPlaceholder={t('inputPlaceholder')}
+              selectionTitle={t("selectionTitle")}
+              inputPlaceholder={t("inputPlaceholder")}
+              isExactMatchDefault={isExactMatchValue}
+              isExactMatchButtonEnable={isExactMatch}
             />
           </>
         );

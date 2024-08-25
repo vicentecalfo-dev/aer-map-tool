@@ -32,18 +32,24 @@ const getFiltersService = (filter = null) => {
       dbField: "scientificName",
       component: "searchByText",
       translate: "Filters.scientificName",
+      isExactMatch: true,
+      isExactMatchValue: true
     },
     synonym: {
       options: {},
       dbField: "synonyms.scientificName",
       component: "searchByText",
       translate: "Filters.synonym",
+      isExactMatch: true,
+      isExactMatchValue: true
     },
     vernacularName: {
       options: {},
       dbField: "vernacularNames.vernacularName",
       component: "searchByText",
       translate: "Filters.vernacularName",
+      isExactMatch: true,
+      isExactMatchValue: true
     },
     scientificNameAuthorship: {
       options: axios.get(`${BASE_API_URL}/authorship`),
@@ -135,6 +141,8 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "profile.lifeForm",
       component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false
     },
     profileVegatationType: {
       options: [
@@ -189,6 +197,8 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "profile.vegetationType",
       component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false
     },
     profileHabitat: {
       options: [
@@ -241,6 +251,8 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "profile.habitat",
       component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false
     },
     distributionRegion: {
       options: [
@@ -252,6 +264,8 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "distribution.region",
       component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false
     },
     distributionState: {
       options: [
@@ -285,6 +299,8 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "distribution.states",
       component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false
     },
     establishmentMeans: {
       options: [
@@ -315,6 +331,8 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "distribution.phytogeographicDomain",
       component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false
     },
     assessmentCategory: {
       options: assessmentCategory,
@@ -384,8 +402,10 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "governmentOfficialList",
       component: "multiComboBox",
-      translate: "Filters.governmentOfficialList.options"
-    },
+      translate: "Filters.governmentOfficialList.options",
+      isExactMatch: true,
+      isExactMatchValue: false
+    }
   };
 
   return filter ? config[filter] : config;

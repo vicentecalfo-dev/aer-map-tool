@@ -11,7 +11,7 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} >
       <body suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           {children}

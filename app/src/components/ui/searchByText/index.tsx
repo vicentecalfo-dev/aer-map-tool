@@ -25,6 +25,7 @@ const SearchByText = ({
   validColumns = ["espécie", "nome científico", "species", "scientificName"],
   sortOrderDefault = "asc",
   isExactMatchDefault = true,
+  isExactMatchButtonEnable = false,
   selectionTitle = "",
   inputPlaceholder = "",
   onChangeSelection = ([]) => {},
@@ -63,7 +64,7 @@ const SearchByText = ({
       setInputValue("");
       onChangeSelection({
         selection: newSelection,
-        isExactMatch
+        isExactMatch,
       });
     }
   };
@@ -166,30 +167,58 @@ const SearchByText = ({
     <div className="grid grid-rows-[auto_280px_auto] overflow-hidden gap-3">
       <div className="flex flex-col items-center gap-2">
         <div className="flex gap-3 items-center w-full">
-          <div className="flex-1">
-            {/* <Checkbox checked={isExactMatch} onChange={handleCheckboxChange}>
+          {isExactMatchButtonEnable && (
+            <div className="flex-1">
+              {/* <Checkbox checked={isExactMatch} onChange={handleCheckboxChange}>
               Buscar Exata
             </Checkbox> */}
-            <div className="flex text-xs gap-3 items-center">
-              <span className="flex-1 flex flex-col">
-                <span
-                  className={
-                    isExactMatch ? `text-govbr-gray-60` : `text-govbr-gray-20`
-                  }
-                >
-                  {t("isExactMatch")}
+              <div className="flex text-xs gap-3 items-center">
+                <Checkbox
+                  checked={isExactMatch}
+                  onChange={handleCheckboxChange}
+                />
+                <span className="flex-1 flex flex-col">
+                  <span
+                    className={
+                      isExactMatch ? `text-govbr-gray-60` : `text-govbr-gray-20`
+                    }
+                  >
+                    {t("isExactMatch")}
+                  </span>
                 </span>
-              </span>
-              <span>
-                <Switch
+                <span>
+                  {/* <Switch
                   checked={isExactMatch}
                   onChange={handleCheckboxChange}
                   density="high"
-                />
-              </span>
+                /> */}
+                </span>
+              </div>
             </div>
-          </div>
+          )}
+         
+        </div>
 
+        <div className="flex items-center gap-3 w-full">
+          <div className="flex-1 w-full">
+            <Input
+              value={inputValue}
+              onChange={handleInputChange}
+              placeholder={inputPlaceholder}
+              className="placeholder:text-sm"
+            />
+          </div>
+          <Tooltip position="left" className="text-xs">
+            <Button
+              size="icon"
+              variant="outline"
+              onClick={handleAddName}
+              density="high"
+            >
+              <FontAwesomeIcon icon={faPlus} />
+            </Button>
+            {t("add")}
+          </Tooltip>
           <div className="flex relative justify-center">
             <div className="w-auto">
               <Tooltip position="left" className="text-xs">
@@ -219,28 +248,6 @@ const SearchByText = ({
               name={name}
             />
           </div>
-        </div>
-
-        <div className="flex items-center gap-3 w-full">
-          <div className="flex-1 w-full">
-            <Input
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder={inputPlaceholder}
-              className="placeholder:text-sm"
-            />
-          </div>
-          <Tooltip position="left" className="text-xs">
-            <Button
-              size="icon"
-              variant="outline"
-              onClick={handleAddName}
-              density="high"
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </Button>
-            {t("add")}
-          </Tooltip>
         </div>
 
         <div className="flex w-full">

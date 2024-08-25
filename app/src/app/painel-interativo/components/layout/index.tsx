@@ -11,10 +11,9 @@ const FilterLayout = ({ children, onFilterSubmit }: any) => {
     <div className="h-screen w-screen bg-govbr-gray-5 overflow-hidden grid grid-rows-[auto_1fr_auto]">
       <HeaderGov />
       <main className="gap-5 row-span-1 grid grid-cols-[auto_1fr] overflow-hidden">
-        <aside className="w-[380px] grid grid-rows-[1fr_auto] gap-5 overflow-hidden">
-          <div className="overflow-y-auto overflow-x-hidden p-6">
-            <div className="flex-1 flex flex-col">{side}</div>
-          </div>
+        <aside className="w-[400px] grid grid-rows-[1fr_auto] gap-5 overflow-hidden">
+          <div className="flex-1 flex flex-col overflow-hidden">{side}</div>
+
           <div className="px-6 flex gap-3 ">
             <Button onClick={onFilterSubmit} className="w-1/2 !font-normal">
               {t("form.search")}

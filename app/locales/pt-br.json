@@ -169,7 +169,9 @@
       "true": "Sim",
       "Não": "Não",
       "false": "Não"
-    }
+    },
+    "isExactMatch": "Buscando por registros que correspondem exatamente as opções selecionadas",
+    "atLeastOn": "Buscando por registros com pelo menos uma opção selecionada"
   },
   "SearchByNumber": {
     "clearSelection": "Limpar Campos",

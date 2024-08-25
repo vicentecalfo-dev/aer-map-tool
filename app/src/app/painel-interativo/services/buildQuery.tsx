@@ -12,22 +12,28 @@ const buildMongoQuery = ({ selectedFilters, filters }: any) => {
     const component = filters[filter]?.component;
 
     if (dbField) {
-      if (component === "multiComboBox" && selectedFilters[filter].length > 0) {
-        mongoQuery[dbField] = {
-          $in: selectedFilters[filter].map((item: any) => {
-            if (!isNaN(item)) return Number(item);
-            if (item.toLowerCase() === "true") return true;
-            if (item.toLowerCase() === "false") return false;
-            return item;
-          }),
-        };
+      if (component === "multiComboBox" && selectedFilters[filter].selection.length > 0) {
+        const isExactMatch = selectedFilters[filter].isExactMatch;
+        const terms = selectedFilters[filter].selection.map((item: any) => {
+          if (!isNaN(item)) return Number(item);
+          if (item.toLowerCase() === "true") return true;
+          if (item.toLowerCase() === "false") return false;
+          return item;
+        });
+        if (isExactMatch) {
+          mongoQuery[dbField] = terms;
+        } else {
+          mongoQuery[dbField] = {
+            $in: terms,
+          };
+        }
       }
 
       if (component === "searchByNumber") {
         mongoQuery[dbField] = selectedFilters[filter];
       }
 
-      if (component === "searchByText") {
+      if (component === "searchByText" && selectedFilters[filter].selection.length > 0) {
         const isExactMatch = selectedFilters[filter].isExactMatch;
         if (isExactMatch) {
           mongoQuery[dbField] = {

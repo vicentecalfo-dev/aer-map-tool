@@ -20,16 +20,14 @@ const MultiComboBox = ({
   options,
   selected = [],
   order = "none", // "asc" | "desc" | "none"
-  isExactMatchDefault,
-  isExactMatchButtonEnable,
+  isExactMatchDefault = true,
   map = { label: "label", value: "value" },
   itemsPerPage = 5,
   onChangeSelection = ([]) => {},
   showSelectAll = true,
   initialSelectAll = false,
   hint,
-  paginate = true, // Prop para controlar a exibição da paginação,
-  
+  paginate = true, // Prop para controlar a exibição da paginação
 }: any) => {
   const t = useTranslations("MultiComboBox");
   const [isExactMatch, setIsExactMatch] = useState(isExactMatchDefault);
@@ -84,10 +82,7 @@ const MultiComboBox = ({
     }
 
     setSelectedOptions(updatedSelected); // Atualiza o estado local
-    onChangeSelection({
-      selection: updatedSelected,
-      isExactMatch: isExactMatch,
-    });
+    onChangeSelection(updatedSelected);
   }
 
   // Função para selecionar ou desmarcar todas as opções
@@ -98,10 +93,7 @@ const MultiComboBox = ({
     if (checked) {
       const allValues = options.map((option) => option[map.value]);
       setSelectedOptions(allValues);
-      onChangeSelection({
-        selection: allValues,
-        isExactMatch: isExactMatch,
-      });
+      onChangeSelection(allValues);
     } else {
       setSelectedOptions([]);
       onChangeSelection([]);
@@ -126,30 +118,9 @@ const MultiComboBox = ({
     onChangeSelection([]); // Notifica o componente pai
   };
 
-  const handleCheckboxChange = () => {
-    setIsExactMatch((prev) => !prev);
-    onChangeSelection({
-      selection: selectedOptions,
-      isExactMatch: !isExactMatch,
-    });
-  };
 
   return (
-    <div className="grid grid-rows-[auto_auto_1fr_auto] gap-3 w-full">
-      { isExactMatchButtonEnable &&
-        <div className="flex items-center gap-3">
-          <Checkbox checked={isExactMatch} onChange={handleCheckboxChange} />
-          <span className="flex-1 flex text-xs items-center">
-            <span
-              className={
-                isExactMatch ? `text-govbr-gray-60` : `text-govbr-gray-20`
-              }
-            >
-              {isExactMatch ? t("isExactMatch") : t("atLeastOn")}
-            </span>
-          </span>
-        </div>
-      }
+    <div className="grid grid-rows-[auto_1fr_auto] gap-3 w-full">
 
       <div className="flex gap-3 w-full items-center">
         <div className="flex-1">
@@ -174,7 +145,7 @@ const MultiComboBox = ({
       </div>
       <div className="overflow-y-auto max-h-[170px]">
         <ul className="flex flex-col gap-1">
-          {showSelectAll && filteredOptions.length > 0 && (
+          {(showSelectAll && filteredOptions.length > 0) && (
             <li className="!text-wrap text-sm">
               <Checkbox checked={selectAll} onChange={handleSelectAllChange}>
                 <span className="text-govbr-gray-60">
@@ -183,13 +154,11 @@ const MultiComboBox = ({
               </Checkbox>
             </li>
           )}
-          {filteredOptions.length === 0 ? (
-            <span className="text-govbr-gray-20 text-sm flex">
-              {t("noOptionFound")}
-            </span>
-          ) : (
-            ""
-          )}
+          {
+            filteredOptions.length === 0 ? <span className="text-govbr-gray-20 text-sm flex">
+            {t("noOptionFound")}
+          </span> : ""
+          }
           {currentItems.map((option: any) => (
             <li className="!text-wrap text-sm" key={option[map.value]}>
               <Checkbox
