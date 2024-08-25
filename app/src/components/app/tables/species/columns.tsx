@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import IUCNCategoryBadge from "../../IUCN/IUCNCategoryBadge";
 import Badge from "@codeworker.br/govbr-tw-react/dist/components/Badge";
-import TableSortIcon from "../sort-icon";
+import TableSortIcon from "../sortIcon";
 import { Button } from "@codeworker.br/govbr-tw-react/dist/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faXmark } from "@fortawesome/free-solid-svg-icons";

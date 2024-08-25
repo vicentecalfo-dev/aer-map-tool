@@ -96,8 +96,8 @@
     "governmentOfficialList": {
       "label": "Lista Oficial MMA",
       "context": "Ministério do Meio Ambiente e Mudança do Clima",
-      "options":{
-        "MMA_443":"Portaria MMA 443 (2014)",
+      "options": {
+        "MMA_443": "Portaria MMA 443 (2014)",
         "MMA_148": "Portaria MMA 148 (2022)"
       }
     },
@@ -116,25 +116,25 @@
     "reasonForReAssessment": {
       "label": "Razão para Reavaliação",
       "context": "Avaliação de Risco de Extinção",
-      "options":{
-        "Criteria revision":"Revisão de Critério",
-        "Incorrect data":"Informações Incorretas",
-        "Mistake":"Errata",
-        "New information":"Novas Informações",
-        "Other":"Outros",
+      "options": {
+        "Criteria revision": "Revisão de Critério",
+        "Incorrect data": "Informações Incorretas",
+        "Mistake": "Errata",
+        "New information": "Novas Informações",
+        "Other": "Outros",
         "Taxonomy": "Revisão Taxonômica"
       }
     },
-    "reasonForChangeCategory":{
+    "reasonForChangeCategory": {
       "label": "Razão para Mudança de Categoria",
       "context": "Avaliação de Risco de Extinção",
-      "options":{
-        "Criteria revision":"Revisão de Critério",
+      "options": {
+        "Criteria revision": "Revisão de Critério",
         "Genuine (since first assessment)": "Genuíno (desde a primeira avaliação)",
-        "Incorrect data":"Informações Incorretas",
-        "Mistake":"Errata",
-        "New information":"Novas Informações",
-        "Other":"Outros",
+        "Incorrect data": "Informações Incorretas",
+        "Mistake": "Errata",
+        "New information": "Novas Informações",
+        "Other": "Outros",
         "Taxonomy": "Revisão Taxonômica"
       }
     },
@@ -164,7 +164,7 @@
     "selectAll": "Selecionar Todos",
     "deselectAll": "Deselecionar Todos",
     "noOptionFound": "Nenhuma opção encontrada",
-    "yesOrNo":{
+    "yesOrNo": {
       "Sim": "Sim",
       "true": "Sim",
       "Não": "Não",
@@ -199,5 +199,42 @@
     "similarityMatch": "A buscar será por registros que contenham os termos selecionados.",
     "instructions": "Digite no campo de busca e/ou faça o upload de um arquivo CSV. Colunas aceitas: {columns}.",
     "filterPlaceholder": "Filtrar ..."
+  },
+  "DashboardResultTable": {
+    "columns": {
+      "id": "ID Flora e Funga do Brasil",
+      "family": "Família",
+      "scientificName": "Espécie",
+      "assessmentCategory": "Categoria de Risco de Extinção",
+      "governmentOfficialList": "Lista Oficial MMA",
+      "yes": "Sim",
+      "no": "Não",
+      "assessmentYear": "Ano de Avaliação"
+    },
+    "noResults": "Nenhum Registro",
+    "cleanFilter": "Limpar Filtro",
+    "filterPlaceholder": "Filtrar ...",
+    "analyzer": "Relatório Gráfico",
+    "downloads": "Opções de Download",
+    "allRecords": "Todos os Registros",
+    "filteredRecords": "Registros Filtrados",
+    "assessment": "Avaliações de Risco de Extinção",
+    "occurrence": "Ocorrências"
+  },
+  "IUCN": {
+    "category": {
+      "EX": "Extinta",
+      "EW": "Extinta na Natureza",
+      "RE": "Regionalmente Extinta",
+      "PEW": "Criticamente em Perigo (possivelmente extinta na natureza)",
+      "PE": "Criticamente em Perigo (possivelmente extinta)",
+      "CR": "Criticamente em Perigo",
+      "EN": "Em Perigo",
+      "VU": "Vulnerável",
+      "NT": "Quase Ameaçada",
+      "LC": "Menos Preocupante",
+      "DD": "Dados Insuficientes",
+      "NE": "Não Avaliada"
+    }
   }
 }

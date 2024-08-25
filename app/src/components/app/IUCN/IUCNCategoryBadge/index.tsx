@@ -2,6 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { IUCNCategories, categoriesColors, categoriesLabels } from "../config";
+import Tooltip from "@codeworker.br/govbr-tw-react/dist/components/Tooltip";
+import { useTranslations } from "next-intl";
 
 interface IUCNCategoryBadgeProps {
   category: IUCNCategories;
@@ -27,11 +29,13 @@ const _shapes: { [key: string]: string } = {
 };
 
 const IUCNCategoryBadge = (props: IUCNCategoryBadgeProps) => {
+  const t: any = useTranslations("IUCN");
   const { category, shape, textSize, size, onClick }: { [key: string]: any } = {
     ..._defaults,
     ...props,
   };
-  const label = categoriesLabels({ category });
+  // const label = categoriesLabels({ category });
+  const label = t(`category.${category}`);
   const badgeTooltipClasses = [
     "relative",
     "before:content-[attr(data-tooltip)]",
@@ -75,11 +79,17 @@ const IUCNCategoryBadge = (props: IUCNCategoryBadgeProps) => {
       });
   };
   return (
-    <span data-tooltip={label} className={cn(...badgeTooltipClasses)}>
+    // <span data-tooltip={label} className={cn(...badgeTooltipClasses)}>
+    //   <span className={cn(...badgeClasses)} onClick={handleOnClick}>
+    //     {category}
+    //   </span>
+    // </span>
+    <Tooltip className="text-xs">
       <span className={cn(...badgeClasses)} onClick={handleOnClick}>
         {category}
       </span>
-    </span>
+      {label}
+    </Tooltip>
   );
 };
 

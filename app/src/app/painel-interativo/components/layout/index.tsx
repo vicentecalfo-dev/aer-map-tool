@@ -27,7 +27,7 @@ const FilterLayout = ({ children, onFilterSubmit }: any) => {
             </Button>
           </div>
         </aside>
-        <div className="overflow-hidden rounded-md grid grid-rows-[1fr] pr-6">
+        <div className="overflow-hidden grid grid-rows-[1fr] pr-6">
           {main}
         </div>
       </main>

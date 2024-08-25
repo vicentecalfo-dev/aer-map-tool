@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@codeworker.br/govbr-tw-react": "^1.1.5",
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.1",

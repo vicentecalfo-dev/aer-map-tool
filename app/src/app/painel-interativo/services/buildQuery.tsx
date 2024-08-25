@@ -12,7 +12,7 @@ const buildMongoQuery = ({ selectedFilters, filters }: any) => {
     const component = filters[filter]?.component;
 
     if (dbField) {
-      if (component === "multiComboBox" && selectedFilters[filter].selection.length > 0) {
+      if (component === "multiComboBox" && selectedFilters[filter]?.selection?.length > 0) {
         const isExactMatch = selectedFilters[filter].isExactMatch;
         const terms = selectedFilters[filter].selection.map((item: any) => {
           if (!isNaN(item)) return Number(item);
