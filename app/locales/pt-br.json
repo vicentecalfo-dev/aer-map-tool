@@ -93,7 +93,7 @@
       "label": "Bioma",
       "context": "Distribuição Geográfica"
     },
-    "governmentOfficialList": {
+    "governmentDocuments": {
       "label": "Lista Oficial MMA",
       "context": "Ministério do Meio Ambiente e Mudança do Clima",
       "options": {
@@ -154,8 +154,40 @@
       "label": "Revisor",
       "context": "Avaliação de Risco de Extinção"
     },
+    "threats": {
+      "label": "Ameaça",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "threatsStress": {
+      "label": "Vetor de Estresse",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "threatsTiming": {
+      "label": "Momento da Ameaça",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "threatsDecline": {
+      "label": "Declínio Causado pela Ameaça",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "threatsSeverity": {
+      "label": "Severidade da Ameaça",
+      "context": "Avaliação de Risco de Extinção"
+    },
     "threatsIncidence": {
       "label": "Incidência da Ameaça",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "conservationAction": {
+      "label": "Ação de Conservação",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "conservationActionSituation": {
+      "label": "Situação da Ação de Conservação",
+      "context": "Avaliação de Risco de Extinção"
+    },
+    "usesInformation": {
+      "label": "Informações de Uso",
       "context": "Avaliação de Risco de Extinção"
     }
   },
@@ -206,7 +238,7 @@
       "family": "Família",
       "scientificName": "Espécie",
       "assessmentCategory": "Categoria de Risco de Extinção",
-      "governmentOfficialList": "Lista Oficial MMA",
+      "governmentDocuments": "Lista Oficial MMA",
       "yes": "Sim",
       "no": "Não",
       "assessmentYear": "Ano de Avaliação"

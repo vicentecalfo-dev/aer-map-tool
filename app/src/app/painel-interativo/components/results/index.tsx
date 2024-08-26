@@ -53,7 +53,7 @@ export default function DashboardResultTable({ data, loading }: any) {
     family: t("columns.family"),
     scientificName: t("columns.scientificName"),
     assessmentCategory: t("columns.assessmentCategory"),
-    governmentOfficialList: t("columns.governmentOfficialList"),
+    governmentDocuments: t("columns.governmentDocuments"),
     yes: t("columns.yes"),
     no: t("columns.no"),
     assessmentYear: t("columns.assessmentYear"),
@@ -220,7 +220,7 @@ export default function DashboardResultTable({ data, loading }: any) {
                   colSpan={columns.length}
                   className="h-full w-full justify-content text-center"
                 >
-                  <span className="flex w-full justify-center">
+                  <span className="flex w-full justify-center p-6">
                     <Spinner />
                   </span>
                 </TableCell>
@@ -250,7 +250,7 @@ export default function DashboardResultTable({ data, loading }: any) {
                       colSpan={columns.length}
                       className="h-full text-center"
                     >
-                      {t("noResults")}
+                      <span className="p-6 text-govbr-gray-60">{t("noResults")}</span>
                     </TableCell>
                   </TableRow>
                 )}

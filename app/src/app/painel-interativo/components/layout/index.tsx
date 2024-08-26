@@ -14,7 +14,7 @@ const FilterLayout = ({ children, onFilterSubmit }: any) => {
         <aside className="w-[400px] grid grid-rows-[1fr_auto] gap-5 overflow-hidden">
           <div className="flex-1 flex flex-col overflow-hidden">{side}</div>
 
-          <div className="px-6 flex gap-3 ">
+          <div className="px-6 flex gap-3 border-t border-govbr-gray-10 pt-3">
             <Button onClick={onFilterSubmit} className="w-1/2 !font-normal">
               {t("form.search")}
             </Button>

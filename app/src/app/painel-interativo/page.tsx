@@ -66,12 +66,12 @@ export default function DashboardPage() {
       {isMounted && (
         <FilterLayout onFilterSubmit={handleFilterSubmit}>
           <div className="grid grid-rows-[auto_1fr] gap-3 w-full overflow-hidden">
-            <div className="flex  flex-col w-full gap-3">
-              <h2 className="text-govbr-blue-warm-vivid-70 text-base font-semibold pl-6 pr-8 flex gap-3">
+            <div className="flex  flex-col w-full gap-3 border-b border-govbr-gray-10 pb-3">
+              <h2 className="text-govbr-blue-warm-vivid-70 text-base font-semibold pl-6 flex gap-3">
                 <span className="flex-1">Filtros Disponíveis</span>
                 <Badge>{Object.keys(filters).length}</Badge>
               </h2>
-              <div className="flex w-full pl-6 pr-8 gap-3 items-center">
+              <div className="flex w-full pl-6  gap-3 items-center">
                 <div className="flex-1">
                   <Input
                     type="text"

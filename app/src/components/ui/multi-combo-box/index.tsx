@@ -56,6 +56,7 @@ const MultiComboBox = ({
   options = multiComboBoxSorter({ options, map, order });
 
   // Filtrando as opções com base no texto do filtro
+  console.log(name, options)
   const filteredOptions = options.filter((option) =>
     option[map.label].toLowerCase().includes(filterText.toLowerCase())
   );

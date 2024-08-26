@@ -16,10 +16,10 @@ export default function TableSortIcon({ column, children }: any) {
   return (
     <>
       <span
-      className="cursor-pointer"
+      className="cursor-pointer flex gap-1 items-center"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
-        {children}
+        <span>{children}</span>
         <FontAwesomeIcon icon={sortIcon[sort]}  className="ml-3"/>
       </span>
     </>

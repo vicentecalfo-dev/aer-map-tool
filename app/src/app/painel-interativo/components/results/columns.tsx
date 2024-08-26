@@ -78,18 +78,18 @@ export const getColumuns = ({ headers }: any): ColumnDef<any>[] => {
       },
     },
     {
-      accessorKey: "governmentOfficialList",
+      accessorKey: "governmentDocuments",
       header: ({ column }) => (
-        <span className="w-[90px] block">
+        <span className="w-[120px] block">
           <TableSortIcon column={column}>
-            {headers.governmentOfficialList}
+            {headers.governmentDocuments}
           </TableSortIcon>
         </span>
       ),
       cell: ({ row }: any) => {
         return (
           <>
-            {row.getValue("governmentOfficialList") === "Não" ? (
+            {row.getValue("governmentDocuments") === "Não" ? (
               <Badge variant="danger-light">{headers.no}</Badge>
             ) : (
               <Badge variant="success-light">{headers.yes}</Badge>
