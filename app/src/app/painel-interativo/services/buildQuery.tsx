@@ -12,14 +12,26 @@ const buildMongoQuery = ({ selectedFilters, filters }: any) => {
     const component = filters[filter]?.component;
 
     if (dbField) {
-      if (component === "multiComboBox" && selectedFilters[filter]?.selection?.length > 0) {
+      if (
+        component === "multiComboBox" &&
+        selectedFilters[filter]?.selection?.length > 0
+      ) {
         const isExactMatch = selectedFilters[filter].isExactMatch;
-        const terms = selectedFilters[filter].selection.map((item: any) => {
-          if (!isNaN(item)) return Number(item);
-          if (item.toLowerCase() === "true") return true;
-          if (item.toLowerCase() === "false") return false;
-          return item;
-        });
+
+        const existsQueries = selectedFilters[filter].selection.filter(
+          (item: any) => item === "$exists:true" || item === "$exists:false"
+        );
+
+        const terms = selectedFilters[filter].selection
+          .filter(
+            (item: any) => item !== "$exists:true" && item !== "$exists:false"
+          )
+          .map((item: any) => {
+            if (!isNaN(item)) return Number(item);
+            if (item.toLowerCase() === "true") return true;
+            if (item.toLowerCase() === "false") return false;
+            return item;
+          });
         if (isExactMatch) {
           mongoQuery[dbField] = terms;
         } else {
@@ -27,13 +39,25 @@ const buildMongoQuery = ({ selectedFilters, filters }: any) => {
             $in: terms,
           };
         }
+
+        if (existsQueries.length > 0) {
+          existsQueries.forEach((query:any) =>{
+            const value = query.split(":")
+            mongoQuery[dbField] = {
+              [value[0]]: value[1] === "true",
+            };
+          })
+        }
       }
 
       if (component === "searchByNumber") {
         mongoQuery[dbField] = selectedFilters[filter];
       }
 
-      if (component === "searchByText" && selectedFilters[filter].selection.length > 0) {
+      if (
+        component === "searchByText" &&
+        selectedFilters[filter].selection.length > 0
+      ) {
         const isExactMatch = selectedFilters[filter].isExactMatch;
         if (isExactMatch) {
           mongoQuery[dbField] = {

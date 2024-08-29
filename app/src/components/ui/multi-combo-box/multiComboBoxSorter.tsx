@@ -1,8 +1,8 @@
-const multiComboBoxSorter = ({ order, map, options }: any) => {
-  if (order === "none") return options;
+const multiComboBoxSorter = ({ sortOrder, map, options }: any) => {
+  if (sortOrder === "none") return options;
   const sorted = [...options];
   sorted.sort((a, b) =>
-    order === "asc"
+    sortOrder === "asc"
       ? a[map.label].localeCompare(b[map.label])
       : b[map.label].localeCompare(a[map.label])
   );

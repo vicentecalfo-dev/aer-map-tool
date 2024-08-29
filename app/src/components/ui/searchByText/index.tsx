@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import {
   Checkbox,
   Input,
@@ -18,6 +18,7 @@ import {
   faSortAlphaDown,
   faSortAlphaUp,
   faSort,
+  faFileCsv,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslations } from "next-intl";
 
@@ -41,10 +42,15 @@ const SearchByText = ({
   const [sortOrder, setSortOrder] = useState<"none" | "asc" | "desc">(
     sortOrderDefault
   );
+  const [error, setError] = useState<string | null>(null);
   const itemsPerPage = 5;
 
+  useEffect(() => {
+    setSelection(selected);
+  }, [selected]);
+
   const handleCheckboxChange = () => {
-    setIsExactMatch((prev) => !prev);
+    setIsExactMatch((prev:any) => !prev);
     onChangeSelection({
       selection: selection,
       isExactMatch: !isExactMatch,
@@ -110,15 +116,18 @@ const SearchByText = ({
             newNames.push(name);
           }
         }
+        setError(null)
+        const newSelection = Array.from(new Set([...newNames, ...selection]));
+        setSelection(newSelection);
+        onChangeSelection({
+          selection: newSelection,
+          isExactMatch,
+        });
+      }else{
+        setError("Nenhuma coluna válida foi encontrada.")
       }
     }
 
-    const newSelection = Array.from(new Set([...newNames, ...selection]));
-    setSelection(newSelection);
-    onChangeSelection({
-      selection: newSelection,
-      isExactMatch,
-    });
   };
 
   const handleDeleteName = (nameToDelete: string) => {
@@ -144,6 +153,10 @@ const SearchByText = ({
       return "asc";
     });
   };
+
+  // useEffect(()=>{
+  //   if(selection.length === 0) handleClearAll();
+  // }, [selection])
 
   const filteredSelection = selection.filter((name) =>
     name.toLowerCase().includes(searchFilter.toLowerCase())
@@ -232,7 +245,7 @@ const SearchByText = ({
                   </label>
 
                   <Button size="icon" variant="outline" density="high">
-                    <FontAwesomeIcon icon={faFileArrowUp} />
+                    <FontAwesomeIcon icon={faFileCsv} />
                   </Button>
                 </>
                 {t("upload")}
@@ -264,6 +277,9 @@ const SearchByText = ({
       </div>
 
       <div className="overflow-y-auto w-full">
+      {error && ( // Exibir mensagem de erro
+          <div className="text-red-500 text-xs text-center py-3 mb-3">{t('noValidColumns')}</div>
+        )}
         {selection.length > 0 && (
           <div className="py-3 text-govbr-blue-warm-vivid-70 text-sm flex gap-3 items-center">
             <span className="flex-1 text-xs">{selectionTitle}</span>

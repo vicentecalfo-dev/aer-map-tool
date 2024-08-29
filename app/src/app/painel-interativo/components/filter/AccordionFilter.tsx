@@ -11,8 +11,10 @@ export default function AccordionFilter({
   onChangeSelection,
   selected,
   options = [],
-  sortOrder = "asc",
+  sortOrder,
+  validColumns,
   component,
+  exists,
   help,
   hint,
   translate,
@@ -56,7 +58,8 @@ export default function AccordionFilter({
             options={resolvedOptions}
             selected={selected}
             sortOrder={sortOrder}
-            hint={hint}
+            hint={hint ? t('hint') : hint}
+            exists={exists}
             isExactMatchDefault={isExactMatchValue}
             isExactMatchButtonEnable={isExactMatch}
             onChangeSelection={(selection: any) => {
@@ -71,7 +74,8 @@ export default function AccordionFilter({
             comparisonTypeDefault={resolvedOptions.comparisonTypeDefault}
             minimumValue={resolvedOptions.limits[0]}
             maximumValue={resolvedOptions.limits[1]}
-            hint={hint}
+            exists={exists}
+            hint={hint ? t('hint') : hint}
             onChange={(selection: any) => {
               onChangeSelection({ filter, selection });
             }}
@@ -90,6 +94,7 @@ export default function AccordionFilter({
               inputPlaceholder={t("inputPlaceholder")}
               isExactMatchDefault={isExactMatchValue}
               isExactMatchButtonEnable={isExactMatch}
+              validColumns = {validColumns}
             />
           </>
         );

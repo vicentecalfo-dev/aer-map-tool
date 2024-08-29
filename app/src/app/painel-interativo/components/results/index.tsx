@@ -20,7 +20,7 @@ import {
 } from "@tanstack/react-table";
 import { useTranslations } from "next-intl";
 import { getColumuns } from "./columns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@codeworker.br/govbr-tw-react/dist/components/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -29,9 +29,11 @@ import {
   faChevronRight,
   faFileArrowDown,
   faFilter,
+  faListCheck,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
+  Badge,
   Input,
   NativeSelect,
   Spinner,
@@ -45,9 +47,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import ScientificName from "@/components/app/ScientificName";
+import DownloadButton from "@/components/app/download-button";
 
 export default function DashboardResultTable({ data, loading }: any) {
   const t: any = useTranslations("DashboardResultTable");
+  const [percetageFound, setPercentageFound] = useState(0);
+  const [filterText, setFilterText] = useState("");
   const headers: any = {
     id: t("columns.id"),
     family: t("columns.family"),
@@ -65,9 +81,17 @@ export default function DashboardResultTable({ data, loading }: any) {
   const [selectedFilterColumn, setSelectedFilterColumn] =
     useState("scientificName");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  useEffect(() => {
+    console.log(data.searchedScientificNames);
+    setPercentageFound(
+      Math.floor(
+        (data?.results?.length / data?.searchedScientificNames?.length) * 100
+      )
+    );
+  }, [data]);
 
   const table = useReactTable({
-    data,
+    data: data.results,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -100,22 +124,38 @@ export default function DashboardResultTable({ data, loading }: any) {
         setSelectedFilterColumn(e.target.value);
         resetFilter(); // Reseta o filtro ao mudar de coluna
       }}
-      disabled={data.length === 0}
+      disabled={data.results.length === 0}
     />
   );
+
+  function getColorBasedOnPercentage(percentage: number): string {
+    if (percentage >= 0 && percentage <= 20) {
+      return "bg-red-600 text-govbr-pure-100/70"; // Cor para 0% a 20%
+    } else if (percentage >= 21 && percentage <= 69) {
+      return "bg-amber-400 text-govbr-pure-100/70"; // Cor para 21% a 69%
+    } else if (percentage >= 70 && percentage <= 100) {
+      return "bg-lime-600 text-govbr-pure-0"; // Cor para 70% a 100%
+    } else {
+      return "bg-gray-100 text-govbr-pure-0"; // Cor padrão para valores fora do intervalo
+    }
+  }
+
+  const filteredNotFound = data.notFound.filter((name: any) => {
+    return name.toLowerCase().includes(filterText.toLowerCase());
+  });
 
   return (
     <div className="grid grid-rows-[auto_1fr_auto] overflow-hidden gap-3">
       <div className="flex">
-        {data.length > 0 && (
+        {data?.results?.length > 0 && (
           <>
-            <div className="flex flex-1 gap-3 items-center">
-              {data.length > 0 && (
+            <div className="flex flex-1 gap-3 items-center text-normal">
+              {data?.results?.length > 0 && (
                 <>
-                  <div className="w-[150px]">
+                  <div className="w-[200px]">
                     <SelectFilterColumn />
                   </div>
-                  <div className="w-[250px]">
+                  <div className="w-[230px]">
                     <Input
                       placeholder={t("filterPlaceholder")}
                       value={
@@ -128,11 +168,11 @@ export default function DashboardResultTable({ data, loading }: any) {
                           .getColumn(selectedFilterColumn)
                           ?.setFilterValue(event.target.value)
                       }
-                      disabled={data.length === 0}
+                      disabled={data.results.length === 0}
                     />
                   </div>
                   <>
-                    <Tooltip position="left" className="text-xs">
+                    <Tooltip position="left" className="text-xs !font-normal">
                       <Button
                         size="icon"
                         density="high"
@@ -141,12 +181,147 @@ export default function DashboardResultTable({ data, loading }: any) {
                       >
                         <FontAwesomeIcon icon={faXmark} />
                       </Button>
-                      {t("cleanFilter")}
+                      <span className="font-normal">{t("cleanFilter")}</span>
                     </Tooltip>
                   </>
                 </>
               )}
             </div>
+            {data.searchedScientificNames.length > 0 && (
+              <div className="flex items-center gap-3 mr-3">
+                <div className="flex flex-col gap-1 items-center justify-start w-[200px]">
+                  <span className="text-xs text-left w-full">
+                    Táxons encontrados na busca:
+                  </span>
+                  <div className="flex justify-start w-full h-[20px] bg-govbr-gray-10 rounded-sm relative items-center">
+                    <div
+                      className={cn(
+                        `h-full relative flex text-xs items-center p-2 rounded-sm ${getColorBasedOnPercentage(
+                          percetageFound
+                        )}`
+                      )}
+                      style={{ width: `${percetageFound}%` }}
+                    ></div>
+                    <span
+                      className={`text-right absolute top-0 right-2 text-xs h-[20px] flex items-center pr-1 ${getColorBasedOnPercentage(
+                        percetageFound
+                      )} !bg-transparent`}
+                    >
+                      {data.results.length}/
+                      {data.searchedScientificNames.length} ({percetageFound}
+                      %)
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  {data.notFound.length > 0 && (
+                    <Sheet>
+                      <SheetTrigger className="relative">
+                        <Tooltip
+                          position="left"
+                          className="text-xs !font-normal z-[99]"
+                        >
+                          <Button
+                            size="icon"
+                            variant="default-danger"
+                            onClick={() => {}}
+                          >
+                            <FontAwesomeIcon icon={faListCheck} />
+                          </Button>
+                          <span className="font-normal">
+                            {t("taxonNotFound.openList")} (
+                            {data.notFound.length})
+                          </span>
+                        </Tooltip>
+                      </SheetTrigger>
+                      <SheetContent className="z-[99] bg-govbr-pure-0 grid grid-rows-[auto_auto_1fr_auto] !w-[600px] !max-w-[600px]">
+                        <div className="text-govbr-blue-warm-vivid-80 font-bold flex gap-3">
+                          <span className="flex-1">
+                            {t("taxonNotFound.title")}
+                          </span>
+                          <SheetClose asChild>
+                            <Tooltip position="left" className="text-xs">
+                              <Button
+                                size="icon"
+                                variant="ghost"
+                                onClick={() => setFilterText("")}
+                                density="high"
+                              >
+                                <FontAwesomeIcon icon={faXmark} />
+                              </Button>
+                              {t("taxonNotFound.close")}
+                            </Tooltip>
+                          </SheetClose>
+                        </div>
+                        <div className="flex gap-3 items-center w-full">
+                          <div className="w-full">
+                            <Input
+                              type="text"
+                              placeholder={t("taxonNotFound.filter")}
+                              value={filterText}
+                              onChange={(e) => setFilterText(e.target.value)}
+                              iconPosition="right"
+                            />
+                          </div>
+                          <Tooltip position="left" className="text-xs">
+                            <Button
+                              size="icon"
+                              variant="outline"
+                              onClick={() => setFilterText("")}
+                              density="high"
+                            >
+                              <FontAwesomeIcon icon={faXmark} />
+                            </Button>
+                            {t("taxonNotFound.clearFilter")}
+                          </Tooltip>
+                        </div>
+                        <div className="overflow-y-auto">
+                          <ul className="flex flex-col gap-2">
+                            {filteredNotFound.map(
+                              (name: string, index: number) => (
+                                <li
+                                  key={name}
+                                  className="p-2 border-b border-govbr-gray-10"
+                                >
+                                  <ScientificName>{name}</ScientificName>
+                                </li>
+                              )
+                            )}
+                          </ul>
+                        </div>
+                        <div className="flex gap-3 items-center">
+                          <span className="flex-1">
+                            <DownloadButton
+                              data={data.notFound.map((taxon: any) => ({
+                                [t("taxonNotFound.csvHeader")]: taxon,
+                              }))}
+                              fileName={t("taxonNotFound.filename")}
+                              fileType="csv"
+                            >
+                              <Tooltip position="left" className="text-xs">
+                                <Button
+                                  size="icon"
+                                  variant="outline"
+                                  onClick={() => setFilterText("")}
+                                  density="high"
+                                >
+                                  <FontAwesomeIcon icon={faFileArrowDown} />
+                                </Button>
+                                {t("taxonNotFound.download")}
+                              </Tooltip>
+                            </DownloadButton>
+                          </span>
+                          <span className="text-sm">
+                            {data.notFound.length}/
+                            {data.searchedScientificNames.length}
+                          </span>
+                        </div>
+                      </SheetContent>
+                    </Sheet>
+                  )}
+                </div>
+              </div>
+            )}
             <div className="flex gap-2 relative">
               <Tooltip position="left" className="text-xs">
                 <Button size="icon" disabled>
@@ -155,7 +330,7 @@ export default function DashboardResultTable({ data, loading }: any) {
                 {t("analyzer")}
               </Tooltip>
               <DropdownMenu>
-                <DropdownMenuTrigger disabled={data.length === 0}>
+                <DropdownMenuTrigger disabled={data.results.length === 0}>
                   <Tooltip position="left" className="text-xs">
                     <Button size="icon">
                       <FontAwesomeIcon icon={faFileArrowDown} />
@@ -164,24 +339,26 @@ export default function DashboardResultTable({ data, loading }: any) {
                   </Tooltip>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>{t('assessment')}</DropdownMenuLabel>
-                  <DropdownMenuItem>{t('allRecords')}  ({data.length})</DropdownMenuItem>
+                  <DropdownMenuLabel>{t("assessment")}</DropdownMenuLabel>
+                  <DropdownMenuItem>
+                    {t("allRecords")} ({data.results.length})
+                  </DropdownMenuItem>
                   {table.getFilteredRowModel().rows?.length > 0 &&
                     data?.length !==
                       table.getFilteredRowModel().rows?.length && (
                       <DropdownMenuItem>
-                        {t('filteredRecords')} (
+                        {t("filteredRecords")} (
                         {table.getFilteredRowModel().rows.length})
                       </DropdownMenuItem>
                     )}
                   <DropdownMenuSeparator />
-                  <DropdownMenuLabel>{t('occurrence')}</DropdownMenuLabel>
-                  <DropdownMenuItem>{t('allRecords')}</DropdownMenuItem>
+                  <DropdownMenuLabel>{t("occurrence")}</DropdownMenuLabel>
+                  <DropdownMenuItem>{t("allRecords")}</DropdownMenuItem>
                   {table.getFilteredRowModel().rows?.length > 0 &&
                     data?.length !==
                       table.getFilteredRowModel().rows?.length && (
                       <DropdownMenuItem>
-                        {t('filteredRecords')}
+                        {t("filteredRecords")}
                       </DropdownMenuItem>
                     )}
                 </DropdownMenuContent>
@@ -199,7 +376,7 @@ export default function DashboardResultTable({ data, loading }: any) {
                   return (
                     <TableHead
                       key={header.id}
-                      className="sticky top-0 bg-govbr-gray-2 z-[90]"
+                      className="sticky top-0 bg-govbr-gray-2 z-[50]"
                     >
                       {header.isPlaceholder
                         ? null
@@ -250,7 +427,9 @@ export default function DashboardResultTable({ data, loading }: any) {
                       colSpan={columns.length}
                       className="h-full text-center"
                     >
-                      <span className="p-6 text-govbr-gray-60">{t("noResults")}</span>
+                      <span className="p-6 text-govbr-gray-60">
+                        {t("noResults")}
+                      </span>
                     </TableCell>
                   </TableRow>
                 )}
@@ -259,24 +438,25 @@ export default function DashboardResultTable({ data, loading }: any) {
           </TableBody>
         </Table>
       </div>
-      {data.length > 0 && (
+      {data.results.length > 0 && (
         <div className="flex gap-3 items-center">
           <div className="flex-1">
-            {data?.length > 0 && (
+            {data?.results.length > 0 && (
               <p className="text-sm text-govbr-gray-60">
-                {`${data.length > 1 ? "Foram" : "Foi"} encontrado${
-                  data.length > 1 ? "s" : ""
+                {`${data.results.length > 1 ? "Foram" : "Foi"} encontrado${
+                  data.results.length > 1 ? "s" : ""
                 } `}
                 <span className="font-bold text-govbr-blue-warm-vivid-70">
-                  {data.length}
+                  {data.results.length}
                 </span>
                 {` registro${
-                  data.length > 1 ? "s" : ""
+                  data.results.length > 1 ? "s" : ""
                 } em nossa base de dados.`}
               </p>
             )}
             {table.getFilteredRowModel().rows?.length > 0 &&
-              data?.length !== table.getFilteredRowModel().rows?.length && (
+              data?.results.length !==
+                table.getFilteredRowModel().rows?.length && (
                 <p className="text-xs text-govbr-gray-60">
                   <span>Mostrando </span>
                   <span className="font-bold text-govbr-blue-warm-vivid-70">

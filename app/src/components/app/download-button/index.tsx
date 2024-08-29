@@ -3,8 +3,8 @@ import { faFileArrowDown } from "@fortawesome/free-solid-svg-icons/faFileArrowDo
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
-const DownloadButton = ({ data, fileName, fileType, label }: any) => {
-  const handleDownload = () => {
+const DownloadButton = ({ data, fileName, fileType, label, children }: any) => {
+  const handleDownload = (event:any) => {
     // 1. Converter o array em um formato de string
     const fileContent =
       fileType === "json" ? JSON.stringify(data, null, 2) : convertToCSV(data);
@@ -25,6 +25,8 @@ const DownloadButton = ({ data, fileName, fileType, label }: any) => {
     // 5. Limpar o URL e remover o link da DOM
     URL.revokeObjectURL(url);
     document.body.removeChild(link);
+
+    event.stopPropagation();
   };
 
   const convertToCSV = (arr: any) => {
@@ -38,9 +40,10 @@ const DownloadButton = ({ data, fileName, fileType, label }: any) => {
   };
 
   return (
-    <Button variant="outline" onClick={handleDownload} className="font-normal">
-      <FontAwesomeIcon icon={faFileArrowDown} /> {label}
-    </Button>
+    <button onClick={handleDownload}>
+      {/* <FontAwesomeIcon icon={faFileArrowDown} /> {label} */}
+      {children}
+    </button>
   );
 };
 

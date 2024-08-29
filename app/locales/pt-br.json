@@ -11,71 +11,196 @@
     },
     "scientificName": {
       "label": "Espécie (Nome Científico)",
-      "context": "Flora e Funga do Brasil",
+      "context": "Dado Taxonômico",
       "selectionTitle": "Seleção de Espécies",
       "inputPlaceholder": "Digitar Espécie"
     },
+    "taxonId": {
+      "label": "Taxon ID",
+      "context": "Identificador Flora e Funga do Brasil",
+      "selectionTitle": "Seleção de Táxon ID",
+      "inputPlaceholder": "Digitar Táxon ID (sem o prefixo FB)"
+    },
     "synonym": {
       "label": "Sinônimo (Nome Científico)",
-      "context": "Flora e Funga do Brasil",
+      "context": "Dado Taxonômico",
       "selectionTitle": "Seleção de Espécies (sinônimos)",
       "inputPlaceholder": "Digitar Sinônimo"
     },
     "vernacularName": {
       "label": "Nome Popular",
-      "context": "Flora e Funga do Brasil",
+      "context": "Dado Taxonômico",
       "selectionTitle": "Seleção de Nomes",
       "inputPlaceholder": "Digitar Nome Popular"
     },
     "scientificNameAuthorship": {
       "label": "Autor",
-      "context": "Flora e Funga do Brasil",
+      "context": "Dado Taxonômico",
       "selectionTitle": "Seleção de Autores",
       "inputPlaceholder": "Digitar Nome do Autor"
     },
     "taxonRank": {
       "label": "Classificação Taxonômica",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado Taxonômico",
+      "options": {
+        "classe": "Classe",
+        "divisao": "Divisão",
+        "especie": "Espécie",
+        "familia": "Família",
+        "forma": "Forma",
+        "genero": "Gênero",
+        "ordem": "Ordem",
+        "sub_especie": "Subespécie",
+        "sub_familia": "Subfamília",
+        "tribo": "Tribo",
+        "variedade": "Variedade"
+      }
     },
     "kingdom": {
       "label": "Reino",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado Taxonômico",
+      "options": {
+        "Fungi": "Fungi",
+        "Plantae": "Plantae"
+      }
     },
     "phylum": {
       "label": "Filo",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado Taxonômico"
     },
     "class": {
       "label": "Classe",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado Taxonômico"
     },
     "order": {
       "label": "Ordem",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado Taxonômico"
     },
     "family": {
       "label": "Família",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado Taxonômico"
     },
     "genus": {
       "label": "Gênero",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado Taxonômico"
     },
     "profileLifeForm": {
       "label": "Forma de Vida",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado de Perfil",
+      "options": {
+        "Aquática-Bentos": "Aquática-Bentos",
+        "Aquática-Neuston": "Aquática-Neuston",
+        "Aquática-Plâncton": "Aquática-Plâncton",
+        "Arbusto": "Arbusto",
+        "Bambu": "Bambu",
+        "Coxim": "Coxim",
+        "Dendróide": "Dendróide",
+        "Desconhecida": "Desconhecida",
+        "Dracenóide": "Dracenóide",
+        "Endofítico": "Endofítico",
+        "Erva": "Erva",
+        "Flabelado": "Flabelado",
+        "Folhosa": "Folhosa",
+        "Liana/volúvel/trepadeira": "Liana/Volúvel/Trepadeira",
+        "Liquenizado": "Liquenizado",
+        "Micorrízico": "Micorrízico",
+        "Palmeira": "Palmeira",
+        "Parasita": "Parasita",
+        "Pendente": "Pendente",
+        "Saprobio": "Saprobio",
+        "Subarbusto": "Subarbusto",
+        "Suculenta": "Suculenta",
+        "Talosa": "Talosa",
+        "Tapete": "Tapete",
+        "Trama": "Trama",
+        "Tufo": "Tufo",
+        "Árvore": "Árvore"
+      }
     },
     "profileVegatationType": {
       "label": "Tipo de Vegetação",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado de Perfil",
+      "options": {
+        "Caatinga (stricto sensu)": "Caatinga (Stricto Sensu)",
+        "Campinarana": "Campinarana",
+        "Campo Limpo": "Campo Limpo",
+        "Campo de Altitude": "Campo de Altitude",
+        "Campo de Várzea": "Campo de Várzea",
+        "Campo rupestre": "Campo Rupestre",
+        "Carrasco": "Carrasco",
+        "Cerrado (lato sensu)": "Cerrado (Lato Sensu)",
+        "Floresta Ciliar ou Galeria": "Floresta Ciliar ou Galeria",
+        "Floresta Estacional Decidual": "Floresta Estacional Decidual",
+        "Floresta Estacional Perenifólia": "Floresta Estacional Perenifólia",
+        "Floresta Estacional Semidecidual": "Floresta Estacional Semidecidual",
+        "Floresta Ombrófila (= Floresta Pluvial)": "Floresta Ombrófila (= Floresta Pluvial)",
+        "Floresta Ombrófila Mista": "Floresta Ombrófila Mista",
+        "Floresta de Igapó": "Floresta de Igapó",
+        "Floresta de Terra Firme": "Floresta de Terra Firme",
+        "Floresta de Várzea": "Floresta de Várzea",
+        "Manguezal": "Manguezal",
+        "Palmeiral": "Palmeiral",
+        "Restinga": "Restinga",
+        "Savana Amazônica": "Savana Amazônica",
+        "Vegetação Aquática": "Vegetação Aquática",
+        "Vegetação Sobre Afloramentos Rochosos": "Vegetação Sobre Afloramentos Rochosos",
+        "Área Antrópica": "Área Antrópica"
+      }
     },
     "profileHabitat": {
       "label": "Habitat",
-      "context": "Flora e Funga do Brasil"
+      "context": "Dado de Perfil",
+      "options": {
+        "Animal morto": "Animal Morto",
+        "Aquática": "Aquática",
+        "Areia": "Areia",
+        "Corticícola": "Corticícola",
+        "Desconhecido": "Desconhecido",
+        "Edáfica": "Edáfica",
+        "Epixila": "Epixila",
+        "Epífila": "Epífila",
+        "Epífita": "Epífita",
+        "Esterco ou Fezes": "Esterco ou Fezes",
+        "Folhedo": "Folhedo",
+        "Folhedo aéreo": "Folhedo Aéreo",
+        "Folhedo submerso": "Folhedo Submerso",
+        "Hemiepífita": "Hemiepífita",
+        "Hemiparasita": "Hemiparasita",
+        "Outro": "Outro",
+        "Parasita": "Parasita",
+        "Planta viva": "Planta Viva",
+        "Planta viva - córtex do caule": "Planta Viva - Córtex do Caule",
+        "Planta viva - córtex galho": "Planta Viva - Córtex Galho",
+        "Planta viva - folha": "Planta Viva - Folha",
+        "Planta viva - fruto": "Planta Viva - Fruto",
+        "Planta viva - inflorescência": "Planta Viva - Inflorescência",
+        "Planta viva - raiz": "Planta Viva - Raiz",
+        "Rocha": "Rocha",
+        "Rupícola": "Rupícola",
+        "Saprófita": "Saprófita",
+        "Saxícola": "Saxícola",
+        "Simbionte (incluindo fungos liquenizados)": "Simbionte (Incluindo Fungos Liquenizados)",
+        "Solo": "Solo",
+        "Sub-aérea": "Sub-Aérea",
+        "Terrícola": "Terrícola",
+        "Tronco em decomposição": "Tronco em Decomposição",
+        "Água": "Água"
+      }
+    },
+    "distributionFragmented": {
+      "label": "Distribuição Fragmentada",
+      "context": "Distribuição Geográfica"
     },
     "distributionRegion": {
       "label": "Região",
-      "context": "Distribuição Geográfica"
+      "context": "Distribuição Geográfica",
+      "options": {
+        "Norte": "Norte",
+        "Nordeste": "Nordeste",
+        "Centro-Oeste": "Centro-Oeste",
+        "Sudeste": "Sudeste",
+        "Sul": "Sul"
+      }
     },
     "distributionState": {
       "label": "Estado",
@@ -83,15 +208,32 @@
     },
     "establishmentMeans": {
       "label": "Origem",
-      "context": "Distribuição Geográfica"
+      "context": "Distribuição Geográfica",
+      "options": {
+        "cultivada": "Cultivada",
+        "nativa": "Nativa",
+        "naturalizada": "Naturalizada"
+      }
     },
     "endemism": {
       "label": "Endêmica do Brasil",
-      "context": "Distribuição Geográfica"
+      "context": "Distribuição Geográfica",
+      "options": {
+        "Endemica": "Endêmica",
+        "Não endemica": "Não Endêmica"
+      }
     },
     "phytogeographicDomain": {
       "label": "Bioma",
-      "context": "Distribuição Geográfica"
+      "context": "Distribuição Geográfica",
+      "options": {
+        "Amazônia": "Amazônia",
+        "Caatinga": "Caatinga",
+        "Cerrado": "Cerrado",
+        "Mata Atlântica": "Mata Atlântica",
+        "Pampa": "Pampa",
+        "Pantanal": "Pantanal"
+      }
     },
     "governmentDocuments": {
       "label": "Lista Oficial MMA",
@@ -103,7 +245,21 @@
     },
     "assessmentCategory": {
       "label": "Categoria de Risco",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Avaliação de Risco de Extinção",
+      "options": {
+        "EX": "EX - Extinta",
+        "EW": "EW - Extinta na Natureza",
+        "RE": "RE - Regionalmente Extinta",
+        "PEW": "PEW - Criticamente em Perigo (possivelmente extinta na natureza)",
+        "PE": "PE - Criticamente em Perigo (possivelmente extinta)",
+        "CR": "CR - Criticamente em Perigo",
+        "EN": "EN - Em Perigo",
+        "VU": "VU - Vulnerável",
+        "NT": "NT - Quase Ameaçada",
+        "LC": "LC - Menos Preocupante",
+        "DD": "DD - Dados Insuficientes",
+        "NE": "NE - Não Avaliada"
+      }
     },
     "assessmentYear": {
       "label": "Ano de Avaliação",
@@ -156,54 +312,439 @@
     },
     "threats": {
       "label": "Ameaça",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Avaliação de Risco de Extinção",
+      "options": {
+        "1 Habitat Loss/Degradation (human induced)": "1 Perda/Degradação de Habitat (induzida pelo homem)",
+        "1 Residential & commercial development": "1 Desenvolvimento residencial e comercial",
+        "1.1 Agriculture": "1.1 Agricultura",
+        "1.1 Housing & urban areas": "1.1 Áreas urbanas e residenciais",
+        "1.1.1 Crop": "1.1.1 Cultivo",
+        "1.1.1.1 Shifting Agriculture": "1.1.1.1 Agricultura itinerante",
+        "1.1.1.2 Small-holder farming": "1.1.1.2 Agricultura de pequenos proprietários",
+        "1.1.1.3 Agro-industry farming": "1.1.1.3 Agricultura agroindustrial",
+        "1.1.2 Wood plantation": "1.1.2 Plantação de madeira",
+        "1.1.2.1 Small-scale": "1.1.2.1 Pequena escala",
+        "1.1.2.2 Large-scale": "1.1.2.2 Grande escala",
+        "1.1.3 Non-timber plantation": "1.1.3 Plantação de produtos não madeireiros",
+        "1.1.3.1 Small-scale": "1.1.3.1 Pequena escala",
+        "1.1.3.2 Large-scale": "1.1.3.2 Grande escala",
+        "1.1.4 Livestock": "1.1.4 Pecuária",
+        "1.1.4.1 Nomadic": "1.1.4.1 Nômade",
+        "1.1.4.2 Small-holder": "1.1.4.2 Pequeno produtor",
+        "1.1.4.3 Agro-industry": "1.1.4.3 Agroindústria",
+        "1.1.5 Abandonment": "1.1.5 Abandono",
+        "1.1.6 Marine aquaculture": "1.1.6 Aquicultura marinha",
+        "1.2 Commercial & industrial areas": "1.2 Áreas comerciais e industriais",
+        "1.2 Land management of non-agricultural area": "1.2 Gestão de terras de áreas não agrícolas",
+        "1.2.1 Abandonment": "1.2.1 Abandono",
+        "1.2.2 Change of management regime": "1.2.2 Mudança de regime de gestão",
+        "1.3 Extraction": "1.3 Extração",
+        "1.3 Tourism & recreation areas": "1.3 Áreas de turismo e recreação",
+        "1.3.1 Mining": "1.3.1 Mineração",
+        "1.3.2.1 Subsistence": "1.3.2.1 Subsistência",
+        "1.3.2.2 Artisinal/small-scale": "1.3.2.2 Artesanal/pequena escala",
+        "1.3.2.3 Large-scale/industrial": "1.3.2.3 Grande escala/industrial",
+        "1.3.3 Wood": "1.3.3 Madeira",
+        "1.3.3.1 Small-scale subsistence": "1.3.3.1 Subsistência de pequena escala",
+        "1.3.3.2 Selective logging": "1.3.3.2 Desmatamento seletivo",
+        "1.3.3.3 Clear-cutting": "1.3.3.3 Corte raso",
+        "1.3.4 Non-woody vegetation collection": "1.3.4 Coleta de vegetação não madeireira",
+        "1.3.6 Groundwater extraction": "1.3.6 Extração de águas subterrâneas",
+        "1.3.8 Unknown": "1.3.8 Desconhecido",
+        "1.4 Infrastructure development": "1.4 Desenvolvimento de infraestrutura",
+        "1.4.1 Industry": "1.4.1 Indústria",
+        "1.4.2 Human settlement": "1.4.2 Assentamento humano",
+        "1.4.3 Tourism/recreation": "1.4.3 Turismo/recreação",
+        "1.4.4 Transport - land/air": "1.4.4 Transporte - terrestre/aéreo",
+        "1.4.6 Dam": "1.4.6 Represa",
+        "1.4.7 Telecommunication": "1.4.7 Telecomunicações",
+        "1.4.8 Power line": "1.4.8 Linha de transmissão",
+        "1.5 Invasive alien species (directly impacting habitat)": "1.5 Espécies invasoras alienígenas (impactando diretamente o habitat)",
+        "1.6 Change in native species dynamics (directly impacting habitat": "1.6 Mudança na dinâmica de espécies nativas (impactando diretamente o habitat",
+        "1.7 Fire": "1.7 Fogo",
+        "10 Human disturbance": "10 Perturbação humana",
+        "10.1 Recreation/tourism": "10.1 Recreação/turismo",
+        "10.3 Avalanches/landslides": "10.3 Avalanches/deslizamentos de terra",
+        "10.3 War/civil unrest": "10.3 Guerra/insurreição civil",
+        "10.4 Transport": "10.4 Transporte",
+        "10.5 Fire": "10.5 Fogo",
+        "10.6 Other": "10.6 Outro",
+        "11 Climate change & severe weather": "11 Mudança climática e condições meteorológicas severas",
+        "11 Other": "11 Outro",
+        "11.1 Habitat shifting & alteration": "11.1 Mudança e alteração de habitat",
+        "11.2 Droughts": "11.2 Secas",
+        "11.5 Other impacts": "11.5 Outros impactos",
+        "12.1 Other threat": "12.1 Outra ameaça",
+        "2 Agriculture & aquaculture": "2 Agricultura e aquicultura",
+        "2 Invasive alien species (directly affecting the species)": "2 Espécies invasoras alienígenas (afetando diretamente a espécie)",
+        "2.1 Annual & perennial non-timber crops": "2.1 Cultivos anuais e perenes não madeireiros",
+        "2.1 Competitor": "2.1 Competidor",
+        "2.1.1 Shifting agriculture": "2.1.1 Agricultura itinerante",
+        "2.1.2 Small-holder farming": "2.1.2 Agricultura de pequenos proprietários",
+        "2.1.3 Agro-industry farming": "2.1.3 Agricultura agroindustrial",
+        "2.1.4 Scale Unknown/Unrecorded": "2.1.4 Escala Desconhecida/Não Registrada",
+        "2.2 Wood & pulp plantations": "2.2 Plantação de madeira e polpa",
+        "2.2.1 Small-holder plantations": "2.2.1 Plantação de pequenos proprietários",
+        "2.2.2 Agro-industry plantations": "2.2.2 Plantação agroindustrial",
+        "2.2.3 Scale Unknown/Unrecorded": "2.2.3 Escala Desconhecida/Não Registrada",
+        "2.3 Hybridizer": "2.3 Hibridizador",
+        "2.3 Livestock farming & ranching": "2.3 Pecuária e criação de gado",
+        "2.3.1 Nomadic grazing": "2.3.1 Pastoreio nômade",
+        "2.3.2 Small-holder grazing, ranching or farming": "2.3.2 Pastoreio, criação de gado ou agricultura de pequenos proprietários",
+        "2.3.3 Agro-industry grazing, ranching or farming": "2.3.3 Pastoreio, criação de gado ou agricultura agroindustrial",
+        "2.3.4 Scale Unknown/Unrecorded": "2.3.4 Escala Desconhecida/Não Registrada",
+        "2.4 Pathogens/parasite": "2.4 Patógenos/parasitas",
+        "2.4.2 Industrial aquaculture": "2.4.2 Aquicultura industrial",
+        "3 Energy production & mining": "3 Produção de energia e mineração",
+        "3 Harvesting (hunting/gathering)": "3 Coleta (caça/coleta)",
+        "3.1 Oil & gas drilling": "3.1 Perfuração de petróleo e gás",
+        "3.1.1 Subsistence use/local trade": "3.1.1 Uso para subsistência/comércio local",
+        "3.1.2 Sub-national/national trade": "3.1.2 Comércio subnacional/nacional",
+        "3.1.3 Regional/international trade": "3.1.3 Comércio regional/internacional",
+        "3.2 Mining & quarrying": "3.2 Mineração e pedreiras",
+        "3.2.1 Subsistence use/local trade": "3.2.1 Uso para subsistência/comércio local",
+        "3.2.2 Sub-national/national trade": "3.2.2 Comércio subnacional/nacional",
+        "3.2.3 Regional/international trade": "3.2.3 Comércio regional/internacional",
+        "3.3 Fuel": "3.3 Combustível",
+        "3.3 Renewable energy": "3.3 Energia renovável",
+        "3.3.1 Subsistence use/local trade": "3.3.1 Uso para subsistência/comércio local",
+        "3.3.2 Sub-national/national trade": "3.3.2 Comércio subnacional/nacional",
+        "3.4 Material": "3.4 Material",
+        "3.4.1 Subsistence use/local trade": "3.4.1 Uso para subsistência/comércio local",
+        "3.4.2 Sub-national/national trade": "3.4.2 Comércio subnacional/nacional",
+        "3.4.3 Regional/international trade": "3.4.3 Comércio regional/internacional",
+        "3.5 Cultural/scientific/leisure activities": "3.5 Atividades culturais/científicas/de lazer",
+        "3.5.1 Subsistence use/local trade": "3.5.1 Uso para subsistência/comércio local",
+        "3.5.2 Sub-national/national trade": "3.5.2 Comércio subnacional/nacional",
+        "3.5.3 Regional/international trade": "3.5.3 Comércio regional/internacional",
+        "4 Transportation & service corridors": "4 Corredores de transporte e serviços",
+        "4.1 Roads & railroads": "4.1 Estradas e ferrovias",
+        "4.2 Utility & service lines": "4.2 Linhas de utilidade e serviços",
+        "4.3 Shipping lanes": "4.3 Rotas de navegação",
+        "5 Biological resource use": "5 Uso de recursos biológicos",
+        "5.1 Hunting & collecting terrestrial animals": "5.1 Caça e coleta de animais terrestres",
+        "5.1.1 Intentional use (species being assessed is the target)": "5.1.1 Uso intencional (a espécie avaliada é o alvo)",
+        "5.1.2 Unintentional effects (species being assessed is not the target)": "5.1.2 Efeitos não intencionais (a espécie avaliada não é o alvo)",
+        "5.1.4 Motivation Unknown/Unrecorded": "5.1.4 Motivação Desconhecida/Não Registrada",
+        "5.2 Gathering terrestrial plants": "5.2 Coleta de plantas terrestres",
+        "5.2.1 Intentional use (species being assessed is the target)": "5.2.1 Uso intencional (a espécie avaliada é o alvo)",
+        "5.2.2 Unintentional effects (species being assessed is not the target)": "5.2.2 Efeitos não intencionais (a espécie avaliada não é o alvo)",
+        "5.2.4 Motivation Unknown/Unrecorded": "5.2.4 Motivação Desconhecida/Não Registrada",
+        "5.3 Logging & wood harvesting": "5.3 Extração de madeira e colheita",
+        "5.3.1 Intentional use: subsistence/small scale (species being assessed is the target) [harvest]": "5.3.1 Uso intencional: subsistência/pequena escala (a espécie avaliada é o alvo) [colheita]",
+        "5.3.2 Intentional use: large scale (species being assessed is the target) [harvest]": "5.3.2 Uso intencional: grande escala (a espécie avaliada é o alvo) [colheita]",
+        "5.3.3 Unintentional effects: subsistence/small scale (species being assessed is not the target) [harvest]": "5.3.3 Efeitos não intencionais: subsistência/pequena escala (a espécie avaliada não é o alvo) [colheita]",
+        "5.3.4 Unintentional effects: large scale (species being assessed is not the target) [harvest]": "5.3.4 Efeitos não intencionais: grande escala (a espécie avaliada não é o alvo) [colheita]",
+        "5.3.5 Motivation Unknown/Unrecorded": "5.3.5 Motivação Desconhecida/Não Registrada",
+        "5.4.3 Unintentional effects: subsistence/small scale (species being assessed is not the target) [harvest]": "5.4.3 Efeitos não intencionais: subsistência/pequena escala (a espécie avaliada não é o alvo) [colheita]",
+        "5.4.4 Unintentional effects: large scale (species being assessed is not the target) [harvest]": "5.4.4 Efeitos não intencionais: grande escala (a espécie avaliada não é o alvo) [colheita]",
+        "6 Human intrusions & disturbance": "6 Intrusões e perturbações humanas",
+        "6 Pollution (affecting habitat and/or species)": "6 Poluição (afetando habitat e/ou espécies)",
+        "6.1 Atmospheric pollution": "6.1 Poluição atmosférica",
+        "6.1 Recreational activities": "6.1 Atividades recreativas",
+        "6.1.1 Global warming/oceanic warming": "6.1.1 Aquecimento global/aquecimento oceânico",
+        "6.2 Land pollution": "6.2 Poluição terrestre",
+        "6.2 War, civil unrest & military exercises": "6.2 Guerra, agitação civil e exercícios militares",
+        "6.2.1 Agriculture": "6.2.1 Agricultura",
+        "6.3 Water pollution": "6.3 Poluição da água",
+        "6.3.1 Agriculture": "6.3.1 Agricultura",
+        "6.3.2 Domestic": "6.3.2 Doméstico",
+        "6.3.3 Commercial/Industrial": "6.3.3 Comercial/Industrial",
+        "7 Natural disaster": "7 Desastres naturais",
+        "7 Natural system modifications": "7 Modificações no sistema natural",
+        "7.1 Fire & fire suppression": "7.1 Fogo e controle de incêndios",
+        "7.1.1 Increase in fire frequency/intensity": "7.1.1 Aumento na frequência/intensidade dos incêndios",
+        "7.1.3 Trend Unknown/Unrecorded": "7.1.3 Tendência Desconhecida/Não Registrada",
+        "7.2 Dams & water management/use": "7.2 Barragens e gestão/uso da água",
+        "7.2.10 Large dams": "7.2.10 Grandes barragens",
+        "7.2.11 Dams (size unknown)": "7.2.11 Barragens (tamanho desconhecido)",
+        "7.2.6 Abstraction of ground water (commercial use)": "7.2.6 Abstração de água subterrânea (uso comercial)",
+        "7.2.8 Abstraction of ground water (unknown use)": "7.2.8 Abstração de água subterrânea (uso desconhecido)",
+        "7.2.9 Small dams": "7.2.9 Pequenas barragens",
+        "7.3 Other ecosystem modifications": "7.3 Outras modificações no ecossistema",
+        "7.3 Temperature extreme": "7.3 Temperatura extrema",
+        "7.4 Wildfire": "7.4 Incêndio florestal",
+        "7.6 Avalanches/landslide": "7.6 Avalanches/deslizamentos de terra",
+        "8 Changes in native species dynamic": "8 Mudanças na dinâmica das espécies nativas",
+        "8 Invasive & other problematic species, genes & diseases": "8 Espécies invasivas e outras problemáticas, genes e doenças",
+        "8.1 Invasive non-native/alien species/diseases": "8.1 Espécies/deseases invasivas não nativas/alienígenas",
+        "8.1.1 Unspecified species": "8.1.1 Espécies não especificadas",
+        "8.1.2 Named species": "8.1.2 Espécies nomeadas",
+        "8.2 Predator": "8.2 Predador",
+        "8.2.1 Unspecified species": "8.2.1 Espécies não especificadas",
+        "8.2.2 Named species": "8.2.2 Espécies nomeadas",
+        "8.3 Prey/food base": "8.3 Presa/base alimentar",
+        "8.4 Hybridizer": "8.4 Hibridizador",
+        "8.4.1 Unspecified species": "8.4.1 Espécies não especificadas",
+        "8.4.2 Named species": "8.4.2 Espécies nomeadas",
+        "8.5 Pathogens/parasite": "8.5 Patógenos/parasitários",
+        "8.7 Other": "8.7 Outros",
+        "9 Intrinsic factor": "9 Fator intrínseco",
+        "9 Pollution": "9 Poluição",
+        "9.1 Domestic & urban waste water": "9.1 Águas residuais domésticas e urbanas",
+        "9.1 Limited dispersal": "9.1 Dispersão limitada",
+        "9.1.1 Sewage": "9.1.1 Esgoto",
+        "9.1.2 Run-off": "9.1.2 Escoamento",
+        "9.1.3 Type Unknown/Unrecorded": "9.1.3 Tipo Desconhecido/Não Registrado",
+        "9.10 Other": "9.10 Outros",
+        "9.2 Poor recruitment/reproduction/regeneration": "9.2 Baixo recrutamento/reprodução/regeneração",
+        "9.2.2 Seepage from mining": "9.2.2 Vazamento de mineração",
+        "9.3 High juvenile mortality": "9.3 Alta mortalidade juvenil",
+        "9.3.2 Soil erosion, sedimentation": "9.3.2 Erosão do solo, sedimentação",
+        "9.3.3 Herbicides and pesticides": "9.3.3 Herbicidas e pesticidas",
+        "9.4 Garbage & solid waste": "9.4 Lixo e resíduos sólidos",
+        "9.4 Inbreeding": "9.4 Endogamia",
+        "9.5 Air-borne pollutants": "9.5 Poluentes atmosféricos",
+        "9.5 Low densitie": "9.5 Baixa densidade",
+        "9.8 Population fluctuation": "9.8 Flutuação populacional",
+        "9.9 Restricted range": "9.9 Faixa restrita"
+      }
     },
     "threatsStress": {
       "label": "Vetor de Estresse",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Avaliação de Risco de Extinção",
+      "options": {
+        "1 Ecosystem/community stresses": "1 Estresses em ecossistemas/comunidades",
+        "1.1 Ecosystem conversion": "1.1 Conversão de ecossistemas",
+        "1.2 Ecosystem degradation": "1.2 Degradação de ecossistemas",
+        "1.3 Indirect ecosystem effects": "1.3 Efeitos indiretos em ecossistemas",
+        "2 Species stresses": "2 Estresses em espécies",
+        "2.1 Species mortality": "2.1 Mortalidade de espécies",
+        "2.2 Species disturbance": "2.2 Distúrbios em espécies",
+        "2.3 Indirect species effects": "2.3 Efeitos indiretos em espécies",
+        "2.3.1 Hybridization": "2.3.1 Hibridização",
+        "2.3.2 Competition": "2.3.2 Competição",
+        "2.3.7 Reduced reproductive success": "2.3.7 Sucesso reprodutivo reduzido",
+        "2.3.8 Other": "2.3.8 Outros"
+      }
     },
     "threatsTiming": {
       "label": "Momento da Ameaça",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Avaliação de Risco de Extinção",
+      "options": {
+        "future": "Futuro",
+        "past": "Passado",
+        "present": "Presente"
+      }
     },
     "threatsDecline": {
       "label": "Declínio Causado pela Ameaça",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Avaliação de Risco de Extinção",
+      "options": {
+        "habitat": "Habitat",
+        "locality": "Localidade",
+        "mature individuals": "Indivíduos maduros",
+        "occupancy": "Ocupação",
+        "occurrence": "Ocorrência"
+      }
     },
     "threatsSeverity": {
       "label": "Severidade da Ameaça",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Avaliação de Risco de Extinção",
+      "options": {
+        "high": "Alto",
+        "low": "Baixo",
+        "medium": "Médio",
+        "very high": "Muito alto",
+        "very low": "Muito baixo"
+      }
     },
     "threatsIncidence": {
       "label": "Incidência da Ameaça",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Avaliação de Risco de Extinção",
+      "options": {
+        "local": "Local",
+        "national": "National",
+        "regional": "Regional"
+      }
     },
     "conservationAction": {
       "label": "Ação de Conservação",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Avaliação de Risco de Extinção",
+      "options": {
+        "1 Land/water protection": "1 Proteção de terra/água",
+        "1 Policy-based actions": "1 Ações baseadas em políticas",
+        "1.1 Management plans": "1.1 Planos de gestão",
+        "1.1 Site/area protection": "1.1 Proteção de site/área",
+        "1.1.1 Development": "1.1.1 Desenvolvimento",
+        "1.1.2 Implementation": "1.1.2 Implementação",
+        "1.2 Legislation": "1.2 Legislação",
+        "1.2 Resource & habitat protection": "1.2 Proteção de recursos e habitat",
+        "1.2.1 Development": "1.2.1 Desenvolvimento",
+        "1.2.1.1 International level": "1.2.1.1 Nível internacional",
+        "1.2.1.2 National level": "1.2.1.2 Nível nacional",
+        "1.2.1.3 Sub-national level": "1.2.1.3 Nível subnacional",
+        "1.2.2 Implementation": "1.2.2 Implementação",
+        "1.2.2.1 International level": "1.2.2.1 Nível internacional",
+        "1.2.2.2 National level": "1.2.2.2 Nível nacional",
+        "1.2.2.3 Sub-national level": "1.2.2.3 Nível subnacional",
+        "1.3 Community management": "1.3 Gestão comunitária",
+        "1.3.1 Governance": "1.3.1 Governança",
+        "2 Communication and Education": "2 Comunicação e Educação",
+        "2 Land/water management": "2 Gestão de terra/água",
+        "2.1 Site/area management": "2.1 Gestão de site/área",
+        "2.2 Awareness": "2.2 Conscientização",
+        "2.2 Invasive/problematic species control": "2.2 Controle de espécies invasivas/problemáticas",
+        "2.3 Habitat & natural process restoration": "2.3 Restauração de habitat e processos naturais",
+        "3 Research actions": "3 Ações de pesquisa",
+        "3 Species management": "3 Gestão de espécies",
+        "3.1 Species management": "3.1 Gestão de espécies",
+        "3.1 Taxonomy": "3.1 Taxonomia",
+        "3.1.2 Trade management": "3.1.2 Gestão de comércio",
+        "3.10 Other": "3.10 Outro",
+        "3.2 Population numbers and range": "3.2 Números e distribuição populacional",
+        "3.2 Species recovery": "3.2 Recuperação de espécies",
+        "3.3 Biology and Ecology": "3.3 Biologia e Ecologia",
+        "3.3.1 Reintroduction": "3.3.1 Reintrodução",
+        "3.4 Ex-situ conservation": "3.4 Conservação ex situ",
+        "3.4 Habitat status": "3.4 Status do habitat",
+        "3.4.1 Captive breeding/artificial propagation": "3.4.1 Reprodução em cativeiro/propagação artificial",
+        "3.4.2 Genome resource bank": "3.4.2 Banco de recursos genômicos",
+        "3.5 Threats": "3.5 Ameaças",
+        "3.6 Uses and harvest levels": "3.6 Usos e níveis de colheita",
+        "3.7 Cultural relevance": "3.7 Relevância cultural",
+        "3.8 Conservation measures": "3.8 Medidas de conservação",
+        "3.9 Trends/Monitoring": "3.9 Tendências/Monitoramento",
+        "4 Education & awareness": "4 Educação e conscientização",
+        "4 Habitat and site-based actions": "4 Ações baseadas em habitat e site",
+        "4.1 Formal education": "4.1 Educação formal",
+        "4.1 Maintenance/Conservation": "4.1 Manutenção/Conservação",
+        "4.2 Restoration": "4.2 Restauração",
+        "4.3 Awareness & communications": "4.3 Conscientização e comunicações",
+        "4.3 Corridors": "4.3 Corredores",
+        "4.4 Protected areas": "4.4 Áreas protegidas",
+        "4.4.1 Identification of new protected areas": "4.4.1 Identificação de novas áreas protegidas",
+        "4.4.2 Establishment": "4.4.2 Estabelecimento",
+        "4.4.3 Management": "4.4.3 Gestão",
+        "4.4.4 Expansion": "4.4.4 Expansão",
+        "4.5 Community-based initiatives": "4.5 Iniciativas baseadas na comunidade",
+        "5 Law & policy": "5 Lei e política",
+        "5 Species-based actions": "5 Ações baseadas em espécies",
+        "5.1 Legislation": "5.1 Legislação",
+        "5.1 Re-introductions": "5.1 Reintroduções",
+        "5.1.1 International level": "5.1.1 Nível internacional",
+        "5.1.2 National level": "5.1.2 Nível nacional",
+        "5.1.3 Sub-national level": "5.1.3 Nível subnacional",
+        "5.1.4 Scale unspecified": "5.1.4 Escala não especificada",
+        "5.2 Policies and regulations": "5.2 Políticas e regulamentos",
+        "5.3 Sustainable use": "5.3 Uso sustentável",
+        "5.3.1 Harvest management": "5.3.1 Gestão de colheita",
+        "5.4 Recovery management": "5.4 Gestão de recuperação",
+        "5.4.1 International level": "5.4.1 Nível internacional",
+        "5.4.2 National level": "5.4.2 Nível nacional",
+        "5.4.3 Sub-national level": "5.4.3 Nível subnacional",
+        "5.7 Ex situ conservation actions": "5.7 Ações de conservação ex situ",
+        "5.7.1 Captive breeding/Artificial propagation": "5.7.1 Reprodução em cativeiro/Propagação artificial",
+        "5.7.2 Genome resource bank": "5.7.2 Banco de recursos genômicos",
+        "5.8 Other": "5.8 Outro",
+        "6 Livelihood, economic & other incentives": "6 Sustento, econômico e outros incentivos",
+        "6 Other": "6 Outro"
+      }
     },
     "conservationActionSituation": {
       "label": "Situação da Ação de Conservação",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Avaliação de Risco de Extinção",
+      "options": {
+        "needed": "Necessário",
+        "on going": "Em andamento"
+      }
     },
     "usesInformation": {
       "label": "Informações de Uso",
-      "context": "Avaliação de Risco de Extinção"
+      "context": "Dados de Uso",
+      "options": {
+        "1. Food - human": "1. Alimentação - humana",
+        "10. Wearing apparel, accessories": "10. Vestuário, acessórios",
+        "11. Other household goods": "11. Outros bens domésticos",
+        "12. Handicrafts, jewellery, decorations, curios, etc.": "12. Artesanato, joias, decorações, curiosidades, etc.",
+        "13. Pets/display animals, horticulture": "13. Animais de estimação/exposição, horticultura",
+        "14. Research": "14. Pesquisa",
+        "15. Sport hunting/specimen collecting": "15. Caça esportiva/coleta de espécimes",
+        "16. Other": "16. Outro",
+        "17. Unknown": "17. Desconhecido",
+        "2. Food - animal": "2. Alimentação - animal",
+        "3. Medicine - human and veterinary": "3. Medicina - humana e veterinária",
+        "4. Poisons": "4. Veneno",
+        "5. Manufacturing chemicals": "5. Químicos industriais",
+        "6. Other chemicals": "6. Outros químicos",
+        "7. Fuel": "7. Combustível",
+        "8. Fibre": "8. Fibra",
+        "9. Construction/structural materials": "9. Materiais de construção/estruturais",
+        "Alimentício": "Alimentício",
+        "Bioativo": "Bioativo",
+        "Confecção de ferramentas e utensílios": "Confecção de ferramentas e utensílios",
+        "Cosméticos e perfumaria": "Cosméticos e perfumaria",
+        "Energia e Combustíveis": "Energia e combustíveis",
+        "Forrageiro": "Forrageiro",
+        "Gomas e resinas": "Gomas e resinas",
+        "Madeireiro": "Madeireiro",
+        "Melífero": "Melífero",
+        "Ornamental": "Ornamental",
+        "Restauração Ambiental": "Restauração ambiental"
+      }
+    },
+    "economicValue": {
+      "label": "Potencial Valor Econômico",
+      "context": "Dados de Valor Econômico"
+    },
+    "distributionMunicipalityState": {
+      "label": "Municípios",
+      "context": "Distribuição Geográfica"
+    },
+    "substratum": {
+      "label": "Substrato",
+      "context": "Dados de Ecologia",
+      "options": {
+        "aquatic": "Aquático",
+        "epiphytic": "Epífito",
+        "hemiepiphytes": "Hemiepífito",
+        "hemiparasite": "Hemiparasita",
+        "rupicolous": "Rupícola",
+        "saxicolous": "Saxícola",
+        "terrestrial": "Terrestre"
+      }
+    },
+    "eoo": {
+      "label": "Extensão de Ocorrência (EOO)",
+      "context": "Dados de Distribuição",
+      "hint": "Por favor, insira o valor da área em quilômetros quadrados (km²)."
+    },
+    "aoo": {
+      "label": "Área de Ocupação (AOO)",
+      "context": "Dados de Distribuição",
+      "hint": "Por favor, insira o valor da área em quilômetros quadrados (km²)."
+    },
+    "profilePopulationExtremeFluctuation": {
+      "label": "Flutuação Extrema",
+      "context": "Dados Populacionais",
+      "hint": "Por favor, insira o valor da área em quilômetros quadrados (km²)."
     }
   },
   "MultiComboBox": {
     "clearSelection": "Limpar Seleção",
-    "selectAll": "Selecionar Todos",
-    "deselectAll": "Deselecionar Todos",
-    "noOptionFound": "Nenhuma opção encontrada",
+    "selectAll": "Selecionar todos",
+    "deselectAll": "Deselecionar todos",
+    "noOptionFound": "Nenhuma opção encontrada com o termo \"{term}\".",
+    "exists": {
+      "yes": "Dado presente",
+      "no": "Dado ausente",
+      "yesWarning": "Você está procurando por registros que tenham esta informação, independente do valor.",
+      "noWarning": "Você está procurando por registros que NÃO tenham esta informação."
+    },
     "yesOrNo": {
       "Sim": "Sim",
       "true": "Sim",
       "Não": "Não",
       "false": "Não"
     },
-    "isExactMatch": "Buscando por registros que correspondem exatamente as opções selecionadas",
-    "atLeastOn": "Buscando por registros com pelo menos uma opção selecionada"
+    "yesNoOrUnknown": {
+      "yes": "Sim",
+      "no": "Não",
+      "unkown": "Desconhecido",
+      "unknown": "Desconhecido"
+    },
+    "isExactMatch": "Buscando por registros que correspondem EXATAMENTE as opções selecionadas",
+    "atLeastOn": "Buscando por registros que correspondem EXATAMENTE as opções selecionadas"
   },
   "SearchByNumber": {
     "clearSelection": "Limpar Campos",
@@ -217,7 +758,13 @@
     "$lt": "Menor que",
     "$lte": "Menor igual que",
     "$gt-$lt": "Entre",
-    "$gte-$lte": "Entre (inclusivo)"
+    "$gte-$lte": "Entre (inclusivo)",
+    "exists": {
+      "yes": "Dado presente",
+      "no": "Dado ausente",
+      "yesWarning": "Você está procurando por registros que tenham esta informação, independente do valor.",
+      "noWarning": "Você está procurando por registros que NÃO tenham esta informação."
+    }
   },
   "SearchByText": {
     "clearSelection": "Limpar Seleção",
@@ -230,13 +777,14 @@
     "isExactMatch": "Buscando exatamente pelo termo selecionado",
     "similarityMatch": "A buscar será por registros que contenham os termos selecionados.",
     "instructions": "Digite no campo de busca e/ou faça o upload de um arquivo CSV. Colunas aceitas: {columns}.",
-    "filterPlaceholder": "Filtrar ..."
+    "filterPlaceholder": "Filtrar ...",
+    "noValidColumns": "Nenhuma coluna válida foi econtrada no arquivo CSV indicado."
   },
   "DashboardResultTable": {
     "columns": {
       "id": "ID Flora e Funga do Brasil",
       "family": "Família",
-      "scientificName": "Espécie",
+      "scientificName": "Nome Científico",
       "assessmentCategory": "Categoria de Risco de Extinção",
       "governmentDocuments": "Lista Oficial MMA",
       "yes": "Sim",
@@ -251,7 +799,17 @@
     "allRecords": "Todos os Registros",
     "filteredRecords": "Registros Filtrados",
     "assessment": "Avaliações de Risco de Extinção",
-    "occurrence": "Ocorrências"
+    "occurrence": "Ocorrências",
+    "taxonNotFound": {
+      "title": "Lista de táxons não encontrados",
+      "close": "Fechar",
+      "clearFilter": "Limpar filtro",
+      "download": "Baixar lista em formato CSV",
+      "filter": "Filtrar ...",
+      "filename": "taxons-nao-encontrados.csv",
+      "csvHeader": "Táxons não encontrados",
+      "openList": "Ver lista de táxons não encontrados"
+    }
   },
   "IUCN": {
     "category": {

@@ -34,6 +34,16 @@ const getFiltersService = (filter = null) => {
       translate: "Filters.scientificName",
       isExactMatch: true,
       isExactMatchValue: true,
+      validColumns: ["espécie", "nome científico", "species", "scientific name", 'táxon', 'taxon']
+    },
+    taxonId: {
+      options: {},
+      dbField: "taxonID",
+      component: "searchByText",
+      translate: "Filters.taxonId",
+      isExactMatch: false,
+      isExactMatchValue: true,
+      validColumns: ["taxonID", "taxonId", "id"]
     },
     synonym: {
       options: {},
@@ -42,6 +52,7 @@ const getFiltersService = (filter = null) => {
       translate: "Filters.synonym",
       isExactMatch: true,
       isExactMatchValue: true,
+      validColumns: ["espécie", "nome científico", "species", "scientific name", 'táxon', 'taxon']
     },
     vernacularName: {
       options: {},
@@ -50,16 +61,19 @@ const getFiltersService = (filter = null) => {
       translate: "Filters.vernacularName",
       isExactMatch: true,
       isExactMatchValue: true,
+      validColumns: ["nome popular", "vernacular name", "name", "nome"]
     },
     scientificNameAuthorship: {
       options: axios.get(`${BASE_API_URL}/authorship`),
       dbField: "scientificNameAuthorship",
       component: "multiComboBox",
+      exists:false
     },
     taxonRank: {
       options: axios.get(`${BASE_API_URL}/taxonRank`),
       dbField: "taxonRank",
       component: "multiComboBox",
+      translate:"Filters.taxonRank.options"
     },
     kingdom: {
       options: [
@@ -68,6 +82,7 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "kingdom",
       component: "multiComboBox",
+      translate: "Filters.kingdom.options"
     },
     phylum: {
       options: axios.get(`${BASE_API_URL}/phylum`),
@@ -100,6 +115,7 @@ const getFiltersService = (filter = null) => {
       component: "multiComboBox",
       isExactMatch: true,
       isExactMatchValue: false,
+      translate:"Filters.profileLifeForm.options"
     },
     profileVegatationType: {
       options: axios.get(`${BASE_API_URL}/vegetationType`),
@@ -107,6 +123,7 @@ const getFiltersService = (filter = null) => {
       component: "multiComboBox",
       isExactMatch: true,
       isExactMatchValue: false,
+      translate: "Filters.profileVegatationType.options"
     },
     profileHabitat: {
       options: axios.get(`${BASE_API_URL}/habitat`),
@@ -114,6 +131,33 @@ const getFiltersService = (filter = null) => {
       component: "multiComboBox",
       isExactMatch: true,
       isExactMatchValue: false,
+      translate: "Filters.profileHabitat.options"
+    },
+    profilePopulationExtremeFluctuation: {
+      options: axios.get(`${BASE_API_URL}/population/extremeFluctuation`),
+      dbField: "profile.population.extremeFluctuation.extremeFluctuation",
+      component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false,
+      translate: "MultiComboBox.yesNoOrUnknown",
+      sortOrder: "desc",
+    },
+    substratum: {
+      options: axios.get(`${BASE_API_URL}/substratum`),
+      dbField: "profile.ecology.substratum",
+      component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false,
+      translate: "Filters.substratum.options"
+    },
+    distributionFragmented: {
+      options: axios.get(`${BASE_API_URL}/distribution/fragmented`),
+      dbField: "profile.distribution.fragmented",
+      component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false,
+      translate: "MultiComboBox.yesNoOrUnknown",
+      sortOrder: "desc",
     },
     distributionRegion: {
       options: [
@@ -127,6 +171,7 @@ const getFiltersService = (filter = null) => {
       component: "multiComboBox",
       isExactMatch: true,
       isExactMatchValue: false,
+      translate:"Filters.distributionRegion.options"
     },
     distributionState: {
       options: [
@@ -163,10 +208,18 @@ const getFiltersService = (filter = null) => {
       isExactMatch: true,
       isExactMatchValue: false,
     },
+    distributionMunicipalityState: {
+      options: axios.get(`/options/municipios.json`),
+      dbField: "distribution.municipality",
+      component: "multiComboBox",
+      isExactMatch: true,
+      isExactMatchValue: false,
+    },
     establishmentMeans: {
       options: axios.get(`${BASE_API_URL}/establishmentMeans`),
       dbField: "distribution.establishmentMeans",
       component: "multiComboBox",
+      translate: "Filters.establishmentMeans.options",
     },
     endemism: {
       options: [
@@ -175,6 +228,8 @@ const getFiltersService = (filter = null) => {
       ],
       dbField: "distribution.endemism",
       component: "multiComboBox",
+      sortOrder: "asc",
+      translate:"Filters.endemism.options",
     },
     phytogeographicDomain: {
       options: axios.get(`${BASE_API_URL}/phytogeographicDomain`),
@@ -182,11 +237,42 @@ const getFiltersService = (filter = null) => {
       component: "multiComboBox",
       isExactMatch: true,
       isExactMatchValue: false,
+      translate: "Filters.phytogeographicDomain.options",
+    },
+    eoo: {
+      options: {
+        limits: [0, new Date().getFullYear()],
+        comparisonTypeDefault: "$eq",
+      },
+      dbField: "profile.distribution.eoo",
+      component: "searchByNumber",
+      translate: "Filters.eoo",
+      hint: true,
+      exists:true
+    },
+    aoo: {
+      options: {
+        limits: [0, new Date().getFullYear()],
+        comparisonTypeDefault: "$eq",
+      },
+      dbField: "profile.distribution.aoo",
+      component: "searchByNumber",
+      translate: "Filters.aoo",
+      hint: true,
+      exists:true
+    },
+    economicValue: {
+      options: axios.get(`${BASE_API_URL}/economicValue`),
+      dbField: "profile.economicValue.potentialEconomicValue",
+      component: "multiComboBox",
+      translate: "MultiComboBox.yesNoOrUnknown",
+      sortOrder: "desc",
     },
     assessmentCategory: {
       options: assessmentCategory,
       dbField: "assessment.category",
       component: "multiComboBox",
+      translate: "Filters.assessmentCategory.options",
     },
     reassessment: {
       options: yesOrNo,
@@ -216,6 +302,7 @@ const getFiltersService = (filter = null) => {
       options: assessmentCategory,
       dbField: "assessment.lastCategory",
       component: "multiComboBox",
+      translate: "Filters.assessmentCategory.options",
     },
     assessmentYear: {
       options: {
@@ -229,46 +316,55 @@ const getFiltersService = (filter = null) => {
       options: axios.get(`${BASE_API_URL}/threats`),
       dbField: "profile.threats.threat",
       component: "multiComboBox",
+      translate:"Filters.threats.options"
     },
     threatsStress: {
       options: axios.get(`${BASE_API_URL}/threats/stress`),
       dbField: "profile.threats.stress",
       component: "multiComboBox",
+      translate:"Filters.threatsStress.options"
     },
     threatsIncidence: {
       options: axios.get(`${BASE_API_URL}/threats/incidence`),
       dbField: "profile.threats.incidence",
       component: "multiComboBox",
+      translate:"Filters.threatsIncidence.options"
     },
     threatsTiming: {
       options: axios.get(`${BASE_API_URL}/threats/timing`),
       dbField: "profile.threats.timing",
       component: "multiComboBox",
+      translate:"Filters.threatsTiming.options"
     },
     threatsDecline: {
       options: axios.get(`${BASE_API_URL}/threats/decline`),
       dbField: "profile.threats.decline",
       component: "multiComboBox",
+      translate:"Filters.threatsDecline.options"
     },
     threatsSeverity: {
       options: axios.get(`${BASE_API_URL}/threats/severity`),
       dbField: "profile.threats.severity",
       component: "multiComboBox",
+      translate:"Filters.threatsSeverity.options"
     },
     conservationAction: {
       options: axios.get(`${BASE_API_URL}/conservation/action`),
       dbField: "profile.actions.action",
       component: "multiComboBox",
+      translate:"Filters.conservationAction.options"
     },
     conservationActionSituation: {
       options: axios.get(`${BASE_API_URL}/conservation/action/situation`),
       dbField: "profile.actions.situation",
       component: "multiComboBox",
+      translate:"Filters.conservationActionSituation.options"
     },
     usesInformation: {
       options: axios.get(`${BASE_API_URL}/uses`),
       dbField: "profile.uses.use",
       component: "multiComboBox",
+      translate:"Filters.usesInformation.options"
     },
     assessmentAssessor: {
       options: axios.get(`${BASE_API_URL}/assessor`),
